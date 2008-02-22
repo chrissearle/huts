@@ -4,7 +4,6 @@ class PersonController extends BaseController {
 
     def scaffold = true
 
-
     def login = {
         if (request.method == "GET") {
             session.userId = null
@@ -16,7 +15,7 @@ class PersonController extends BaseController {
             if (user) {
                 session.userId = user.userId
 
-                def redirectParams = session.originalRequestParams ? session.originalRequestParams : redirect(controller: 'huts', action: 'list')
+                def redirectParams = session.originalRequestParams ? session.originalRequestParams : redirect(controller: 'hut', action: 'list')
 
                 redirect(redirectParams)
             } else {
@@ -28,6 +27,6 @@ class PersonController extends BaseController {
     def logout = {
         session.userId = null
         flash['message'] = 'Successfully logged out'
-        redirect(controller: 'huts', action: 'list')
+        redirect(controller: 'hut', action: 'list')
     }
 }
