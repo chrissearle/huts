@@ -6,6 +6,8 @@ class Person {
     String userId
     String password
 
+    Boolean admin
+
     static hasMany = [owns: Hut]
 
     static constraints = {
@@ -16,5 +18,5 @@ class Person {
         password(blank: false, size: 6..20)
     }
 
-    String toString() { "${this.name}, ${this.phone}" }
+    String toString() {"${this.name}, ${this.phone}"}
 }
