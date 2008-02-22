@@ -12,4 +12,14 @@ abstract class BaseController {
             return false
         }
     }
+
+    def isadmin = {
+        if (session.userId) {
+            def user = Person.getByUserId(session.userId)
+
+            return user.admin
+        }
+
+        return false
+    }
 }
