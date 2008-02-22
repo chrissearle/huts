@@ -8,10 +8,10 @@ class Booking {
         hut(nullable: false)
         contact(nullable: false)
         startDate(validator: {return (it > new Date())})
-        endDate(validator: {return (it > new Date())})        
+        endDate(validator: {return (it > new Date())})
     }
 
     static belongsTo = Hut
 
-    String toString() { "${this.hut}, ${this.person}" }
+    String toString() {"${this.hut}, ${this.contact}"}
 }
