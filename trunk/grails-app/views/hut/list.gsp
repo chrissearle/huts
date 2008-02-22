@@ -39,9 +39,9 @@
 
                         <td>
                             <g:if test="${hut?.bookings?.size()}">
-                                <g:link controller="booking" action="list" id="${hut?.id}">Bookings</g:link>
+                                <g:link controller="booking" action="list" id="${hut?.id}">Existing Bookings</g:link>
+                                <br/>
                             </g:if>
-                            <br/>
                             <g:link controller="booking" action="book" id="${hut?.id}">Book</g:link>
                         </td>
 
