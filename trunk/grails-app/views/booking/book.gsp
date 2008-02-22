@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>Create Booking</h1>
+    <h1>Book ${hut}</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -15,35 +15,19 @@
             <g:renderErrors bean="${booking}" as="list"/>
         </div>
     </g:hasErrors>
-    <g:form action="save" method="post">
+    <g:form action="book" method="post">
+        <g:hiddenField name="hut.id" value="${hut.id}"/>
+        <g:hiddenField name="user.id" value="${session.userId}"/>
         <div class="dialog">
             <table>
                 <tbody>
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="hut">Hut:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: booking, field: 'hut', 'errors')}">
-                            <g:select optionKey="id" from="${Hut.list()}" name="hut.id" value="${booking?.hut?.id}"></g:select>
-                        </td>
-                    </tr>
-
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="contact">Contact:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: booking, field: 'contact', 'errors')}">
-                            <g:select optionKey="id" from="${Person.list()}" name="contact.id" value="${booking?.contact?.id}"></g:select>
-                        </td>
-                    </tr>
-
-                    <tr class="prop">
-                        <td valign="top" class="name">
                             <label for="startDate">Start Date:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: booking, field: 'startDate', 'errors')}">
-                            <g:datePicker name="startDate" value="${booking?.startDate}"></g:datePicker>
+                            <g:datePicker name="startDate" value="${booking?.startDate}" precision="day"></g:datePicker>
                         </td>
                     </tr>
 
@@ -52,7 +36,7 @@
                             <label for="endDate">End Date:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: booking, field: 'endDate', 'errors')}">
-                            <g:datePicker name="endDate" value="${booking?.endDate}"></g:datePicker>
+                            <g:datePicker name="endDate" value="${booking?.endDate}" precision="day"></g:datePicker>
                         </td>
                     </tr>
 
@@ -60,7 +44,7 @@
             </table>
         </div>
         <div class="buttons">
-            <span class="button"><input class="save" type="submit" value="Create"/></span>
+            <span class="button"><input class="save" type="submit" value="Book"/></span>
         </div>
     </g:form>
 </div>
