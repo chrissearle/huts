@@ -52,6 +52,7 @@
         </table>
     </div>
     <div class="paginateButtons">
+        <g:link controller="person" action="create">Add person</g:link>
         <g:paginate total="${Person.count()}"/>
     </div>
 </div>
