@@ -1,6 +1,6 @@
 class PersonController extends BaseController {
 
-    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout']]
+    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register']]
 
     def scaffold = true
 
@@ -31,7 +31,7 @@ class PersonController extends BaseController {
     def logout = {
         session.userId = null
         flash['message'] = 'Successfully logged out'
-        redirect(controller: 'hut', action: 'list')
+        redirect(controller: 'person', action: 'login')
     }
 
     def approval = {
@@ -50,5 +50,21 @@ class PersonController extends BaseController {
             }
         }
         return [personList: Person.findAllByApproved(false)]
+    }
+
+    def register = {
+        if (request.method == "GET") {
+            def user = new Person()
+        } else {
+            def user = new Person()
+            user.properties = params
+            user.admin = false
+            user.approved = false
+
+            if (user.save()) {
+                flash['message'] = "Account created - it will now need to be approved by an administrator"
+                redirect(controller: 'person', action: 'login')
+            }
+        }
     }
 }

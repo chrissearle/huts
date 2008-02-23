@@ -17,6 +17,7 @@
 <div class="nav">
     <g:if test="${!session.userId}">
         <span class="menuButton"><g:link controller="hut" action="list">Log In</g:link></span>
+        <span class="menuButton"><g:link controller="person" action="register">Register</g:link></span>
     </g:if>
     <g:else>
         <span class="menuButton"><g:link controller="hut" action="list">Manage Huts</g:link></span>
