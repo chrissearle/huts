@@ -41,6 +41,24 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
+                            <label for="description">Description:</label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'location', 'errors')}">
+                            <textarea id="description" name="description">${fieldValue(bean: hut, field: 'description')}</textarea>
+                        </td>
+                    </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name">
+                            <label for="beds">Beds:</label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'beds', 'errors')}">
+                            <input type="text" maxlength="5" id="beds" name="beds" value="${fieldValue(bean: hut, field: 'beds')}"/>
+                        </td>
+                    </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name">
                             <label for="owner">Owner:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'owner', 'errors')}">

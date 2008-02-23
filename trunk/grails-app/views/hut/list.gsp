@@ -19,11 +19,11 @@
 
                     <g:sortableColumn property="location" title="Location"/>
 
+                    <g:sortableColumn property="beds" title="Beds"/>
+
                     <th>Owner</th>
 
                     <th>Bookings</th>
-
-                    <th></th>
 
                 </tr>
             </thead>
@@ -31,9 +31,11 @@
                 <g:each in="${hutList}" status="i" var="hut">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-                        <td>${hut.name?.encodeAsHTML()}</td>
+                        <td><g:link action="show" id="${hut.id}">${hut.name?.encodeAsHTML()}</g:link></td>
 
                         <td>${hut.location?.encodeAsHTML()}</td>
+
+                        <td>${hut.beds?.encodeAsHTML()}</td>
 
                         <td><g:link controller="person" action="show" id="${hut?.owner?.id}">${hut.owner?.encodeAsHTML()}</g:link></td>
 
@@ -44,8 +46,6 @@
                             </g:if>
                             <g:link controller="booking" action="book" id="${hut?.id}">Book</g:link>
                         </td>
-
-                        <td><g:link action="edit" id="${hut.id}">Edit</g:link></td>
 
                     </tr>
                 </g:each>

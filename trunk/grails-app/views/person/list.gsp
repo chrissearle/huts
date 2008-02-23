@@ -23,14 +23,13 @@
 
                     <th>Hut</th>
 
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <g:each in="${personList}" status="i" var="person">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
-                        <td>${person.name?.encodeAsHTML()}</td>
+                        <td><g:link action="show" id="${person.id}">${person.name?.encodeAsHTML()}</g:link></td>
 
                         <td><a href="mailto:${person.email}">${person.email}</a></td>
 
@@ -43,8 +42,6 @@
                                 </g:each>
                             </g:if>
                         </td>
-
-                        <td><g:link action="show" id="${person.id}">Show</g:link></td>
 
                     </tr>
                 </g:each>

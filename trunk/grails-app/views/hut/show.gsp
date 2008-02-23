@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>Show Hut</h1>
+    <h1>${hut.name}</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -15,23 +15,23 @@
             <tbody>
 
                 <tr class="prop">
-                    <td valign="top" class="name">Id:</td>
-
-                    <td valign="top" class="value">${hut.id}</td>
-
-                </tr>
-
-                <tr class="prop">
-                    <td valign="top" class="name">Name:</td>
-
-                    <td valign="top" class="value">${hut.name}</td>
-
-                </tr>
-
-                <tr class="prop">
                     <td valign="top" class="name">Location:</td>
 
                     <td valign="top" class="value">${hut.location}</td>
+
+                </tr>
+
+                <tr class="prop">
+                    <td valign="top" class="name">Description:</td>
+
+                    <td valign="top" class="value">${hut.description}</td>
+
+                </tr>
+
+                <tr class="prop">
+                    <td valign="top" class="name">Beds:</td>
+
+                    <td valign="top" class="value">${hut.beds}</td>
 
                 </tr>
 
@@ -51,6 +51,7 @@
                                 <li><g:link controller="booking" action="show" id="${b.id}">${b}</g:link></li>
                             </g:each>
                         </ul>
+                        <g:link controller="booking" action="book" id="${hut.id}">Add Booking</g:link>
                     </td>
 
                 </tr>
