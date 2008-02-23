@@ -18,7 +18,7 @@ class Hut {
         owner(nullable: false)
         description(blank: false, maxSize: 255)
         beds(blank: false, size: 1..50)
-        image(maxSize: 250000)
+        image(nullable: true, maxSize: 250000)
     }
 
     String toString() {"${this.name}, ${this.location}"}
