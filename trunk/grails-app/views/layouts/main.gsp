@@ -26,5 +26,11 @@
     </g:else>
 </div>
 <g:layoutBody/>
+<div class="">
+    <div class="nav">
+        <span class="menuButton"><a href="https://svn.chrissearle.net/trac/chrissearle.net/">Trac Support System</a></span>
+        <span class="menuButton"><a href="mailto:support-huts@chrissearle.org">Mail Support</a></span>
+    </div>
+</div>
 </body>
 </html>
