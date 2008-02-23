@@ -13,6 +13,18 @@
     <div class="dialog">
         <table>
             <tbody>
+                <tr class="prop">
+                    <td valign="top" class="name">Image:</td>
+
+                    <td valign="top" class="value">
+                        <g:if test="${hut.image}">
+                            <img src="${createLink(action: 'showpic')}/${hut.id}" alt="hut" height="80"/>
+                            <br/>
+                        </g:if>
+                        <span class="button"><g:link controller="hut" action="picture" id="${hut.id}">Set image</g:link></span>
+                    </td>
+
+                </tr>
 
                 <tr class="prop">
                     <td valign="top" class="name">Location:</td>
