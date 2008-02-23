@@ -21,7 +21,7 @@
 
                     <g:sortableColumn property="beds" title="Beds"/>
 
-                    <th>Owner</th>
+                    <th>Contact</th>
 
                     <th>Bookings</th>
 

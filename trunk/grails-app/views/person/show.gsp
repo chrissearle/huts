@@ -43,7 +43,7 @@
                 </tr>
 
                 <tr class="prop">
-                    <td valign="top" class="name">Owns:</td>
+                    <td valign="top" class="name">Contact for:</td>
 
                     <td valign="top" style="text-align:left;" class="value">
                         <ul>

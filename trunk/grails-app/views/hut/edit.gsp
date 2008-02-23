@@ -59,7 +59,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="owner">Owner:</label>
+                            <label for="owner">Contact:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'owner', 'errors')}">
                             <g:select optionKey="id" from="${Person.list()}" name="owner.id" value="${hut?.owner?.id}"></g:select>

@@ -86,7 +86,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="owns">Owns:</label>
+                            <label for="owns">Contact for:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: person, field: 'owns', 'errors')}">
 

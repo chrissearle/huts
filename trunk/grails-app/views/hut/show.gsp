@@ -48,7 +48,7 @@
                 </tr>
 
                 <tr class="prop">
-                    <td valign="top" class="name">Owner:</td>
+                    <td valign="top" class="name">Contact:</td>
 
                     <td valign="top" class="value"><g:link controller="person" action="show" id="${hut?.owner?.id}">${hut?.owner}</g:link></td>
 

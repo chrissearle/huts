@@ -21,7 +21,7 @@
 
                     <g:sortableColumn property="phone" title="Phone"/>
 
-                    <th>Hut</th>
+                    <th>Contact for</th>
 
                 </tr>
             </thead>
