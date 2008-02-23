@@ -77,6 +77,15 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
+                            <label for="approved">Approved:</label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: person, field: 'approved', 'errors')}">
+                            <g:checkBox name="approved" value="${person?.approved}"></g:checkBox>
+                        </td>
+                    </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name">
                             <label for="owns">Owns:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: person, field: 'owns', 'errors')}">

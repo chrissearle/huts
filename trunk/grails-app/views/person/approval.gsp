@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="body">
-    <h1>Person List</h1>
+    <h1>Approval List</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -21,8 +21,6 @@
 
                     <g:sortableColumn property="phone" title="Phone"/>
 
-                    <th>Hut</th>
-
                     <th></th>
                 </tr>
             </thead>
@@ -36,15 +34,7 @@
 
                         <td>${person.phone?.encodeAsHTML()}</td>
 
-                        <td>
-                            <g:if test="${person?.owns?.size() > 0}">
-                                <g:each var="o" in="${person.owns}">
-                                    <g:link controller="hut" action="show" id="${o.id}">${o}</g:link><br/>
-                                </g:each>
-                            </g:if>
-                        </td>
-
-                        <td><g:link action="show" id="${person.id}">Show</g:link></td>
+                        <td><g:link action="approval" id="${person.id}">Approve</g:link></td>
 
                     </tr>
                 </g:each>
@@ -52,8 +42,6 @@
         </table>
     </div>
     <div class="paginateButtons">
-        <g:link controller="person" action="create">Add person</g:link>
-        <g:link controller="person" action="approval">People waiting approval</g:link>
         <g:paginate total="${Person.count()}"/>
     </div>
 </div>

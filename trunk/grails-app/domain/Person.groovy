@@ -7,6 +7,7 @@ class Person {
     String password
 
     Boolean admin
+    Boolean approved
 
     static hasMany = [owns: Hut]
 
