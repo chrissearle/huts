@@ -30,6 +30,10 @@ class BookingController extends BaseController {
     }
 
     def list = {
+        if (!params.id) {
+            redirect(controller:"hut", action:"list")
+        }
+        
         def hut = Hut.get(params.id)
 
         return [bookingList: Booking.findByHut(hut), 'hut': hut]
