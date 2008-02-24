@@ -1,61 +1,58 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Hut List</title>
+    <meta name="layout" content="summer-days"/>
+    <title>Huts</title>
 </head>
 <body>
-<div class="body">
-    <h1>Hut List</h1>
+
+<ul id="nav2">
+    <li><g:link controller="hut" action="create">Add hut</g:link></li>
+</ul>
+
+<div>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-    <div class="list">
-        <table>
-            <thead>
-                <tr>
 
-                    <g:sortableColumn property="name" title="Name"/>
-
-                    <g:sortableColumn property="location" title="Location"/>
-
-                    <g:sortableColumn property="beds" title="Beds"/>
-
-                    <th>Contact</th>
-
-                    <th>Bookings</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <g:each in="${hutList}" status="i" var="hut">
-                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-
-                        <td><g:link action="show" id="${hut.id}">${hut.name?.encodeAsHTML()}</g:link></td>
-
-                        <td>${hut.location?.encodeAsHTML()}</td>
-
-                        <td>${hut.beds?.encodeAsHTML()}</td>
-
-                        <td><g:link controller="person" action="show" id="${hut?.owner?.id}">${hut.owner?.encodeAsHTML()}</g:link></td>
-
+    <table>
+        <tbody>
+            <g:each in="${hutList}" status="i" var="hut">
+                <tr valign="top">
+                    <g:if test="${(i % 2) == 0}">
                         <td>
-                            <g:if test="${hut?.bookings?.size()}">
-                                <g:link controller="booking" action="list" id="${hut?.id}">Existing Bookings</g:link>
-                                <br/>
+                            <g:if test="${hut.image}">
+                                <g:link action="show" id="$hut.id"><img src="${createLink(action: 'showpic')}/${hut.id}" alt="hut" width="300"/></g:link>
                             </g:if>
-                            <g:link controller="booking" action="book" id="${hut?.id}">Book</g:link>
+                            <g:else>
+                                <div class="unavailable">
+                                    No image available
+                                </div>
+                            </g:else>
                         </td>
-
-                    </tr>
-                </g:each>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginateButtons">
-        <g:link controller="hut" action="create">Add hut</g:link>
-        <g:paginate total="${Hut.count()}"/>
-    </div>
+                    </g:if>
+                    <td>
+                        <h3><g:link action="show" id="$hut.id">${hut.name}</g:link></h3>
+                        <p>Contact: <g:link controller="person" action="show" id="$hut.owner.id">${hut.owner}</g:link></p>
+                        <p>Location: ${hut.location}</p>
+                        <p>Beds: ${hut.beds}</p>
+                    </td>
+                    <g:if test="${(i % 2) == 1}">
+                        <td>
+                            <g:if test="${hut.image}">
+                                <g:link action="show" id="$hut.id"><img src="${createLink(action: 'showpic')}/${hut.id}" alt="hut" width="300"/></g:link>
+                            </g:if>
+                            <g:else>
+                                <div class="unavailable">
+                                    No image available
+                                </div>
+                            </g:else>
+                        </td>
+                    </g:if>
+                </tr>
+            </g:each>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
