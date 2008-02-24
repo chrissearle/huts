@@ -17,7 +17,7 @@ class Hut {
         location(blank: false, maxSize: 50)
         owner(nullable: false)
         description(blank: false, maxSize: 255)
-        beds(blank: false, size: 1..50)
+        beds(nullable: false, range: 1..50)
         image(nullable: true, maxSize: 250000)
     }
 

@@ -1,20 +1,23 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Create Hut</title>
+    <meta name="layout" content="summer-days"/>
+    <title>Create hut</title>
 </head>
 <body>
-<div class="body">
-    <h1>Create Hut</h1>
+
+<div>
+    <h3 class="formtitle">Create hut</h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+
     <g:hasErrors bean="${hut}">
         <div class="errors">
             <g:renderErrors bean="${hut}" as="list"/>
         </div>
     </g:hasErrors>
+
     <g:form action="save" method="post">
         <div class="dialog">
             <table>
@@ -43,7 +46,7 @@
                             <label for="description">Description:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'location', 'errors')}">
-                            <textarea id="description" name="description">${fieldValue(bean: hut, field: 'description')}</textarea>
+                            <textarea id="description" name="description" cols="40" rows="5">${fieldValue(bean: hut, field: 'description')}</textarea>
                         </td>
                     </tr>
 
@@ -52,7 +55,7 @@
                             <label for="beds">Beds:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'beds', 'errors')}">
-                            <input type="text" maxlength="5" id="beds" name="beds" value="${fieldValue(bean: hut, field: 'beds')}"/>
+                            <input type="text" maxlength="5" id="beds" name="beds" size="6" value="${fieldValue(bean: hut, field: 'beds')}"/>
                         </td>
                     </tr>
 

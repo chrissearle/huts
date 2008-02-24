@@ -1,20 +1,23 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Edit Hut</title>
+    <meta name="layout" content="summer-days"/>
+    <title>Edit: ${hut.name}</title>
 </head>
 <body>
-<div class="body">
-    <h1>Edit Hut</h1>
+
+<div>
+    <h3 class="formtitle">Edit ${hut.name}</h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+
     <g:hasErrors bean="${hut}">
         <div class="errors">
             <g:renderErrors bean="${hut}" as="list"/>
         </div>
     </g:hasErrors>
+
     <g:form method="post">
         <input type="hidden" name="id" value="${hut?.id}"/>
         <div class="dialog">
@@ -44,7 +47,7 @@
                             <label for="description">Description:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'location', 'errors')}">
-                            <textarea id="description" name="description">${fieldValue(bean: hut, field: 'description')}</textarea>
+                            <textarea id="description" name="description" cols="40" rows="5">${fieldValue(bean: hut, field: 'description')}</textarea>
                         </td>
                     </tr>
 
@@ -53,7 +56,7 @@
                             <label for="beds">Beds:</label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'beds', 'errors')}">
-                            <input type="text" maxlength="5" id="beds" name="beds" value="${fieldValue(bean: hut, field: 'beds')}"/>
+                            <input type="text" maxlength="5" id="beds" name="beds" size="6" value="${fieldValue(bean: hut, field: 'beds')}"/>
                         </td>
                     </tr>
 
@@ -66,28 +69,11 @@
                         </td>
                     </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="bookings">Bookings:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'bookings', 'errors')}">
-
-                            <ul>
-                                <g:each var="b" in="${hut?.bookings?}">
-                                    <li><g:link controller="booking" action="show" id="${b.id}">${b}</g:link></li>
-                                </g:each>
-                            </ul>
-                            <g:link controller="booking" action="book" id="${hut.id}">Add Booking</g:link>
-
-                        </td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
         <div class="buttons">
             <span class="button"><g:actionSubmit class="save" value="Update"/></span>
-            <span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete"/></span>
         </div>
     </g:form>
 </div>
