@@ -7,6 +7,7 @@
 <body>
 
 <div>
+    <h3 class="formtitle">Log in</h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>

@@ -16,12 +16,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/i18n/messages.properties" afterPath="$PROJECT_DIR$/grails-app/i18n/messages.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/huts.iws" afterPath="$PROJECT_DIR$/huts.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/css/sd-stylesheet.css" afterPath="$PROJECT_DIR$/web-app/css/sd-stylesheet.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/hut/edit.gsp" afterPath="$PROJECT_DIR$/grails-app/views/hut/edit.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/hut/create.gsp" afterPath="$PROJECT_DIR$/grails-app/views/hut/create.gsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/Hut.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/Hut.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/PersonController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/PersonController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/person/login.gsp" afterPath="$PROJECT_DIR$/grails-app/views/person/login.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/person/register.gsp" afterPath="$PROJECT_DIR$/grails-app/views/person/register.gsp" />
     </list>
     <ignored path="huts.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,11 +93,69 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="login.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/person/login.gsp">
+      <file leaf-file-name="list.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/hut/list.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="26" selection-start="1243" selection-end="1243" vertical-scroll-proportion="0.68421054">
+            <state line="23" column="16" selection-start="589" selection-end="589" vertical-scroll-proportion="0.5762004">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Hut.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/Hut.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="21" selection-start="409" selection-end="409" vertical-scroll-proportion="0.49137932">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sd-stylesheet.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/css/sd-stylesheet.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="111" column="17" selection-start="2513" selection-end="2513" vertical-scroll-proportion="0.7168784">
+              <folding>
+                <marker date="1203870176000" expanded="true" signature="4368:4409" placeholder="{...}" />
+                <marker date="1203870176000" expanded="true" signature="4425:4547" placeholder="{...}" />
+                <marker date="1203870176000" expanded="true" signature="4566:4596" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/person/register.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="29" selection-start="2862" selection-end="2862" vertical-scroll-proportion="1.2995951">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonController.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/PersonController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="56" selection-start="2285" selection-end="2285" vertical-scroll-proportion="1.3372549">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HutController.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/HutController.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="1.3176471">
+              <folding>
+                <marker date="1203846019000" expanded="true" signature="430:497" placeholder="{...}" />
+                <marker date="1203846019000" expanded="true" signature="536:579" placeholder="{...}" />
+                <marker date="1203846019000" expanded="true" signature="585:948" placeholder="{...}" />
+                <marker date="1203846019000" expanded="true" signature="654:709" placeholder="{...}" />
+                <marker date="1203846019000" expanded="true" signature="1234:1301" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,76 +169,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HutController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/HutController.groovy">
+      <file leaf-file-name="edit.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/hut/edit.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.9411765">
-              <folding>
-                <marker date="1203846019000" expanded="true" signature="430:497" placeholder="{...}" />
-                <marker date="1203846019000" expanded="true" signature="536:579" placeholder="{...}" />
-                <marker date="1203846019000" expanded="true" signature="585:948" placeholder="{...}" />
-                <marker date="1203846019000" expanded="true" signature="654:709" placeholder="{...}" />
-                <marker date="1203846019000" expanded="true" signature="1234:1301" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/hut/list.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="0" selection-start="2178" selection-end="2178" vertical-scroll-proportion="1.394572">
+            <state line="75" column="78" selection-start="3241" selection-end="3286" vertical-scroll-proportion="1.3340292">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Hut.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Hut.groovy">
+      <file leaf-file-name="login.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/person/login.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="21" selection-start="409" selection-end="409" vertical-scroll-proportion="0.49137932">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sd-stylesheet.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/css/sd-stylesheet.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="213" column="30" selection-start="4291" selection-end="4291" vertical-scroll-proportion="0.45553538">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="messages.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="23" selection-start="2773" selection-end="2773" vertical-scroll-proportion="0.619802">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="ResourceBundle">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="0" selection-start="1910" selection-end="2335" vertical-scroll-proportion="0.91288567">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/hut/create.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="14" selection-start="458" selection-end="458" vertical-scroll-proportion="0.123173274">
+            <state line="10" column="0" selection-start="183" selection-end="221" vertical-scroll-proportion="0.24291497">
               <folding />
             </state>
           </provider>
@@ -190,7 +190,7 @@
       <file leaf-file-name="create.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/person/create.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="90" selection-start="4054" selection-end="4132" vertical-scroll-proportion="0.708502">
+            <state line="89" column="90" selection-start="4054" selection-end="4132" vertical-scroll-proportion="1.3724697">
               <folding />
             </state>
           </provider>
@@ -596,52 +596,6 @@
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
   </component>
   <component name="RunManager" selected="Grails Application.Grails local">
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <method>
-        <option name="Make" value="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="operation" value="run-app" />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -670,6 +624,52 @@
       <method>
         <option name="Make" value="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="operation" value="run-app" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
@@ -768,7 +768,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1624" height="1028" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
@@ -783,8 +783,8 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3281768" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281768" order="2" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281768" order="8" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3281768" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
@@ -807,7 +807,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="true" />
-    <option name="LAST_COMMIT_MESSAGE" value="o Start re-theme" />
+    <option name="LAST_COMMIT_MESSAGE" value="o Continue re-theme (huts controller)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -839,6 +839,7 @@
     <MESSAGE value="o Fixes #12&#10;o Owner renamed to Contact (in views)" />
     <MESSAGE value="o Image should be allowed to be null" />
     <MESSAGE value="o Start re-theme" />
+    <MESSAGE value="o Continue re-theme (huts controller)" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -879,23 +880,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/person/show.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="61" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.91093117">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="0" selection-start="1449" selection-end="1676" vertical-scroll-proportion="0.77732795">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/PersonController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.19215687">
           <folding />
         </state>
       </provider>
@@ -914,78 +901,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/hut/edit.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="0" selection-end="3346" vertical-scroll-proportion="0.7244259">
+        <state line="36" column="23" selection-start="2773" selection-end="2773" vertical-scroll-proportion="0.85544556">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/person/create.gsp">
+    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="90" selection-start="4054" selection-end="4132" vertical-scroll-proportion="0.708502">
+        <state line="129" column="0" selection-start="1910" selection-end="2335" vertical-scroll-proportion="0.021778584">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/hut/create.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="14" selection-start="458" selection-end="458" vertical-scroll-proportion="0.123173274">
+        <state line="17" column="14" selection-start="458" selection-end="458" vertical-scroll-proportion="0.025052192">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/person/login.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/person/create.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="26" selection-start="1243" selection-end="1243" vertical-scroll-proportion="0.68421054">
+        <state line="89" column="90" selection-start="4054" selection-end="4132" vertical-scroll-proportion="1.3724697">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/BookingController.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/hut/list.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1029" selection-end="1094" vertical-scroll-proportion="0.91764706">
+        <state line="23" column="16" selection-start="589" selection-end="589" vertical-scroll-proportion="0.5762004">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/Hut.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="21" selection-start="409" selection-end="409" vertical-scroll-proportion="0.49137932">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/i18n/messages.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="23" selection-start="2773" selection-end="2773" vertical-scroll-proportion="0.619802">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="0" selection-start="1910" selection-end="2335" vertical-scroll-proportion="0.91288567">
+        <state line="19" column="21" selection-start="409" selection-end="409" vertical-scroll-proportion="0.49137932">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/css/sd-stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="30" selection-start="4291" selection-end="4291" vertical-scroll-proportion="0.45553538">
+        <state line="111" column="17" selection-start="2513" selection-end="2513" vertical-scroll-proportion="0.7168784">
+          <folding>
+            <marker date="1203870176000" expanded="true" signature="4368:4409" placeholder="{...}" />
+            <marker date="1203870176000" expanded="true" signature="4425:4547" placeholder="{...}" />
+            <marker date="1203870176000" expanded="true" signature="4566:4596" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/person/login.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="183" selection-end="221" vertical-scroll-proportion="0.24291497">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/hut/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="78" selection-start="3241" selection-end="3286" vertical-scroll-proportion="1.3340292">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/person/register.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="29" selection-start="2862" selection-end="2862" vertical-scroll-proportion="1.2995951">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/HutController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.9411765">
+        <state line="56" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="1.3176471">
           <folding>
             <marker date="1203846019000" expanded="true" signature="430:497" placeholder="{...}" />
             <marker date="1203846019000" expanded="true" signature="536:579" placeholder="{...}" />
@@ -996,9 +994,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/hut/list.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/BookingController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="2178" selection-end="2178" vertical-scroll-proportion="1.394572">
+        <state line="39" column="0" selection-start="1029" selection-end="1094" vertical-scroll-proportion="0.91764706">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/PersonController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="56" selection-start="2285" selection-end="2285" vertical-scroll-proportion="1.3372549">
           <folding />
         </state>
       </provider>

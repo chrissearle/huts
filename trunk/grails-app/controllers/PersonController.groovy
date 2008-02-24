@@ -64,6 +64,8 @@ class PersonController extends BaseController {
             if (user.save()) {
                 flash['message'] = "Account created - it will now need to be approved by an administrator"
                 redirect(controller: 'person', action: 'login')
+            } else {
+                render(view: 'register', model: [person: user])
             }
         }
     }
