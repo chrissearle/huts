@@ -1,12 +1,16 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Person List</title>
+    <meta name="layout" content="summer-days"/>
+    <title>User List</title>
 </head>
 <body>
-<div class="body">
-    <h1>Person List</h1>
+<ul id="nav2">
+    <li></span><g:link controller="person" action="create">Add user</g:link></li>
+    <li><g:link controller="person" action="approval">Users waiting approval</g:link></li>
+</ul>
+
+<div>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -27,7 +31,7 @@
             </thead>
             <tbody>
                 <g:each in="${personList}" status="i" var="person">
-                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}" valign="top">
 
                         <td><g:link action="show" id="${person.id}">${person.name?.encodeAsHTML()}</g:link></td>
 
@@ -47,11 +51,6 @@
                 </g:each>
             </tbody>
         </table>
-    </div>
-    <div class="paginateButtons">
-        <g:link controller="person" action="create">Add person</g:link>
-        <g:link controller="person" action="approval">People waiting approval</g:link>
-        <g:paginate total="${Person.count()}"/>
     </div>
 </div>
 </body>

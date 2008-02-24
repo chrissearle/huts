@@ -1,12 +1,11 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Person List</title>
+    <meta name="layout" content="summer-days"/>
+    <title>People waiting approval</title>
 </head>
 <body>
-<div class="body">
-    <h1>Approval List</h1>
+<div>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -15,11 +14,11 @@
             <thead>
                 <tr>
 
-                    <g:sortableColumn property="name" title="Name"/>
+                    <th>Name</th>
 
-                    <g:sortableColumn property="email" title="Email"/>
+                    <th>Email</th>
 
-                    <g:sortableColumn property="phone" title="Phone"/>
+                    <th>Phone</th>
 
                     <th></th>
                 </tr>

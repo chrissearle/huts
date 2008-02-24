@@ -1,12 +1,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Create Person</title>
+    <meta name="layout" content="summer-days"/>
+    <title>Create User</title>
 </head>
 <body>
-<div class="body">
-    <h1>Create Person</h1>
+<div>
+    <h3 class="formtitle">Create Person</h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -16,76 +16,74 @@
         </div>
     </g:hasErrors>
     <g:form action="save" method="post">
-        <div class="dialog">
-            <table>
-                <tbody>
+        <table>
+            <tbody>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="name">Name:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'name', 'errors')}">
-                            <input type="text" maxlength="50" id="name" name="name" value="${fieldValue(bean: person, field: 'name')}"/>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="name">Name:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'name', 'errors')}">
+                        <input type="text" maxlength="50" id="name" name="name" value="${fieldValue(bean: person, field: 'name')}"/>
+                    </td>
+                </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="email">Email:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'email', 'errors')}">
-                            <input type="text" id="email" name="email" value="${fieldValue(bean: person, field: 'email')}"/>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="email">Email:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'email', 'errors')}">
+                        <input type="text" id="email" name="email" value="${fieldValue(bean: person, field: 'email')}"/>
+                    </td>
+                </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="phone">Phone:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'phone', 'errors')}">
-                            <input type="text" maxlength="15" id="phone" name="phone" value="${fieldValue(bean: person, field: 'phone')}"/>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="phone">Phone:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'phone', 'errors')}">
+                        <input type="text" maxlength="15" id="phone" name="phone" value="${fieldValue(bean: person, field: 'phone')}"/>
+                    </td>
+                </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="userId">User Id:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'userId', 'errors')}">
-                            <input type="text" maxlength="20" id="userId" name="userId" value="${fieldValue(bean: person, field: 'userId')}"/>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="userId">User Id:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'userId', 'errors')}">
+                        <input type="text" maxlength="20" id="userId" name="userId" value="${fieldValue(bean: person, field: 'userId')}"/>
+                    </td>
+                </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="password">Password:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'password', 'errors')}">
-                            <input type="text" maxlength="20" id="password" name="password" value="${fieldValue(bean: person, field: 'password')}"/>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="password">Password:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'password', 'errors')}">
+                        <input type="text" maxlength="20" id="password" name="password" value="${fieldValue(bean: person, field: 'password')}"/>
+                    </td>
+                </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="admin">Admin:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'admin', 'errors')}">
-                            <g:checkBox name="admin" value="${person?.admin}"></g:checkBox>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="admin">Admin:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'admin', 'errors')}">
+                        <g:checkBox name="admin" value="${person?.admin}"></g:checkBox>
+                    </td>
+                </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="approved">Approved:</label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: person, field: 'approved', 'errors')}">
-                            <g:checkBox name="approved" value="${person?.approved}"></g:checkBox>
-                        </td>
-                    </tr>
+                <tr>
+                    <td valign="top" class="name">
+                        <label for="approved">Approved:</label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'approved', 'errors')}">
+                        <g:checkBox name="approved" value="${person?.approved}"></g:checkBox>
+                    </td>
+                </tr>
 
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
         <div class="buttons">
             <span class="button"><input class="save" type="submit" value="Create"/></span>
         </div>
