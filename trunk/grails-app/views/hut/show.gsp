@@ -41,7 +41,14 @@
                 <td>
                     <h4>Bookings</h4>
                     <g:each var="b" in="${hut.bookings}">
-                        <p><g:link controller="booking" action="show" id="${b.id}">${b}</g:link></p>
+                        <p>
+                            <g:link controller="booking" action="show" id="${b.id}">
+                                ${b.contact.name}:
+                                <g:formatDate date="${b.startDate}" format="yyyy-MM-dd"/>
+                                -
+                                <g:formatDate date="${b.endDate}" format="yyyy-MM-dd"/>
+                            </g:link>
+                        </p>
                     </g:each>
                     <br/>
                     <p><g:link controller="booking" action="book" id="${hut.id}">Add Booking</g:link></p>

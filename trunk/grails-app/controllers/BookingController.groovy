@@ -4,6 +4,21 @@ class BookingController extends BaseController {
 
     def scaffold = true
 
+    def delete = {
+        log.warn("Deleting")
+        def booking = Booking.get(params.id)
+        if (booking) {
+            def id = booking.hut.id
+            booking.delete()
+            flash.message = "Booking deleted"
+            redirect(controller: 'hut', action: 'show', id: id)
+        }
+        else {
+            flash.message = "Booking not found"
+            redirect(controller: 'hut', action: 'list')
+        }
+    }
+
     def book = {
         def booking = new Booking()
 
@@ -11,6 +26,7 @@ class BookingController extends BaseController {
         booking.endDate = new Date() + 2
 
         booking.properties = params;
+
 
         if (request.method == "GET") {
             def hut = Hut.get(params.id)
@@ -21,7 +37,7 @@ class BookingController extends BaseController {
             if (booking.save()) {
                 flash.message = "Successfully booked ${booking.hut}"
 
-                redirect(controller: "hut", action: "list")
+                redirect(controller: "hut", action: "show", id: booking.hut.id)
             } else {
                 def hut = Hut.get(params['hut.id'])
                 return ['booking': booking, 'hut': hut]
@@ -29,11 +45,12 @@ class BookingController extends BaseController {
         }
     }
 
+
     def list = {
         if (!params.id) {
-            redirect(controller:"hut", action:"list")
+            redirect(controller: "hut", action: "list")
         }
-        
+
         def hut = Hut.get(params.id)
 
         return [bookingList: Booking.findByHut(hut), 'hut': hut]
