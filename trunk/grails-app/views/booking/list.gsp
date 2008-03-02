@@ -23,6 +23,8 @@
 
                 <g:sortableColumn property="endDate" title="End Date"/>
 
+                <th>Number of people</th>
+
                 <th></th>
             </tr>
         </thead>
@@ -35,6 +37,8 @@
                     <td><g:formatDate date="${booking.startDate}" format="yyyy-MM-dd"/></td>
 
                     <td><g:formatDate date="${booking.endDate}" format="yyyy-MM-dd"/></td>
+
+                    <td>${booking.peopleCount?.encodeAsHTML()}</td>
 
                     <td><g:link action="edit" id="${booking.id}">Edit</g:link></td>
                 </tr>

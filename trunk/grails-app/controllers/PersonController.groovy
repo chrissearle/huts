@@ -1,4 +1,5 @@
 class PersonController extends BaseController {
+    EmailerService emailerService
 
     def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register']]
 
@@ -62,6 +63,29 @@ class PersonController extends BaseController {
             user.approved = false
 
             if (user.save()) {
+                def admins = Person.findAllByAdmin(true)
+
+                def adminMails = []
+
+                admins.each {admin ->
+                    adminMails += admin.email
+                }
+
+                // Each "email" is a simple Map
+                def email = [
+                        to: adminMails,
+                        subject: "User registered",
+                        text: """A new user has been registered:
+Name:   ${user.name}
+E-Mail: ${user.email}
+Phone:  ${user.phone}
+Login:  ${user.userId}"""
+                ]
+
+                // sendEmails expects a List
+                emailerService.sendEmails([email])
+
+
                 flash['message'] = "Account created - it will now need to be approved by an administrator"
                 redirect(controller: 'person', action: 'login')
             } else {

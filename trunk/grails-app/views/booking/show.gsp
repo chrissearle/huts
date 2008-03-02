@@ -49,6 +49,15 @@
 
             </tr>
 
+            <tr>
+                <td valign="top" class="name">
+                    <label for="peopleCount">Number of people</label>
+                </td>
+                <td valign="top" class="value ${hasErrors(bean: booking, field: 'peopleCount', 'errors')}">
+                    <input type="text" maxlength="50" id="peopleCount" name="peopleCount" value="${fieldValue(bean: booking, field: 'peopleCount')}"/>
+                </td>
+            </tr>
+
         </tbody>
     </table>
 </div>
