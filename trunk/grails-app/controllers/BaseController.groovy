@@ -31,7 +31,7 @@ abstract class BaseController {
 
                             Hut hut = Hut.get(params.id)
 
-                            if (!p.admin && !(p == hut.owner)) {
+                            if (!(p.admin || (p == hut.owner))) {
                                 redirect(controller: 'hut', action: 'denied')
 
                                 return false
@@ -39,6 +39,28 @@ abstract class BaseController {
                         }
                         break;
                     case "booking":
+                        Person p = Person.findByUserId(session.userId)
+
+                        if (params.action == "show" || params.action == "edit") {
+                            Booking b = Booking.get(params.id)
+
+                            if (!(p.admin || (p == b.hut.owner) || (p == b.contact))) {
+                                redirect(controller: 'booking', action: 'denied')
+
+                                return false
+                            }
+                        }
+                        if (params.action == "list") {
+                            Hut hut = Hut.get(params.id)
+
+                            if (!(p.admin || (p == hut.owner))) {
+                                redirect(controller: 'hut', action: 'denied')
+
+                                return false
+                            }
+                        }
+                        // TODO - create: see Trac #17 - needs this in place before an access check is meaningful - will be hut id
+
                         break;
                     default: // NOP
                         break;
