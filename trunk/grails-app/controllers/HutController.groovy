@@ -54,4 +54,20 @@ class HutController extends BaseController {
         response.contentType = "image/jpeg"
         response.outputStream << hut.image
     }
+
+    def delete = {
+        def hut = Hut.get(params.id)
+
+        if (hut) {
+            flash.message = "${hut.name} deleted"
+
+            hut.delete()
+
+            redirect(controller: 'hut', action: 'list')
+        }
+        else {
+            flash.message = "Hut not found"
+            redirect(controller: 'hut', action: 'list')
+        }
+    }
 }

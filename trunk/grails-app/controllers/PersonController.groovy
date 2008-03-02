@@ -93,4 +93,20 @@ Login:  ${user.userId}"""
             }
         }
     }
+
+    def delete = {
+        def person = Person.get(params.id)
+
+        if (person) {
+            flash.message = "${person.name} deleted"
+
+            person.delete()
+
+            redirect(controller: 'person', action: 'list')
+        }
+        else {
+            flash.message = "Person not found"
+            redirect(controller: 'person', action: 'list')
+        }
+    }
 }

@@ -2,16 +2,21 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
+    <g:javascript library="huts"/>
     <title>${hut.name}</title>
 </head>
 <body>
 
 <g:manageHut hutId="${hut.id}" userId="${session.userId}">
-    <ul id="nav2">
-        <li><g:link controller="hut" action="edit" id="${hut.id}">Edit ${hut.name}</g:link></li>
-        <li><g:link controller="hut" action="delete" id="${hut.id}">Delete ${hut.name}</g:link></li>
-        <li><g:link controller="booking" action="list" id="${hut.id}">Manage Bookings</g:link></li>
-    </ul>
+    <form method="post" action="${createLink(controller: 'hut', action: 'delete')}" name="deletemenuform">
+        <input type="hidden" name="id" value="${hut?.id}"/>
+
+        <ul id="nav2">
+            <li><g:link controller="hut" action="edit" id="${hut.id}">Edit ${hut.name}</g:link></li>
+            <li><a href="#" onclick="return deleteCheckSubmit();">Delete ${hut.name}</a></li>
+            <li><g:link controller="booking" action="list" id="${hut.id}">Manage Bookings</g:link></li>
+        </ul>
+    </form>
 </g:manageHut>
 
 <div>

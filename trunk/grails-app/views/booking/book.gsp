@@ -44,7 +44,7 @@
                         <label for="peopleCount">Number of people</label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: booking, field: 'peopleCount', 'errors')}">
-                        <input type="text" maxlength="50" id="peopleCount" name="peopleCount" value="${fieldValue(bean: booking, field: 'peopleCount')}"/>
+                        <input type="text" maxlength="50" id="peopleCount" name="peopleCount" value="${fieldValue(bean: booking, field: 'peopleCount')}"/> (max: ${hut.beds})
                     </td>
                 </tr>
 

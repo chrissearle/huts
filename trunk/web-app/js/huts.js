@@ -1,4 +1,4 @@
-function deleteHutSubmit() {
+function deleteCheckSubmit() {
 
     if (confirm('Are you sure?')) {
         document.forms['deletemenuform'].submit();

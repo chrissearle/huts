@@ -11,7 +11,7 @@
         <input type="hidden" name="id" value="${booking?.id}"/>
         <ul id="nav2">
             <li><g:link controller="booking" action="edit" id= q"${booking.id}">Edit</g:link></li>
-            <li><a href="#" onclick="return deleteHutSubmit();">Delete</a></li>
+            <li><a href="#" onclick="return deleteCheckSubmit();">Delete</a></li>
             <li><g:link controller="booking" action="list" id="${booking.hut.id}">Back to list</g:link></li>
         </ul>
     </form>
