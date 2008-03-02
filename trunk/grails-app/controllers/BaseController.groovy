@@ -10,6 +10,20 @@ abstract class BaseController {
             redirect(controller: 'person', action: 'login')
 
             return false
+        } else {
+            if (params.controller) {
+                if (params.controller == "person") {
+                    if (params.action != "editme") {
+                        Person p = Person.findByUserId(session.userId)
+
+                        if (!p.admin) {
+                            redirect(controller: 'person', action: 'denied')
+
+                            return false
+                        }
+                    }
+                }
+            }
         }
     }
 

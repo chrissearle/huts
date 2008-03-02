@@ -1,7 +1,7 @@
 class PersonController extends BaseController {
     EmailerService emailerService
 
-    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register']]
+    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied']]
 
     def scaffold = true
 
@@ -109,4 +109,6 @@ Login:  ${user.userId}"""
             redirect(controller: 'person', action: 'list')
         }
     }
+
+    def denied = {}
 }
