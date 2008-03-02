@@ -109,6 +109,4 @@ Login:  ${user.userId}"""
             redirect(controller: 'person', action: 'list')
         }
     }
-
-    def denied = {}
 }

@@ -9,7 +9,7 @@
 <div>
     <h3 class="formtitle">Denied</h3>
 
-    <p class="formtext">Your user does not have access to the administration area.</p>
+    <p class="formtext">Your user does not have access to administrate that hut.</p>
 </div>
 </body>
 </html>

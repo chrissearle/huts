@@ -12,16 +12,36 @@ abstract class BaseController {
             return false
         } else {
             if (params.controller) {
-                if (params.controller == "person") {
-                    if (params.action != "editme") {
-                        Person p = Person.findByUserId(session.userId)
+                switch (params.controller) {
+                    case "person":
+                        if (params.action != "editme") {
+                            Person p = Person.findByUserId(session.userId)
 
-                        if (!p.admin) {
-                            redirect(controller: 'person', action: 'denied')
+                            if (!p.admin) {
+                                redirect(controller: 'person', action: 'denied')
 
-                            return false
+                                return false
+                            }
                         }
-                    }
+                        break;
+                    case "hut":
+                        if (params.action == "edit" || params.action == "delete") {
+
+                            Person p = Person.findByUserId(session.userId)
+
+                            Hut hut = Hut.get(params.id)
+
+                            if (!p.admin && !(p == hut.owner)) {
+                                redirect(controller: 'hut', action: 'denied')
+
+                                return false
+                            }
+                        }
+                        break;
+                    case "booking":
+                        break;
+                    default: // NOP
+                        break;
                 }
             }
         }
@@ -36,4 +56,6 @@ abstract class BaseController {
 
         return false
     }
+
+    def denied = {}
 }
