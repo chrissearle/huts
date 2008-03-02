@@ -45,6 +45,17 @@
             <span class="button"><input class="save" type="submit" value="Book"/></span>
         </div>
     </g:form>
+
+    <h4 class="formtitle">Availability</h4>
+
+    <p class="formtext">This chart shows only nights - so day of departure is not shown</p>
+
+    <table class="datetable">
+        <tr><td width="50%" class="booked">Booked</td><td width="50%" class="bookedMe">Booked by you</td></tr>
+    </table>
+
+    <g:monthView hutId="${hut.id}" monthcount="12" userId="${session.userId}"/>
+
 </div>
 </body>
 </html>

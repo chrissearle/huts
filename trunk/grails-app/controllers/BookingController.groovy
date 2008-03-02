@@ -53,6 +53,16 @@ class BookingController extends BaseController {
 
         def hut = Hut.get(params.id)
 
-        return [bookingList: Booking.findByHut(hut), 'hut': hut]
+        def criteria = Booking.createCriteria();
+
+        def now = new Date() - 1
+
+        def bookings = criteria.list {
+            eq('hut', hut)
+            ge('startDate', now)
+            order('startDate', 'asc')
+        }
+
+        return ['bookingList': bookings, 'hut': hut]
     }
 }

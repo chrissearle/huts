@@ -6,11 +6,13 @@
 </head>
 <body>
 
-<ul id="nav2">
-    <li><g:link controller="hut" action="edit" id="${hut.id}">Edit ${hut.name}</g:link></li>
-    <li><g:link controller="hut" action="delete" id="${hut.id}">Delete ${hut.name}</g:link></li>
-    <li><g:link controller="booking" action="list" id="${hut.id}">Manage Bookings</g:link></li>
-</ul>
+<g:manageHut hutId="${hut.id}" userId="${session.userId}">
+    <ul id="nav2">
+        <li><g:link controller="hut" action="edit" id="${hut.id}">Edit ${hut.name}</g:link></li>
+        <li><g:link controller="hut" action="delete" id="${hut.id}">Delete ${hut.name}</g:link></li>
+        <li><g:link controller="booking" action="list" id="${hut.id}">Manage Bookings</g:link></li>
+    </ul>
+</g:manageHut>
 
 <div>
     <g:if test="${flash.message}">
@@ -42,12 +44,19 @@
                     <h4>Bookings</h4>
                     <g:each var="b" in="${hut.bookings}">
                         <p>
-                            <g:link controller="booking" action="show" id="${b.id}">
-                                ${b.contact.name}:
+                            <g:showBooking bookingId="${b.id}" userId="${session.userId}">
+                                <g:link controller="booking" action="show" id="${b.id}">
+                                    ${b.contact.name}:
+                                    <g:formatDate date="${b.startDate}" format="yyyy-MM-dd"/>
+                                    -
+                                    <g:formatDate date="${b.endDate}" format="yyyy-MM-dd"/>
+                                </g:link>
+                            </g:showBooking>
+                            <g:showBookingDate bookingId="${b.id}" userId="${session.userId}">
                                 <g:formatDate date="${b.startDate}" format="yyyy-MM-dd"/>
                                 -
                                 <g:formatDate date="${b.endDate}" format="yyyy-MM-dd"/>
-                            </g:link>
+                            </g:showBookingDate>
                         </p>
                     </g:each>
                     <br/>
@@ -63,7 +72,13 @@
                 <td colspan="2">
                     <h4>Availability</h4>
 
-                    <p>TODO: Add graphs of availability</p>
+                    <p>This chart shows only nights - so day of departure is not shown</p>
+
+                    <table class="datetable">
+                        <tr><td width="50%" class="booked">Booked</td><td width="50%" class="bookedMe">Booked by you</td></tr>
+                    </table>
+
+                    <g:monthView hutId="${hut.id}" monthcount="4" userId="${session.userId}"/>
                 </td>
             </tr>
         </tbody>
