@@ -34,6 +34,9 @@ class BookingController extends BaseController {
         } else {
             Person user = Person.findByUserId(params['user.id'])
             booking.contact = user
+
+            // TODO - Does this booking overlap?
+
             if (booking.save()) {
 
                 // Each "email" is a simple Map
@@ -65,7 +68,6 @@ Phone:  ${booking.contact.phone}"""
             }
         }
     }
-
 
     def list = {
         if (!params.id) {
