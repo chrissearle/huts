@@ -1,7 +1,7 @@
 class PersonController extends BaseController {
     EmailerService emailerService
 
-    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied']]
+    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied', 'forgotten']]
 
     def scaffold = true
 
@@ -107,6 +107,38 @@ Login:  ${user.userId}"""
         else {
             flash.message = "Person not found"
             redirect(controller: 'person', action: 'list')
+        }
+    }
+
+    def forgotten = {
+        if (request.method == "GET") {
+            def user = new Person()
+        } else {
+            def user = Person.findByUserId(params.userId)
+
+            if (!user) {
+                user = Person.findByEmail(params.email)
+            }
+
+            if (user) {
+                // Each "email" is a simple Map
+                def email = [
+                        to: [user.email],
+                        subject: "Forgotten password request",
+                        text: "You recently requested your password: ${user.password}"
+                ]
+
+                // sendEmails expects a List
+                emailerService.sendEmails([email])
+
+                flash['message'] = "Your password has been sent to your registered e-mail address"
+
+                redirect(controller: 'person', action: 'login')
+            } else {
+                flash['message'] = "Could not find your user"
+
+                redirect(controller: 'person', action: 'forgotten')
+            }
         }
     }
 }
