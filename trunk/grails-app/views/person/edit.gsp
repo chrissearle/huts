@@ -65,23 +65,26 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td valign="top" class="name">
-                        <label for="admin">Admin:</label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: person, field: 'admin', 'errors')}">
-                        <g:checkBox name="admin" value="${person?.admin}"></g:checkBox>
-                    </td>
-                </tr>
+                <g:isAdmin userId="${session.userId}">
 
-                <tr>
-                    <td valign="top" class="name">
-                        <label for="approved">Approved:</label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: person, field: 'approved', 'errors')}">
-                        <g:checkBox name="approved" value="${person?.approved}"></g:checkBox>
-                    </td>
-                </tr>
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="admin">Admin:</label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: person, field: 'admin', 'errors')}">
+                            <g:checkBox name="admin" value="${person?.admin}"></g:checkBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="approved">Approved:</label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: person, field: 'approved', 'errors')}">
+                            <g:checkBox name="approved" value="${person?.approved}"></g:checkBox>
+                        </td>
+                    </tr>
+                </g:isAdmin>
 
             </tbody>
         </table>

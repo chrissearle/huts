@@ -14,13 +14,20 @@ abstract class BaseController {
             if (params.controller) {
                 switch (params.controller) {
                     case "person":
-                        if (params.action != "editme") {
-                            Person p = Person.findByUserId(session.userId)
+                        Person p = Person.findByUserId(session.userId)
+
+                        if (params.id) {
+                            Person p2 = Person.get(params.id)
 
                             if (!p.admin) {
-                                redirect(controller: 'person', action: 'denied')
 
-                                return false
+                                if (p.id != p2.id) {
+                                    log.error("PARAMS: ${params}");
+
+                                    redirect(controller: 'person', action: 'denied')
+
+                                    return false
+                                }
                             }
                         }
                         break;

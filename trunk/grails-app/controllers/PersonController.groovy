@@ -8,6 +8,7 @@ class PersonController extends BaseController {
     def login = {
         if (request.method == "GET") {
             session.userId = null
+            session.userPK = null
             def user = new Person()
         } else {
             def user = Person.findByUserIdAndPassword(params.userId,
@@ -16,6 +17,7 @@ class PersonController extends BaseController {
             if (user) {
                 if (user.approved) {
                     session.userId = user.userId
+                    session.userPK = user.id
 
                     def redirectParams = session.originalRequestParams ? session.originalRequestParams : redirect(controller: 'hut', action: 'list')
 
