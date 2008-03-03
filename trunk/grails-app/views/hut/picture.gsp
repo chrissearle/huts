@@ -1,12 +1,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <title>Create Hut</title>
+    <meta name="layout" content="summer-days"/>
+    <title>Upload hut picture</title>
 </head>
 <body>
-<div class="body">
-    <h1>${hut.name} - Picture</h1>
+<div>
+    <h3 class="formtitle">${hut.name} - upload picture</h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>

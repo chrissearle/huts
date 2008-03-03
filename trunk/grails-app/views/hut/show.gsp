@@ -13,6 +13,7 @@
 
         <ul id="nav2">
             <li><g:link controller="hut" action="edit" id="${hut.id}">Edit ${hut.name}</g:link></li>
+            <li><g:link controller="hut" action="picture" id="${hut.id}">Upload picture for ${hut.name}</g:link></li>
             <li><a href="#" onclick="return deleteCheckSubmit();">Delete ${hut.name}</a></li>
             <li><g:link controller="booking" action="list" id="${hut.id}">Manage Bookings</g:link></li>
         </ul>
