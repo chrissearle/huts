@@ -24,19 +24,23 @@ class Booking {
 
             def results = criteria.list {
                 or {
+                    // "startDate"<=val<"endDate"
                     and {
                         eq("hut", obj.hut)
-                        gt("endDate", val)
                         le("startDate", val)
+                        gt("endDate", val)
                     }
+                    // "startDate"<=obj.endDate<"endDate"
                     and {
                         eq("hut", obj.hut)
+                        le("startDate", obj.endDate)
                         ge("endDate", obj.endDate)
-                        lt("startDate", obj.endDate)
                     }
-                    // TODO around and within
+                    // val<"startDate" & obj.endDate>"endDate"
                     and {
                         eq("hut", obj.hut)
+                        gt("startDate", val)
+                        lt("endDate", obj.endDate)
                     }
                 }
             }

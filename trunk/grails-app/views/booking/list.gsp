@@ -26,6 +26,8 @@
                 <th>Number of people</th>
 
                 <th></th>
+
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +41,8 @@
                     <td><g:formatDate date="${booking.endDate}" format="yyyy-MM-dd"/></td>
 
                     <td>${booking.peopleCount?.encodeAsHTML()}</td>
+
+                    <td><g:link action="show" id="${booking.id}">Show</g:link></td>
 
                     <td><g:link action="edit" id="${booking.id}">Edit</g:link></td>
                 </tr>
