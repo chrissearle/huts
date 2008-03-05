@@ -2,12 +2,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
-    <title>Create hut</title>
+    <title><g:message code="hut.create.title"/></title>
 </head>
 <body>
 
 <div>
-    <h3 class="formtitle">Create hut</h3>
+    <h3 class="formtitle"><g:message code="hut.create.title"/></h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -25,7 +25,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="name">Name:</label>
+                            <label for="name"><g:message code="hut.shared.name"/></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'name', 'errors')}">
                             <input type="text" maxlength="50" id="name" name="name" value="${fieldValue(bean: hut, field: 'name')}"/>
@@ -34,7 +34,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="location">Location:</label>
+                            <label for="location"><g:message code="hut.shared.location"/></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'location', 'errors')}">
                             <input type="text" maxlength="50" id="location" name="location" value="${fieldValue(bean: hut, field: 'location')}"/>
@@ -43,7 +43,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="description">Description:</label>
+                            <label for="description"><g:message code="hut.shared.description"/></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'location', 'errors')}">
                             <textarea id="description" name="description" cols="40" rows="5">${fieldValue(bean: hut, field: 'description')}</textarea>
@@ -52,7 +52,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="beds">Beds:</label>
+                            <label for="beds"><g:message code="hut.shared.beds"/></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'beds', 'errors')}">
                             <input type="text" maxlength="5" id="beds" name="beds" size="6" value="${fieldValue(bean: hut, field: 'beds')}"/>
@@ -61,7 +61,7 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="owner">Contact:</label>
+                            <label for="owner"><g:message code="hut.shared.contact"/></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'owner', 'errors')}">
                             <g:select optionKey="id" from="${Person.list()}" name="owner.id" value="${hut?.owner?.id}"></g:select>

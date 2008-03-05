@@ -2,11 +2,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
-    <title>Upload hut picture</title>
+    <title><g:message code="hut.picture.title" args="${[hut.name]}"/></title>
 </head>
 <body>
-<div>
-    <h3 class="formtitle">${hut.name} - upload picture</h3>
+<div class="body">
+    <h3 class="formtitle"><g:message code="hut.picture.title" args="${[hut.name]}"/></h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -22,7 +22,7 @@
                 <tbody>
                     <tr class="prop">
                         <td valign="top" class="name">
-                            <label for="file">Image file:</label>
+                            <label for="file"><g:message code="hut.shared.file"/></label>
                         </td>
                         <td valign="top" class="value">
                             <input type="file" name="file"/>

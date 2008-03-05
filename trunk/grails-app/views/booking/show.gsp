@@ -38,14 +38,14 @@
             <tr>
                 <td valign="top" class="name">Start Date:</td>
 
-                <td valign="top" class="value"><g:formatDate date="${booking.startDate}" format="yyyy-MM-dd"/></td>
+                <td valign="top" class="value"><g:formatDate date="${booking.startDate}" format="dd/MM/yyyy"/></td>
 
             </tr>
 
             <tr>
                 <td valign="top" class="name">End Date:</td>
 
-                <td valign="top" class="value"><g:formatDate date="${booking.endDate}" format="yyyy-MM-dd"/></td>
+                <td valign="top" class="value"><g:formatDate date="${booking.endDate}" format="dd/MM/yyyy"/></td>
 
             </tr>
 

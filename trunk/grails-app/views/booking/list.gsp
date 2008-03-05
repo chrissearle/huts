@@ -36,9 +36,9 @@
 
                     <td><g:link controller="person" action="show" id="${booking?.contact?.id}">${booking.contact?.encodeAsHTML()}</g:link></td>
 
-                    <td><g:formatDate date="${booking.startDate}" format="yyyy-MM-dd"/></td>
+                    <td><g:formatDate date="${booking.startDate}" format="dd/MM/yyyy"/></td>
 
-                    <td><g:formatDate date="${booking.endDate}" format="yyyy-MM-dd"/></td>
+                    <td><g:formatDate date="${booking.endDate}" format="dd/MM/yyyy"/></td>
 
                     <td>${booking.peopleCount?.encodeAsHTML()}</td>
 
