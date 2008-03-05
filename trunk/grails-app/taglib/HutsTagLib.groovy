@@ -190,4 +190,25 @@ class HutsTagLib {
         return null
     }
 
+    def langFlag = {attrs ->
+        def lang = attrs.lang
+        def params = attrs.params
+
+        def path = request.contextPath
+
+        if (params.controller) {
+            path += "/${params.controller}"
+        }
+
+        if (params.action) {
+            path += "/${params.action}"
+        }
+        if (params.id) {
+            path += "/${params.id}"
+        }
+
+        path += "?lang=${lang}"
+
+        out << "<a href='$path'><img src='${request.contextPath}/images/flags/${lang}.png'/></a>"
+    }
 }
