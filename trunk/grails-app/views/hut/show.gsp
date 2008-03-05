@@ -52,7 +52,7 @@
                         </p>
                     </g:each>
                     <br/>
-                    <p><g:link controller="booking" action="book" id="${hut.id}">Add Booking</g:link></p>
+                    <p><g:link controller="booking" action="book" id="${hut.id}"><g:message code="hut.show.booking.link"/></g:link></p>
 
                 </td>
                 <td>
@@ -62,18 +62,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <h4><g:message code="hut.show.title.availability"/></h4>
-
-                    <p><g:message code="hut.show.text.availability"/></p>
-
-                    <table class="datetable">
-                        <tr>
-                            <td width="50%" class="booked"><g:message code="hut.show.key.booked"/></td>
-                            <td width="50%" class="bookedMe"><g:message code="hut.show.key.youbooked"/></td>
-                        </tr>
-                    </table>
-
-                    <g:monthView hutId="${hut.id}" monthcount="4" userId="${session.userId}"/>
+                    <g:render template="/availabilityShort" var="hut" bean="${hut}"/>
                 </td>
             </tr>
         </tbody>

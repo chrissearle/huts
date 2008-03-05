@@ -70,6 +70,10 @@
             <span class="button"><input class="save" type="submit" value="Create"/></span>
         </div>
     </g:form>
+
+    <g:if test="${hut}">
+        <g:render template="/availabilityLong" var="hut" bean="${hut}"/>
+    </g:if>
 </div>
 </body>
 </html>
