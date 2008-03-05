@@ -2,17 +2,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
-    <title>Forgotten Password</title>
+    <title><g:message code="user.forgotten.title"/></title>
 </head>
 <body>
 
 <div>
-    <h3 class="formtitle">Forgotten Password</h3>
+    <h3 class="formtitle"><g:message code="user.forgotten.title"/></h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <p class="formtext">Please enter either your login or your registered e-mail address.</p>
+    <p class="formtext"><g:message code="user.forgotten.text.forgetten"/></p>
 
     <g:form controller="person" method="post">
         <table>
@@ -20,7 +20,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="userId">User Id:</label>
+                        <label for="userId"><g:message code="user.shared.userId"/></label>
                     </td>
                     <td valign="top" class="value">
                         <input type="text" maxlength="20" id="userId" name="userId" value="${fieldValue(bean: person, field: 'userId')}"/>
@@ -29,7 +29,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="email">E-mail:</label>
+                        <label for="email"><g:message code="user.shared.email"/></label>
                     </td>
                     <td valign="top" class="value">
                         <input type="text" maxlength="50" id="email" name="email" value="${fieldValue(bean: person, field: 'email')}"/>

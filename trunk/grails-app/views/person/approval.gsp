@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
-    <title>People waiting approval</title>
+    <title><g:message code="user.approval.title"/></title>
 </head>
 <body>
 <div>
@@ -14,11 +14,11 @@
             <thead>
                 <tr>
 
-                    <th>Name</th>
+                    <th><g:message code="user.shared.name"/></th>
 
-                    <th>Email</th>
+                    <th><g:message code="user.shared.email"/></th>
 
-                    <th>Phone</th>
+                    <th><g:message code="user.shared.phone"/></th>
 
                     <th></th>
                 </tr>
@@ -33,7 +33,7 @@
 
                         <td>${person.phone?.encodeAsHTML()}</td>
 
-                        <td><g:link action="approval" id="${person.id}">Approve</g:link></td>
+                        <td><g:link action="approval" id="${person.id}"><g:message code="user.approval.approve.link"/></g:link></td>
 
                     </tr>
                 </g:each>

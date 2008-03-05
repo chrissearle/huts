@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
     <g:javascript library="huts"/>
-    <title>${person.name}</title>
+    <title><g:message code="user.show.title" args="${[person.name]}"/></title>
 </head>
 <body>
 <div>
@@ -11,8 +11,8 @@
         <form method="post" action="${createLink(controller: 'person', action: 'delete')}" name="deletemenuform">
             <input type="hidden" name="id" value="${person?.id}"/>
             <ul id="nav2">
-                <li><g:link controller="person" action="edit" id="${person.id}">Edit ${person.name}</g:link></li>
-                <li><a href="#" onclick="return deleteCheckSubmit();">Delete ${person.name}</a></li>
+                <li><g:link controller="person" action="edit" id="${person.id}"><g:message code="user.show.menu.edit" args="${[person.name]}"/></g:link></li>
+                <li><a href="#" onclick="return deleteCheckSubmit();"><g:message code="user.show.menu.delete" args="${[person.name]}"/></a></li>
             </ul>
         </form>
     </g:isAdmin>

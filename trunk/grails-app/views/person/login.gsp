@@ -2,12 +2,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
-    <title>Log in</title>
+    <title><g:message code="user.login.title"/></title>
 </head>
 <body>
 
 <div>
-    <h3 class="formtitle">Log in</h3>
+    <h3 class="formtitle"><g:message code="user.login.title"/></h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -18,7 +18,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="userId">User Id:</label>
+                        <label for="userId"><g:message code="user.shared.userId"/></label>
                     </td>
                     <td valign="top" class="value">
                         <input type="text" maxlength="20" id="userId" name="userId" value="${fieldValue(bean: person, field: 'userId')}"/>
@@ -27,7 +27,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="password">Password:</label>
+                        <label for="password"><g:message code="user.shared.password"/></label>
                     </td>
                     <td valign="top" class="value">
                         <input type="password" maxlength="20" id="password" name="password" value="${fieldValue(bean: person, field: 'password')}"/>

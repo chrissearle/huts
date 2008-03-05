@@ -2,12 +2,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="summer-days"/>
-    <title>User List</title>
+    <title><g:message code="user.list.title"/></title>
 </head>
 <body>
 <ul id="nav2">
-    <li></span><g:link controller="person" action="create">Add user</g:link></li>
-    <li><g:link controller="person" action="approval">Users waiting approval</g:link></li>
+    <li></span><g:link controller="person" action="create"><g:message code="user.list.menu.add"/></g:link></li>
+    <li><g:link controller="person" action="approval"><g:message code="user.list.menu.approve"/></g:link></li>
 </ul>
 
 <div>
