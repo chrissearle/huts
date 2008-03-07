@@ -1,5 +1,5 @@
 class PersonController extends BaseController {
-    EmailerService emailerService
+    EmailService emailService
 
     def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied', 'forgotten']]
 
@@ -70,22 +70,10 @@ class PersonController extends BaseController {
                     adminMails += admin.email
                 }
 
-                // Each "email" is a simple Map
-                def email = [
-                        to: adminMails,
-                        subject: "User registered",
-                        text: """A new user has been registered:
-Name:   ${user.name}
-E-Mail: ${user.email}
-Phone:  ${user.phone}
-Login:  ${user.userId}"""
-                ]
+                emailService.sendMail("userNewAdminNotification", ["user": user], adminMails,
+                        message(code: "user.new.notification.subject", args: [user.name]))
 
-                // sendEmails expects a List
-                emailerService.sendEmails([email])
-
-
-                flash['message'] = message("user.account.created")
+                flash['message'] = message(code: "user.account.created")
                 redirect(controller: 'person', action: 'login')
             } else {
                 render(view: 'register', model: [person: user])
@@ -121,15 +109,8 @@ Login:  ${user.userId}"""
             }
 
             if (user) {
-                // Each "email" is a simple Map
-                def email = [
-                        to: [user.email],
-                        subject: "Forgotten password request",
-                        text: "You recently requested your password: ${user.password}"
-                ]
-
-                // sendEmails expects a List
-                emailerService.sendEmails([email])
+                emailService.sendMail("userPasswordReminder", ["user": user], [user.email],
+                        message(code: "user.forgotten.password.subject"))
 
                 flash['message'] = message("user.password.sent")
 

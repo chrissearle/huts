@@ -1,5 +1,5 @@
 class BookingController extends BaseController {
-    EmailerService emailerService
+    EmailService emailService
 
     def beforeInterceptor = [action: this.&auth]
 
@@ -36,26 +36,8 @@ class BookingController extends BaseController {
             booking.contact = user
 
             if (booking.save()) {
-
-                // Each "email" is a simple Map
-                def email = [
-                        to: [booking.hut.owner.email],
-                        cc: [booking.contact.email],
-                        subject: "Booking made for hut: ${booking.hut.name}",
-                        text: """A booking has been made for:
-Hut: ${booking.hut.name}
-Start: ${booking.startDate}
-End: ${booking.endDate}
-
-by
-
-Name:   ${booking.contact.name}
-E-Mail: ${booking.contact.email}
-Phone:  ${booking.contact.phone}"""
-                ]
-
-                // sendEmails expects a List
-                emailerService.sendEmails([email])
+                emailService.sendMail("hutBookingOwnerNotification", ["booking": booking], [booking.hut.owner.email],
+                        message(code: "booking.owner.notification.subject", args: [booking.hut.name]))
 
                 flash.message = message(code: "booking.booked.ok", args: [booking.hut])
 
