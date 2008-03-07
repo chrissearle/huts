@@ -23,17 +23,17 @@ class PersonController extends BaseController {
 
                     redirect(redirectParams)
                 } else {
-                    flash['message'] = "Sorry, your account has not yet been approved by an administrator"
+                    flash['message'] = message(code: "user.not.approved")
                 }
             } else {
-                flash['message'] = "Please enter a valid user id and password"
+                flash['message'] = message(code: "user.login.invalid")
             }
         }
     }
 
     def logout = {
         session.userId = null
-        flash['message'] = 'Successfully logged out'
+        flash['message'] = message(code: "user.logout.loggedout")
         redirect(controller: 'person', action: 'login')
     }
 
@@ -44,12 +44,9 @@ class PersonController extends BaseController {
             Person user = Person.get(userid)
             user.approved = true
             if (user.save(flush: true)) {
-                flash['message'] = "User ${user.name} successfully approved"
+                flash['message'] = message(code: "user.approval.approved", args: [user.name])
             } else {
-                flash['message'] = "User ${user.name} was not saved"
-                /*user.errors.each {
-                      flash['message'] = flash['message'] + it + "<br/>"
-                 } */
+                flash['message'] = message(code: "user.approval.failed", args: [user.name])
             }
         }
         return [personList: Person.findAllByApproved(false)]
@@ -88,7 +85,7 @@ Login:  ${user.userId}"""
                 emailerService.sendEmails([email])
 
 
-                flash['message'] = "Account created - it will now need to be approved by an administrator"
+                flash['message'] = message("user.account.created")
                 redirect(controller: 'person', action: 'login')
             } else {
                 render(view: 'register', model: [person: user])
@@ -100,14 +97,15 @@ Login:  ${user.userId}"""
         def person = Person.get(params.id)
 
         if (person) {
-            flash.message = "${person.name} deleted"
+            flash.message = message("user.account.created", args[person.name])
 
             person.delete()
 
             redirect(controller: 'person', action: 'list')
         }
         else {
-            flash.message = "Person not found"
+            flash.message = message("user.not.found")
+
             redirect(controller: 'person', action: 'list')
         }
     }
@@ -133,11 +131,11 @@ Login:  ${user.userId}"""
                 // sendEmails expects a List
                 emailerService.sendEmails([email])
 
-                flash['message'] = "Your password has been sent to your registered e-mail address"
+                flash['message'] = message("user.password.sent")
 
                 redirect(controller: 'person', action: 'login')
             } else {
-                flash['message'] = "Could not find your user"
+                flash['message'] = message("user.not.found")
 
                 redirect(controller: 'person', action: 'forgotten')
             }

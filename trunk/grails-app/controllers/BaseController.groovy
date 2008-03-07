@@ -22,8 +22,6 @@ abstract class BaseController {
                             if (!p.admin) {
 
                                 if (p.id != p2.id) {
-                                    log.error("PARAMS: ${params}");
-
                                     redirect(controller: 'person', action: 'denied')
 
                                     return false

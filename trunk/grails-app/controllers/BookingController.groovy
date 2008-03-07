@@ -11,11 +11,11 @@ class BookingController extends BaseController {
         if (booking) {
             def id = booking.hut.id
             booking.delete()
-            flash.message = "Booking deleted"
+            flash.message = message(code: "booking.deleted")
             redirect(controller: 'hut', action: 'show', id: id)
         }
         else {
-            flash.message = "Booking not found"
+            flash.message = message(code: "booking.not.found")
             redirect(controller: 'hut', action: 'list')
         }
     }
@@ -57,7 +57,7 @@ Phone:  ${booking.contact.phone}"""
                 // sendEmails expects a List
                 emailerService.sendEmails([email])
 
-                flash.message = "Successfully booked ${booking.hut}"
+                flash.message = message(code: "booking.booked.ok", args: [booking.hut])
 
                 redirect(controller: "hut", action: "show", id: booking.hut.id)
             } else {

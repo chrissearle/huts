@@ -31,7 +31,7 @@ class HutController extends BaseController {
             hut.image = file.getBytes()
         }
 
-        flash['message'] = "Image for ${hut.name} set"
+        flash['message'] = message(code: "hut.picture.uploaded", args: [hut.name])
 
         redirect(controller: 'hut', action: 'list')
     }
@@ -59,14 +59,14 @@ class HutController extends BaseController {
         def hut = Hut.get(params.id)
 
         if (hut) {
-            flash.message = "${hut.name} deleted"
+            flash.message = message(code: "hut.deleted", args = [hut.name])
 
             hut.delete()
 
             redirect(controller: 'hut', action: 'list')
         }
         else {
-            flash.message = "Hut not found"
+            flash.message = message(code: "hut.not.found")
             redirect(controller: 'hut', action: 'list')
         }
     }
