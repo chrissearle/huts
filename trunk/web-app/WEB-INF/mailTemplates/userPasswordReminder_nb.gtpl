@@ -1,3 +1,3 @@
 https://www.chrissearle.org/huts/
 
-Du ba om å få tilsendt passordet ditt: ${user.password}
+Du ba om √• f√• tilsendt passordet ditt: ${user.password}
