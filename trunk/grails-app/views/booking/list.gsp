@@ -26,7 +26,7 @@
                 <th><g:message code="booking.shared.people"/></th>
 
                 <th></th>
-                '
+
                 <th></th>
             </tr>
         </thead>

@@ -85,14 +85,14 @@ class PersonController extends BaseController {
         def person = Person.get(params.id)
 
         if (person) {
-            flash.message = message("user.account.created", args[person.name])
+            flash.message = message(code: "user.account.created", args[person.name])
 
             person.delete()
 
             redirect(controller: 'person', action: 'list')
         }
         else {
-            flash.message = message("user.not.found")
+            flash.message = message(code: "user.not.found")
 
             redirect(controller: 'person', action: 'list')
         }
@@ -112,11 +112,11 @@ class PersonController extends BaseController {
                 emailService.sendMail(message(code: "user.forgotten.password.file"), ["user": user], [user.email],
                         message(code: "user.forgotten.password.subject"))
 
-                flash['message'] = message("user.password.sent")
+                flash['message'] = message(code: "user.password.sent")
 
                 redirect(controller: 'person', action: 'login')
             } else {
-                flash['message'] = message("user.not.found")
+                flash['message'] = message(code: "user.not.found")
 
                 redirect(controller: 'person', action: 'forgotten')
             }

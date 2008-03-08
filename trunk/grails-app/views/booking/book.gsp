@@ -34,7 +34,7 @@
                     <td valign="top" class="name">
                         <label for="endDate"><g:message code="booking.shared.enddate"/></label>
                     </td>
-                    <td valign="top" class="value ${hasErrors(bean: booking, field: 'endDate', 'errors')}">
+                    <td valign="top" class="value ${hasErrors(bean: booking, field: 'startDate', 'errors')}">
                         <g:datePicker name="endDate" value="${booking?.endDate}" precision="day"></g:datePicker>
                     </td>
                 </tr>
