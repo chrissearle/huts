@@ -33,7 +33,7 @@
 
         </div>
         <div class="buttons">
-            <span class="button"><input class="save" type="submit" value="Upload"/></span>
+            <span class="button"><g:actionSubmit action="picture" value="${message(code:'hut.picture.upload.button')}"/></span>
         </div>
     </g:form>
 </div>

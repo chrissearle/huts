@@ -73,7 +73,7 @@
             </table>
         </div>
         <div class="buttons">
-            <span class="button"><g:actionSubmit class="save" value="Update"/></span>
+            <span class="button"><g:actionSubmit action="update" value="${message(code:'hut.edit.update.button')}"/></span>
         </div>
     </g:form>
 </div>
