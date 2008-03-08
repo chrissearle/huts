@@ -36,7 +36,7 @@ class BookingController extends BaseController {
             booking.contact = user
 
             if (booking.save()) {
-                emailService.sendMail("hutBookingOwnerNotification", ["booking": booking], [booking.hut.owner.email],
+                emailService.sendMail(message(code: "booking.owner.notification.file"), ["booking": booking], [booking.hut.owner.email],
                         message(code: "booking.owner.notification.subject", args: [booking.hut.name]))
 
                 flash.message = message(code: "booking.booked.ok", args: [booking.hut])
