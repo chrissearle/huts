@@ -19,13 +19,13 @@
             <thead>
                 <tr>
 
-                    <g:sortableColumn property="name" title="Name"/>
+                    <g:sortableColumn property="name" titleKey="user.shared.name"/>
 
-                    <g:sortableColumn property="email" title="Email"/>
+                    <g:sortableColumn property="email" titleKey="user.shared.email"/>
 
-                    <g:sortableColumn property="phone" title="Phone"/>
+                    <g:sortableColumn property="phone" titleKey="user.shared.phone"/>
 
-                    <th>Contact for</th>
+                    <th><g:message code="user.shared.contact"/></th>
 
                 </tr>
             </thead>

@@ -40,7 +40,7 @@
         </table>
 
         <div class="buttons">
-            <span class="button"><g:actionSubmit action="forgotten" value="Send password"/></span>
+            <span class="button"><g:actionSubmit action="forgotten" value="${message(code:'user.forgotten.send.button')}"/></span>
         </div>
     </g:form>
 </div>

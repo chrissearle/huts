@@ -68,7 +68,7 @@
             </tbody>
         </table>
         <div class="buttons">
-            <span class="button"><g:actionSubmit value="Register"/></span>
+            <span class="button"><g:actionSubmit action="register" value="${message(code:'user.show.register.button')}"/></span>
         </div>
     </g:form>
 </div>

@@ -38,7 +38,7 @@
         </table>
 
         <div class="buttons">
-            <span class="button"><g:actionSubmit value="Log in"/></span>
+            <span class="button"><g:actionSubmit action="login" value="${message(code:'user.login.login.button')}"/></span>
         </div>
     </g:form>
 </div>
