@@ -51,7 +51,7 @@
             </tbody>
         </table>
         <div class="buttons">
-            <span class="button"><input class="save" type="submit" value="Book"/></span>
+            <span class="button"><g:actionSubmit action="book" value="${message(code:'booking.book.book.button')}"/></span>
         </div>
     </g:form>
 

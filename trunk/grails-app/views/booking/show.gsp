@@ -22,35 +22,35 @@
         <tbody>
 
             <tr>
-                <td valign="top" class="name">Hut:</td>
+                <td valign="top" class="name"><g:message code="booking.shared.hut"/></td>
 
                 <td valign="top" class="value"><g:link controller="hut" action="show" id="${booking?.hut?.id}">${booking?.hut}</g:link></td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name">Contact:</td>
+                <td valign="top" class="name"><g:message code="booking.shared.contact"/></td>
 
                 <td valign="top" class="value"><g:link controller="person" action="show" id="${booking?.contact?.id}">${booking?.contact}</g:link></td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name">Start Date:</td>
+                <td valign="top" class="name"><g:message code="booking.shared.startdate"/></td>
 
                 <td valign="top" class="value"><g:formatDate date="${booking.startDate}" format="dd/MM/yyyy"/></td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name">End Date:</td>
+                <td valign="top" class="name"><g:message code="booking.shared.enddate"/></td>
 
                 <td valign="top" class="value"><g:formatDate date="${booking.endDate}" format="dd/MM/yyyy"/></td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name">Number of people</td>
+                <td valign="top" class="name"><g:message code="booking.shared.people"/></td>
 
                 <td valign="top" class="value">${booking.peopleCount}</td>
             </tr>

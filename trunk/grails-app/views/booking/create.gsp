@@ -21,7 +21,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="hut">Hut:</label>
+                        <label for="hut"><g:message code="booking.shared.hut"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: booking, field: 'hut', 'errors')}">
                         <g:select optionKey="id" from="${Hut.list()}" name="hut.id" value="${booking?.hut?.id}"></g:select>
@@ -30,7 +30,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="contact">Contact:</label>
+                        <label for="contact"><g:message code="booking.shared.contact"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: booking, field: 'contact', 'errors')}">
                         <g:select optionKey="id" from="${Person.list()}" name="contact.id" value="${booking?.contact?.id}"></g:select>
@@ -39,7 +39,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="startDate">Start Date:</label>
+                        <label for="startDate"><g:message code="booking.shared.startdate"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: booking, field: 'startDate', 'errors')}">
                         <g:datePicker name="startDate" value="${booking?.startDate}" precision="day"></g:datePicker>
@@ -48,7 +48,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="endDate">End Date:</label>
+                        <label for="endDate"><g:message code="booking.shared.enddate"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: booking, field: 'endDate', 'errors')}">
                         <g:datePicker name="endDate" value="${booking?.endDate}" precision="day"></g:datePicker>
@@ -57,7 +57,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="peopleCount">Number of people</label>
+                        <label for="peopleCount"><g:message code="booking.shared.people"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: booking, field: 'peopleCount', 'errors')}">
                         <input type="text" maxlength="50" id="peopleCount" name="peopleCount" value="${fieldValue(bean: booking, field: 'peopleCount')}"/>
@@ -67,7 +67,7 @@
             </tbody>
         </table>
         <div class="buttons">
-            <span class="button"><input class="save" type="submit" value="Create"/></span>
+            <span class="button"><g:actionSubmit action="create" value="${message(code:'booking.create.create.button')}"/></span>
         </div>
     </g:form>
 

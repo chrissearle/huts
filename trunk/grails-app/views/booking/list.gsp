@@ -17,16 +17,16 @@
         <thead>
             <tr>
 
-                <th>Contact</th>
+                <th><g:message code="booking.shared.contact"/></th>
 
-                <g:sortableColumn property="startDate" title="Start Date"/>
+                <g:sortableColumn property="startDate" titleKey="booking.shared.startdate"/>
 
-                <g:sortableColumn property="endDate" title="End Date"/>
+                <g:sortableColumn property="endDate" titleKey="booking.shared.enddate"/>
 
-                <th>Number of people</th>
+                <th><g:message code="booking.shared.people"/></th>
 
                 <th></th>
-
+                '
                 <th></th>
             </tr>
         </thead>
@@ -42,9 +42,9 @@
 
                     <td>${booking.peopleCount?.encodeAsHTML()}</td>
 
-                    <td><g:link action="show" id="${booking.id}">Show</g:link></td>
+                    <td><g:link action="show" id="${booking.id}"><g:message code="booking.shared.show"/></g:link></td>
 
-                    <td><g:link action="edit" id="${booking.id}">Edit</g:link></td>
+                    <td><g:link action="edit" id="${booking.id}"><g:message code="booking.shared.edit"/></g:link></td>
                 </tr>
             </g:each>
         </tbody>
