@@ -6,7 +6,7 @@
     <artifactId>huts</artifactId>
     <packaging>grails-app</packaging>
     <name>huts</name>
-    <version>2-SNAPSHOT</version>
+    <version>2</version>
     <build>
         <plugins>
             <plugin>
