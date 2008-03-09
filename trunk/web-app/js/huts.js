@@ -7,12 +7,14 @@ function deleteCheckSubmit() {
     }
 }
 
-function HutLocation(name, lat, lng, imgurl, showurl) {
+function HutLocation(name, lat, lng, imgurl, showurl, linktext, description) {
     this.name = name;
     this.lat = lat;
     this.lng = lng;
     this.showurl = showurl;
     this.imgurl = imgurl;
+    this.linktext = linktext;
+    this.description = description;
 }
 
 function toggleMapList() {
@@ -28,6 +30,18 @@ function toggleMapList() {
     }
 }
 
+function toggleMapView() {
+    var img = document.getElementById("hutimg");
+    var map = document.getElementById("map");
+
+    if (map.style.display == "none") {
+        map.style.display = "";
+        img.style.display = "none";
+    } else {
+        map.style.display = "none";
+        img.style.display = "";
+    }
+}
 
 function initializeMaps(hutlocs) {
     var norway = new GLatLng(64.830253743883, 16.2158203125);
@@ -39,7 +53,6 @@ function initializeMaps(hutlocs) {
 
         map.addControl(new GSmallMapControl());
         map.addControl(new GMapTypeControl());
-        map.addControl(new GScaleControl());
     } else {
         toggleMapList();
     }
@@ -53,17 +66,39 @@ function initializeMaps(hutlocs) {
     }
 }
 
+
+function initializeSingleMap(lat, lng) {
+    var point = new GLatLng(lat, lng);
+
+    if (GBrowserIsCompatible()) {
+        var map = new google.maps.Map2(document.getElementById("map"));
+
+        map.setCenter(point, 7);
+
+        map.addControl(new GSmallMapControl());
+        map.addControl(new GMapTypeControl());
+    }
+
+    if (document.getElementById("hutimg")) {
+        toggleMapView();
+    }
+
+    var marker = new GMarker(point);
+
+    map.addOverlay(marker);
+}
+
 function getMarker(hutloc) {
     var marker = new GMarker(new GLatLng(hutloc.lat, hutloc.lng));
 
     var popup = "<h4>" + hutloc.name + "</h4>";
 
-    if (hutloc.imgurl) 
-{
-    popup += "<img width='150px' src='" + hutloc.imgurl + "'/>";
-}
+    if (hutloc.imgurl) {
+        popup += "<img width='150px' src='" + hutloc.imgurl + "'/>";
+    }
 
-    popup += "<p><a href='" + hutloc.showurl + "'>" + hutloc.name + "</a>";
+    popup += "<p>" + hutloc.description + "</p>";
+    popup += "<p><a href='" + hutloc.showurl + "'>" + hutloc.linktext + "</a></p>";
 
     GEvent.addListener(marker, "click", function() {
         marker.openInfoWindowHtml(popup);

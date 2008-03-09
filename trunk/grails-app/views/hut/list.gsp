@@ -20,7 +20,9 @@
         <g:else>
             "",
         </g:else>
-        "${createLink(action: 'show')}/${hut.id}");
+        "${createLink(action: 'show')}/${hut.id}",
+        "<g:message code='hut.list.show.link'/>",
+        "${hut.description}");
     </g:each>
 
     initializeMaps(hutlocs);
@@ -41,7 +43,7 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <div id="map"></div>
+    <div id="map" class="mainmap"></div>
 
     <div id="oldlist" style="display: none;">
         <table>

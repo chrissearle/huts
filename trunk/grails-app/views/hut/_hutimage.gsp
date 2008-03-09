@@ -1,10 +1,11 @@
 <td>
     <g:if test="${hut.image}">
-        <g:link action="show" id="$hut.id"><img src="${createLink(action: 'showpic')}/${hut.id}" alt="${hut.name}" width="300"/></g:link>
+        <div id="map" class="showmap"></div>
+        <g:link action="show" id="$hut.id"><img id="hutimg" style="display: none;" src="${createLink(action: 'showpic')}/${hut.id}" alt="${hut.name}" width="300"/></g:link>
+        <p><a href="javascript:toggleMapView();"><g:message code="hut.show.toggle"/></a></p>
     </g:if>
     <g:else>
-        <div class="unavailable">
-            <g:message code="hut.shared.image.unavailable"/>
-        </div>
+        <div id="map" class="showmap"></div>
     </g:else>
+
 </td>
