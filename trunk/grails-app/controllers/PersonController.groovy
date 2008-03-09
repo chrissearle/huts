@@ -78,10 +78,10 @@ class PersonController extends BaseController {
                     adminMails += admin.email
                 }
 
-                emailService.sendMail(message(code: "user.new.notification.file"), ["user": user], adminMails,
+                emailService.sendMail(message(code: "user.new.notification.file"), ["user": user], adminMails, [],
                         message(code: "user.new.notification.subject", args: [user.name]))
 
-                emailService.sendMail(message(code: "user.new.confirmation.file"), ["user": user], [user.email],
+                emailService.sendMail(message(code: "user.new.confirmation.file"), ["user": user], [user.email], [],
                         message(code: "user.new.confirmation.subject"))
 
                 flash['message'] = message(code: "user.account.created")
@@ -120,7 +120,7 @@ class PersonController extends BaseController {
             }
 
             if (user) {
-                emailService.sendMail(message(code: "user.forgotten.password.file"), ["user": user], [user.email],
+                emailService.sendMail(message(code: "user.forgotten.password.file"), ["user": user], [user.email], [],
                         message(code: "user.forgotten.password.subject"))
 
                 flash['message'] = message(code: "user.password.sent")

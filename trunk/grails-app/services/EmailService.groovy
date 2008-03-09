@@ -11,7 +11,7 @@ class EmailService {
     MailSender mailSender
     SimpleMailMessage mailMessage
 
-    def sendMail(String templateName, Map binding, List toAddress, String subject) {
+    def sendMail(String templateName, Map binding, List toAddress, List ccAddress, String subject) {
 
         def servletContext = ApplicationHolder.getApplication().getParentContext().getServletContext()
 
@@ -30,6 +30,7 @@ class EmailService {
 
         def email = [
                 to: toAddress,
+                cc: ccAddress,
                 subject: subject,
                 text: template.toString()
         ]
@@ -41,10 +42,13 @@ class EmailService {
     def sendEmails(mails) {
 
         def messages = []
-        for (mail in mails) {
+        mails.each {mail ->
             SimpleMailMessage message = new SimpleMailMessage(mailMessage)
 
             message.to = mail.to
+            if (mail.cc.size() > 0) {
+                message.cc = mail.cc
+            }
             message.text = mail.text
             message.subject = mail.subject
             messages << message
