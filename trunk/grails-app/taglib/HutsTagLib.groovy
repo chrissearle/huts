@@ -3,45 +3,52 @@ import java.text.SimpleDateFormat
 
 class HutsTagLib {
     def showBooking = {attrs, body ->
-        def b = Booking.get(attrs.bookingId)
+        if (attrs.userId) {
+            def b = Booking.get(attrs.bookingId)
 
-        def p = Person.findByUserId(attrs.userId)
+            def p = Person.findByUserId(attrs.userId)
 
-        if (p.admin || b.hut.owner == p || b.contact == p) {
-            out << body()
+            if (p && (p.admin || b.hut.owner == p || b.contact == p)) {
+                out << body()
+            }
         }
     }
 
     def showBookingDate = {attrs, body ->
-        def b = Booking.get(attrs.bookingId)
+        if (attrs.userId) {
+            def b = Booking.get(attrs.bookingId)
 
-        def p = Person.findByUserId(attrs.userId)
+            def p = Person.findByUserId(attrs.userId)
 
-        if (!(p.admin || b.hut.owner == p || b.contact == p)) {
-            out << body()
+            if (p && (!(p.admin || b.hut.owner == p || b.contact == p))) {
+                out << body()
+            }
         }
     }
 
     def manageHut = {attrs, body ->
-        def h = Hut.get(attrs.hutId)
+        if (attrs.userId) {
+            def h = Hut.get(attrs.hutId)
 
-        def p = Person.findByUserId(attrs.userId)
+            def p = Person.findByUserId(attrs.userId)
 
-        if (p.admin || h.owner == p) {
-            out << body()
+            if (p && (p.admin || h.owner == p)) {
+                out << body()
+            }
         }
     }
 
     def isAdmin = {attrs, body ->
-        def p = Person.findByUserId(attrs.userId)
+        if (attrs.userId) {
+            def p = Person.findByUserId(attrs.userId)
 
-        if (p.admin) {
-            out << body()
+            if (p && p.admin) {
+                out << body()
+            }
         }
     }
 
     def monthView = {attrs ->
-        def p = Person.findByUserId(attrs.userId)
 
         def hut = Hut.get(attrs.hutId)
 
@@ -147,7 +154,7 @@ class HutsTagLib {
 
                     if (booking) {
                         def cssClass = "booked"
-                        if (booking.contact == p) {
+                        if (booking.contact.userId == attrs.userId) {
                             cssClass = "bookedMe"
                         }
                         out << " class='$cssClass'"

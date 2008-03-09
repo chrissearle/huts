@@ -9,6 +9,8 @@ class Hut {
     String latitude
     String longitude
 
+    Boolean openHut = true
+
     byte[] image
 
     static belongsTo = Person

@@ -44,14 +44,15 @@ function toggleMapView() {
 }
 
 function initializeMaps(hutlocs) {
-    var norway = new GLatLng(64.830253743883, 16.2158203125);
+    //    var norway = new GLatLng(64.830253743883, 16.2158203125);
+    var norway = new GLatLng(60, 10.7);
 
     if (GBrowserIsCompatible()) {
         var map = new google.maps.Map2(document.getElementById("map"));
 
-        map.setCenter(norway, 4);
+        map.setCenter(norway, 7);
 
-        map.addControl(new GSmallMapControl());
+        map.addControl(new GLargeMapControl());
         map.addControl(new GMapTypeControl());
     } else {
         toggleMapList();
@@ -97,8 +98,8 @@ function getMarker(hutloc) {
         popup += "<img width='150px' src='" + hutloc.imgurl + "'/>";
     }
 
-    popup += "<p>" + hutloc.description + "</p>";
-    popup += "<p><a href='" + hutloc.showurl + "'>" + hutloc.linktext + "</a></p>";
+    popup += "<p class='maptext'>" + hutloc.description + "</p>";
+    popup += "<p class='maptext'><a href='" + hutloc.showurl + "'>" + hutloc.linktext + "</a></p>";
 
     GEvent.addListener(marker, "click", function() {
         marker.openInfoWindowHtml(popup);

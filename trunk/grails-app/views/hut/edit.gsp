@@ -87,6 +87,15 @@
                         </td>
                     </tr>
 
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="openHut"><g:message code="hut.shared.openHut"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'openHut', 'errors')}">
+                            <g:checkBox name="openHut" value="${hut?.openHut}"></g:checkBox>
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>

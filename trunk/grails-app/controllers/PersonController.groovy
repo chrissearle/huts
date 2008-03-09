@@ -40,7 +40,7 @@ class PersonController extends BaseController {
     def logout = {
         session.userId = null
         flash['message'] = message(code: "user.logout.loggedout")
-        redirect(controller: 'person', action: 'login')
+        redirect(controller: 'hut', action: 'list')
     }
 
     def approval = {
@@ -96,7 +96,7 @@ class PersonController extends BaseController {
         def person = Person.get(params.id)
 
         if (person) {
-            flash.message = message(code: "user.account.created", args[person.name])
+            flash.message = message(code: "user.deleted", args: [person.name])
 
             person.delete()
 

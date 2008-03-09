@@ -34,7 +34,10 @@
 <body onunload="GUnload()">
 
 <ul id="nav2">
-    <li><g:link controller="hut" action="create"><g:message code="hut.list.menu.add"/></g:link></li>
+
+    <g:if test="${session.userId}">
+        <li><g:link controller="hut" action="create"><g:message code="hut.list.menu.add"/></g:link></li>
+    </g:if>
     <li><a href="javascript:toggleMapList();"><g:message code="hut.list.menu.toggle"/></a></li>
 </ul>
 
@@ -51,11 +54,11 @@
                 <g:each in="${hutList}" status="i" var="hut">
                     <tr valign="top">
                         <g:if test="${(i % 2) == 0}">
-                            <g:render template="hutimage" var="hut" bean="${hut}"/>
+                            <g:render template="hutimagenomap" var="hut" bean="${hut}"/>
                         </g:if>
                         <g:render template="hutdetails" var="hut" bean="${hut}"/>
                         <g:if test="${(i % 2) == 1}">
-                            <g:render template="hutimage" var="hut" bean="${hut}"/>
+                            <g:render template="hutimagenomap" var="hut" bean="${hut}"/>
                         </g:if>
                     </tr>
                 </g:each>

@@ -2,8 +2,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class HutController extends BaseController {
-
-    def beforeInterceptor = [action: this.&auth]
+    def beforeInterceptor = [action: this.&auth, except: ['list', 'show', 'showpic']]
 
     def scaffold = true
 
@@ -71,8 +70,17 @@ class HutController extends BaseController {
         }
     }
 
-    def map = {
-        // Does nothing yet
-        def googleMapKey = grailsApplication.config.google.map.key
+    def list = {
+        if (!session.userId) {
+            def criteria = Hut.createCriteria();
+
+            def huts = criteria.list {
+                eq('openHut', true)
+            }
+
+            return ['hutList': huts]
+        } else {
+            return ['hutList': Hut.list()]
+        }
     }
 }
