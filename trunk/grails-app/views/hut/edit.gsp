@@ -78,14 +78,16 @@
                         </td>
                     </tr>
 
-                    <tr class="prop">
-                        <td valign="top" class="name">
-                            <label for="owner"><g:message code="hut.shared.contact"/></label>
-                        </td>
-                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'owner', 'errors')}">
-                            <g:select optionKey="id" from="${Person.list()}" name="owner.id" value="${hut?.owner?.id}"></g:select>
-                        </td>
-                    </tr>
+                    <g:isAdmin userId="${session.userId}">
+                        <tr class="prop">
+                            <td valign="top" class="name">
+                                <label for="owner"><g:message code="hut.shared.contact"/></label>
+                            </td>
+                            <td valign="top" class="value ${hasErrors(bean: hut, field: 'owner', 'errors')}">
+                                <g:select optionKey="id" from="${Person.list()}" name="owner.id" value="${hut?.owner?.id}"></g:select>
+                            </td>
+                        </tr>
+                    </g:isAdmin>
 
                     <tr>
                         <td valign="top" class="name">

@@ -138,6 +138,12 @@ class HutController extends BaseController {
         hut.users = new PersonList()
         hut.users.hut = hut
 
+        def p = Person.findByUserId(session.userId);
+
+        if (!p.admin) {
+            hut.owner = p
+        }
+
         if (!hut.hasErrors() && hut.save()) {
             flash.message = message(code: 'hut.save.saved', args: [hut.name])
             redirect(action: show, id: hut.id)
@@ -152,6 +158,12 @@ class HutController extends BaseController {
         if (hut) {
 
             hut.properties = params
+
+            def p = Person.findByUserId(session.userId);
+
+            if (!p.admin) {
+                hut.owner = p
+            }
 
             if (!hut.users) {
                 hut.users = new PersonList()
