@@ -2,7 +2,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class HutController extends BaseController {
-    def beforeInterceptor = [action: this.&auth, except: ['list', 'show', 'showpic']]
+    def beforeInterceptor = [action: this.&auth, except: ['list', 'denied']]
 
     def scaffold = true
 
@@ -58,7 +58,7 @@ class HutController extends BaseController {
         def hut = Hut.get(params.id)
 
         if (hut) {
-            flash.message = message(code: "hut.deleted", args = [hut.name])
+            flash.message = message(code: "hut.deleted", args: [hut.name])
 
             hut.delete()
 
@@ -71,16 +71,103 @@ class HutController extends BaseController {
     }
 
     def list = {
-        if (!session.userId) {
-            def criteria = Hut.createCriteria();
+        def criteria = Hut.createCriteria();
 
+        if (!session.userId) {
             def huts = criteria.list {
                 eq('openHut', true)
             }
 
             return ['hutList': huts]
         } else {
-            return ['hutList': Hut.list()]
+            Person p = Person.findByUserId(session.userId)
+
+            if (p.admin) {
+                return ['hutList': Hut.list()]
+            }
+
+            def huts = criteria.list {
+                or {
+                    eq('openHut', true)
+                    users {
+                        users {
+                            eq('userId', session.userId)
+                        }
+                    }
+                    owner {
+                        eq('userId', session.userId)
+                    }
+                }
+            }
+
+            return ['hutList': huts]
+        }
+    }
+
+    def userlist = {
+        def hut = Hut.get(params.id)
+
+        if (hut) {
+            def criteria = Person.createCriteria();
+
+            def people = criteria.list {
+                eq('approved', true)
+                eq('confirmed', true)
+                ne('userId', hut.owner.userId)
+            }
+
+            return ['hut': hut, 'users': people]
+        }
+    }
+
+    def adduser = {
+        def hut = Hut.get(params.id)
+
+        def person = Person.get(params.user)
+
+        if (hut && person) {
+            hut.users.addToUsers(person).save()
+        }
+
+        redirect(controller: 'hut', action: 'userlist', id: hut.id);
+    }
+
+    def save = {
+        def hut = new Hut(params)
+
+        hut.users = new PersonList()
+        hut.users.hut = hut
+
+        if (!hut.hasErrors() && hut.save()) {
+            flash.message = message(code: 'hut.save.saved', args: [hut.name])
+            redirect(action: show, id: hut.id)
+        } else {
+            render(view: 'create', model: [hut: hut])
+        }
+    }
+
+    def update = {
+        def hut = Hut.get(params.id)
+
+        if (hut) {
+
+            hut.properties = params
+
+            if (!hut.users) {
+                hut.users = new PersonList()
+                hut.users.hut = hut
+            }
+
+            if (!hut.hasErrors() && hut.save()) {
+                flash.message = message(code: 'hut.update.saved', args: [hut.name])
+                redirect(action: show, id: hut.id)
+            } else {
+                render(view: 'edit', model: [hut: hut])
+            }
+        }
+        else {
+            flash.message = message(code: 'hut.update.not.found')
+            redirect(action: edit, id: params.id)
         }
     }
 }

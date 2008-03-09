@@ -26,6 +26,9 @@
             <li><g:link controller="hut" action="picture" id="${hut.id}"><g:message code="hut.show.menu.upload" args="${[hut.name]}"/></g:link></li>
             <li><a href="#" onclick="return deleteCheckSubmit();"><g:message code="hut.show.menu.delete" args="${[hut.name]}"/></a></li>
             <li><g:link controller="booking" action="list" id="${hut.id}"><g:message code="hut.show.menu.manage" args="${[hut.name]}"/></g:link></li>
+            <g:if test="${!hut.openHut}">
+                <li><g:link controller="hut" action="userlist" id="${hut.id}"><g:message code="hut.show.menu.userlist"/></g:link></li>
+            </g:if>
         </ul>
     </form>
 </g:manageHut>

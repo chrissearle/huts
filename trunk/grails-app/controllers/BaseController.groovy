@@ -1,15 +1,26 @@
 abstract class BaseController {
     def auth = {
         if (!session.userId) {
-            def originalRequestParams = [controller: controllerName, action: actionName]
 
-            originalRequestParams.putAll(params)
+            if (params.controller == "hut" && (params.action == "show" || params.action == "showpic")) {
+                Hut hut = Hut.get(params.id)
 
-            session.originalRequestParams = originalRequestParams
+                if (!hut.openHut) {
+                    redirect(controller: 'hut', action: 'denied')
 
-            redirect(controller: 'person', action: 'login')
+                    return false
+                }
+            } else {
+                def originalRequestParams = [controller: controllerName, action: actionName]
 
-            return false
+                originalRequestParams.putAll(params)
+
+                session.originalRequestParams = originalRequestParams
+
+                redirect(controller: 'person', action: 'login')
+
+                return false
+            }
         } else {
             if (params.controller) {
                 switch (params.controller) {
@@ -42,7 +53,21 @@ abstract class BaseController {
                                 return false
                             }
                         }
+
+                        if (params.action == "show" || params.action == "showpic") {
+
+                            Person p = Person.findByUserId(session.userId)
+
+                            Hut hut = Hut.get(params.id)
+
+                            if (!(p.admin || (p == hut.owner) || hut.users.users.contains(p))) {
+                                redirect(controller: 'hut', action: 'denied')
+
+                                return false
+                            }
+                        }
                         break;
+
                     case "booking":
                         Person p = Person.findByUserId(session.userId)
 

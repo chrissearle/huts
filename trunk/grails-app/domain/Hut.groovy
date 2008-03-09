@@ -11,6 +11,8 @@ class Hut {
 
     Boolean openHut = true
 
+    PersonList users
+
     byte[] image
 
     static belongsTo = Person
