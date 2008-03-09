@@ -1,7 +1,8 @@
 class PersonController extends BaseController {
     EmailService emailService
+    RandomService randomService
 
-    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied', 'forgotten']]
+    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied', 'forgotten', 'confirm']]
 
     def scaffold = true
 
@@ -15,7 +16,7 @@ class PersonController extends BaseController {
                     params.password)
 
             if (user) {
-                if (user.approved) {
+                if (user.approved && user.confirmed) {
                     session.userId = user.userId
                     session.userPK = user.id
 
@@ -23,7 +24,12 @@ class PersonController extends BaseController {
 
                     redirect(redirectParams)
                 } else {
-                    flash['message'] = message(code: "user.not.approved")
+                    if (!user.approved) {
+                        flash['message'] = message(code: "user.not.approved")
+                    }
+                    if (!user.confirmed) {
+                        flash['message'] = message(code: "user.not.confirmed")
+                    }
                 }
             } else {
                 flash['message'] = message(code: "user.login.invalid")
@@ -59,7 +65,9 @@ class PersonController extends BaseController {
             def user = new Person()
             user.properties = params
             user.admin = false
-            user.approved = false
+            user.approved = true
+            user.confirmed = false
+            user.challenge = randomService.getRandomKey(40)
 
             if (user.save()) {
                 def admins = Person.findAllByAdmin(true)
@@ -72,6 +80,9 @@ class PersonController extends BaseController {
 
                 emailService.sendMail(message(code: "user.new.notification.file"), ["user": user], adminMails,
                         message(code: "user.new.notification.subject", args: [user.name]))
+
+                emailService.sendMail(message(code: "user.new.confirmation.file"), ["user": user], [user.email],
+                        message(code: "user.new.confirmation.subject"))
 
                 flash['message'] = message(code: "user.account.created")
                 redirect(controller: 'person', action: 'login')
@@ -121,5 +132,22 @@ class PersonController extends BaseController {
                 redirect(controller: 'person', action: 'forgotten')
             }
         }
+    }
+
+    def confirm = {
+        def user = Person.get(params.id)
+
+        if (user && params.key) {
+            if (user.challenge.equals(params.key)) {
+                user.confirmed = true
+                user.challenge = ""
+
+                if (user.save()) {
+                    flash['message'] = message(code: 'user.confirm.confirmed')
+                }
+            }
+        }
+
+        redirect(controller: 'person', action: 'login')
     }
 }

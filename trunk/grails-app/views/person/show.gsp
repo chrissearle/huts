@@ -23,28 +23,28 @@
         <tbody>
 
             <tr>
-                <td valign="top" class="name"><g:message code="person.shared.name"/></td>
+                <td valign="top" class="name"><g:message code="user.shared.name"/></td>
 
                 <td valign="top" class="value">${person.name}</td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name"><g:message code="person.shared.email"/></td>
+                <td valign="top" class="name"><g:message code="user.shared.email"/></td>
 
                 <td valign="top" class="value"><a href="mailto:${person.email}">${person.email}</a></td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name"><g:message code="person.shared.phone"/></td>
+                <td valign="top" class="name"><g:message code="user.shared.phone"/></td>
 
                 <td valign="top" class="value">${person.phone}</td>
 
             </tr>
 
             <tr>
-                <td valign="top" class="name"><g:message code="person.shared.userId"/></td>
+                <td valign="top" class="name"><g:message code="user.shared.userId"/></td>
 
                 <td valign="top" class="value">${person.userId}</td>
 

@@ -8,6 +8,9 @@ class Person {
 
     Boolean admin
     Boolean approved
+    Boolean confirmed
+
+    String challenge
 
     static hasMany = [owns: Hut]
 
@@ -17,6 +20,7 @@ class Person {
         phone(maxSize: 15)
         userId(blank: false, unique: true, size: 3..20)
         password(blank: false, size: 6..20)
+        challenge(nullable: true)
     }
 
     String toString() {"${this.name}, ${this.phone}"}

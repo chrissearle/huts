@@ -84,6 +84,15 @@
                             <g:checkBox name="approved" value="${person?.approved}"></g:checkBox>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="approved"><g:message code="user.shared.confirmed"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: person, field: 'confirmed', 'errors')}">
+                            <g:checkBox name="confirmed" value="${person?.confirmed}"></g:checkBox>
+                        </td>
+                    </tr>
                 </g:isAdmin>
 
             </tbody>
