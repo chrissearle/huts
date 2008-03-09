@@ -70,4 +70,9 @@ class HutController extends BaseController {
             redirect(controller: 'hut', action: 'list')
         }
     }
+
+    def map = {
+        // Does nothing yet
+        def googleMapKey = grailsApplication.config.google.map.key
+    }
 }

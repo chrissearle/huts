@@ -6,6 +6,9 @@ class Hut {
     String description
     Integer beds
 
+    String latitude
+    String longitude
+
     byte[] image
 
     static belongsTo = Person
@@ -15,6 +18,8 @@ class Hut {
     static constraints = {
         name(blank: false, maxSize: 50)
         location(blank: false, maxSize: 50)
+        latitude(blank: false)
+        longitude(blank: false)
         owner(nullable: false)
         description(blank: false, maxSize: 255)
         beds(nullable: false, range: 1..50)

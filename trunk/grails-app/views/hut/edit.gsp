@@ -44,6 +44,24 @@
 
                     <tr class="prop">
                         <td valign="top" class="name">
+                            <label for="latitude"><g:message code="hut.shared.latitude"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'latitude', 'errors')}">
+                            <input type="text" maxlength="10" id="latitude" name="latitude" value="${fieldValue(bean: hut, field: 'latitude')}"/>
+                        </td>
+                    </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name">
+                            <label for="location"><g:message code="hut.shared.longitude"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: hut, field: 'longitude', 'errors')}">
+                            <input type="text" maxlength="10" id="longitude" name="longitude" value="${fieldValue(bean: hut, field: 'longitude')}"/>
+                        </td>
+                    </tr>
+
+                    <tr class="prop">
+                        <td valign="top" class="name">
                             <label for="description"><g:message code="hut.shared.description"/></label>
                         </td>
                         <td valign="top" class="value ${hasErrors(bean: hut, field: 'location', 'errors')}">
