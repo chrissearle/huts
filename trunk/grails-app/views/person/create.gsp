@@ -84,7 +84,7 @@
 
                 <tr>
                     <td valign="top" class="name">
-                        <label for="confirmed"><g:message code="hut.shared.confirmed"/></label>
+                        <label for="confirmed"><g:message code="user.shared.confirmed"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: person, field: 'confirmed', 'errors')}">
                         <g:checkBox name="confirmed" value="${person?.confirmed}"></g:checkBox>
