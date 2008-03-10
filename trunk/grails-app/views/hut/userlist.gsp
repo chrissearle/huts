@@ -37,11 +37,11 @@
 
                         <td>
                             <g:if test="${hut.users.users.contains(person)}">
-                                <a href="${createLink(controller: "hut", action: "deluser")}/${hut.id}?user=${person.id}">Remove</a>
+                                <a href="${createLink(controller: "hut", action: "deluser", id: hut.id)}?user=${person.id}">Remove</a>
                             </g:if>
 
                             <g:else>
-                                <a href="${createLink(controller: "hut", action: "adduser")}/${hut.id}?user=${person.id}">Add</a>
+                                <a href="${createLink(controller: "hut", action: "adduser", id: hut.id)}?user=${person.id}">Add</a>
                             </g:else>
 
                         </td>

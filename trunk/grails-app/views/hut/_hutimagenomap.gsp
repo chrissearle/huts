@@ -1,6 +1,6 @@
 <td>
     <g:if test="${hut.image}">
-        <g:link action="show" id="$hut.id"><img id="hutimg" src="${createLink(action: 'showpic')}/${hut.id}" alt="${hut.name}" width="300"/></g:link>
+        <g:link action="show" id="$hut.id"><img id="hutimg" src="${createLink(action: 'showpic', id: hut.id)}" alt="${hut.name}" width="300"/></g:link>
     </g:if>
     <g:else>
         <div class="unavailable">
