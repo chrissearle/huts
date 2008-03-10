@@ -15,12 +15,12 @@
         hutlocs["${hut.name}"] = new HutLocation("${hut.name}", "${hut.latitude}", "${hut.longitude}",
 
         <g:if test="${hut.image}">
-            "${createLink(action: 'showpic')}/${hut.id}",
+            "${createLink(action: 'showpic', id: hut.id)}",
         </g:if>
         <g:else>
             "",
         </g:else>
-        "${createLink(action: 'show')}/${hut.id}",
+        "${createLink(action: 'show', id: hut.id)}",
         "<g:message code='hut.list.show.link'/>",
         "${hut.description}");
     </g:each>
