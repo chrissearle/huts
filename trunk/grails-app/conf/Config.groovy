@@ -40,6 +40,7 @@ environments {
     production {
         grails.serverURL = "http://huts.chrissearle.net/huts"
         google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTSHwLzGy9_V0V5XWMiiVFSAkWTrxTK2ih4vDZUe0HMSlF-3ftZVQ3d4w"
+        google.analytics.key = "UA-2221544-6"
     }
 }
 
