@@ -30,6 +30,15 @@
 
                 <tr>
                     <td valign="top" class="name">
+                        <label for="organization"><g:message code="user.shared.organization"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'name', 'errors')}">
+                        <input type="text" maxlength="50" id="organization" name="organization" value="${fieldValue(bean: person, field: 'organization')}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top" class="name">
                         <label for="email"><g:message code="user.shared.email"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: person, field: 'email', 'errors')}">

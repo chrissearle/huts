@@ -22,7 +22,8 @@
         </g:else>
         "${createLink(action: 'show', id: hut.id)}",
         "<g:message code='hut.list.show.link'/>",
-        "${hut.description}");
+        "${hut.description}",
+        "${hut.owner.organization}");
     </g:each>
 
     initializeMaps(hutlocs);
