@@ -58,13 +58,19 @@ function initializeMaps(hutlocs) {
         toggleMapList();
     }
 
+    var bounds = new GLatLngBounds();
+
     for (name in hutlocs) {
         var hutloc = hutlocs[name];
 
-        var marker = getMarker(hutloc);
+        var marker = getMarker(hutloc, bounds);
 
         map.addOverlay(marker);
     }
+
+    map.setZoom(map.getBoundsZoomLevel(bounds));
+
+    map.setCenter(bounds.getCenter());
 }
 
 
@@ -89,8 +95,11 @@ function initializeSingleMap(lat, lng) {
     map.addOverlay(marker);
 }
 
-function getMarker(hutloc) {
-    var marker = new GMarker(new GLatLng(hutloc.lat, hutloc.lng));
+function getMarker(hutloc, bounds) {
+    var latlng = new GLatLng(hutloc.lat, hutloc.lng)
+    var marker = new GMarker(latlng);
+
+    bounds.extend(latlng);
 
     var popup = "<h4>" + hutloc.name + "</h4>";
 
