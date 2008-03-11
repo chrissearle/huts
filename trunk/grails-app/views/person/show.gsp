@@ -30,6 +30,13 @@
             </tr>
 
             <tr>
+                <td valign="top" class="name"><g:message code="user.shared.organization"/></td>
+
+                <td valign="top" class="value">${person.organization}</td>
+
+            </tr>
+
+            <tr>
                 <td valign="top" class="name"><g:message code="user.shared.email"/></td>
 
                 <td valign="top" class="value"><a href="mailto:${person.email}">${person.email}</a></td>

@@ -38,8 +38,8 @@ environments {
         google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTwM0brOpm-All5BF6PoaKBxRWWERTQsPYlehY-o2ihzdV8xcjkHihn8g"
     }
     production {
-        grails.serverURL = "https://www.chrissearle.org/huts"
-        google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBRhEFXl5Sm6P17Fo2l1GP8doMtyTxS6mvURRwNFrXwwp43qrYgFeUgMiA"
+        grails.serverURL = "http://huts.chrissearle.net/huts"
+        google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTSHwLzGy9_V0V5XWMiiVFSAkWTrxTK2ih4vDZUe0HMSlF-3ftZVQ3d4w"
     }
 }
 

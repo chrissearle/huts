@@ -5,6 +5,7 @@ class Person {
 
     String userId
     String password
+    String organization
 
     Boolean admin
     Boolean approved
@@ -21,6 +22,7 @@ class Person {
         userId(blank: false, unique: true, size: 3..20)
         password(blank: false, size: 6..20)
         challenge(nullable: true)
+        organization(nullable: true)
     }
 
     String toString() {"${this.name}, ${this.phone}"}

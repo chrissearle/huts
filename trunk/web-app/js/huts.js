@@ -7,7 +7,7 @@ function deleteCheckSubmit() {
     }
 }
 
-function HutLocation(name, lat, lng, imgurl, showurl, linktext, description) {
+function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, organization) {
     this.name = name;
     this.lat = lat;
     this.lng = lng;
@@ -15,6 +15,7 @@ function HutLocation(name, lat, lng, imgurl, showurl, linktext, description) {
     this.imgurl = imgurl;
     this.linktext = linktext;
     this.description = description;
+    this.organization = organization;
 }
 
 function toggleMapList() {
@@ -96,12 +97,16 @@ function initializeSingleMap(lat, lng) {
 }
 
 function getMarker(hutloc, bounds) {
-    var latlng = new GLatLng(hutloc.lat, hutloc.lng)
+    var latlng = new GLatLng(hutloc.lat, hutloc.lng);
     var marker = new GMarker(latlng);
 
     bounds.extend(latlng);
 
     var popup = "<h4>" + hutloc.name + "</h4>";
+
+    if (hutloc.organization) {
+        popup += "<h5>" + hutloc.organization + "</h5>";
+    }
 
     if (hutloc.imgurl) {
         popup += "<img width='150px' src='" + hutloc.imgurl + "'/>";
