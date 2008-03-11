@@ -69,8 +69,15 @@ function initializeMaps(hutlocs) {
         map.addOverlay(marker);
     }
 
+    // Zoom to bounds
     map.setZoom(map.getBoundsZoomLevel(bounds));
+    map.setCenter(bounds.getCenter());
 
+    // Based on that - grow top by a small amount
+    bounds = growTopBound(map, bounds);
+
+    // And re-do the zoom
+    map.setZoom(map.getBoundsZoomLevel(bounds));
     map.setCenter(bounds.getCenter());
 }
 
@@ -120,4 +127,14 @@ function getMarker(hutloc, bounds) {
     });
 
     return marker;
+}
+
+function growTopBound(map, bounds) {
+    var latlngNorthEast = bounds.getNorthEast();
+
+    var pointNorthEast = map.fromLatLngToDivPixel(latlngNorthEast);
+
+    bounds.extend(map.fromDivPixelToLatLng(new GPoint(pointNorthEast.x, pointNorthEast.y - 75)));
+
+    return bounds;
 }
