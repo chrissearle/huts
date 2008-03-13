@@ -98,7 +98,9 @@ function initializeSingleMap(lat, lng) {
         toggleMapView();
     }
 
-    var marker = new GMarker(point);
+    var markerOptions = { clickable: false };
+
+    var marker = new GMarker(point, markerOptions);
 
     map.addOverlay(marker);
 }
