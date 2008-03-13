@@ -12,18 +12,21 @@
     var hutlocs = new Array()
 
     <g:each var="hut" in="${hutList}">
-        hutlocs["${hut.name}"] = new HutLocation("${hut.name}", "${hut.latitude}", "${hut.longitude}",
-
-        <g:if test="${hut.image}">
-            "${createLink(action: 'showpic', id: hut.id)}",
-        </g:if>
-        <g:else>
-            "",
-        </g:else>
+        hutlocs["${hut.name}"] = new HutLocation(
+          "${hut.name}",
+          "${hut.latitude}",
+          "${hut.longitude}",
+        <g:if test="${hut.image}">"${createLink(action: 'showpic', id: hut.id)}",</g:if><g:else>"",</g:else>
         "${createLink(action: 'show', id: hut.id)}",
-        "<g:message code='hut.list.show.link'/>",
-        "${hut.description}",
-        "${hut.owner.organization}");
+          "<g:message code='hut.list.show.link'/>",
+          "${hut.description}",
+          "${hut.owner.organization}",
+        <g:if test="${hut.owner.userId == session.userId}">"OWNER"</g:if>
+        <g:else>
+            <g:if test="${hut.openHut}">"PUBLIC"</g:if>
+            <g:else>"PRIVATE"</g:else>
+        </g:else>
+        );
     </g:each>
 
     initializeMaps(hutlocs);

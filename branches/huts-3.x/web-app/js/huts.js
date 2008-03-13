@@ -7,7 +7,7 @@ function deleteCheckSubmit() {
     }
 }
 
-function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, organization) {
+function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, organization, huttype) {
     this.name = name;
     this.lat = lat;
     this.lng = lng;
@@ -16,6 +16,7 @@ function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, org
     this.linktext = linktext;
     this.description = description;
     this.organization = organization;
+    this.huttype = huttype;
 }
 
 function toggleMapList() {
@@ -82,7 +83,7 @@ function initializeMaps(hutlocs) {
 }
 
 
-function initializeSingleMap(lat, lng) {
+function initializeSingleMap(lat, lng, huttype) {
     var point = new GLatLng(lat, lng);
 
     if (GBrowserIsCompatible()) {
@@ -98,14 +99,18 @@ function initializeSingleMap(lat, lng) {
         toggleMapView();
     }
 
-    var marker = new GMarker(point);
+    var markerOptions = { clickable: false, icon: getIcon(huttype) };
+
+    var marker = new GMarker(point, markerOptions);
 
     map.addOverlay(marker);
 }
 
 function getMarker(hutloc, bounds) {
+    var markerOptions = { icon:getIcon(hutloc.huttype) };
+
     var latlng = new GLatLng(hutloc.lat, hutloc.lng);
-    var marker = new GMarker(latlng);
+    var marker = new GMarker(latlng, markerOptions);
 
     bounds.extend(latlng);
 
@@ -137,4 +142,25 @@ function growTopBound(map, bounds) {
     bounds.extend(map.fromDivPixelToLatLng(new GPoint(pointNorthEast.x, pointNorthEast.y - 75)));
 
     return bounds;
+}
+
+function getIcon(huttype) {
+
+    // Create our "tiny" marker icon
+    var tinyIcon = new GIcon();
+    var icon = "red";
+    if (huttype == "PRIVATE") {
+        icon = "blue";
+    }
+    if (huttype == "OWNER") {
+        icon = "yellow";
+    }
+    tinyIcon.image = "http://labs.google.com/ridefinder/images/mm_20_" + icon + ".png";
+    tinyIcon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+    tinyIcon.iconSize = new GSize(12, 20);
+    tinyIcon.shadowSize = new GSize(22, 20);
+    tinyIcon.iconAnchor = new GPoint(6, 20);
+    tinyIcon.infoWindowAnchor = new GPoint(5, 1);
+
+    return tinyIcon;
 }
