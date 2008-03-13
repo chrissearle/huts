@@ -8,7 +8,12 @@
     google.load("maps", "2.x");
 
     function initialize() {
-    initializeSingleMap("${hut.latitude}","${hut.longitude}");
+    initializeSingleMap("${hut.latitude}","${hut.longitude}",
+    <g:if test="${hut.owner.userId == session.userId}">"OWNER"</g:if>
+        <g:else>
+            <g:if test="${hut.openHut}">"PUBLIC"</g:if>
+            <g:else>"PRIVATE"</g:else>
+        </g:else>);
     }
 
     google.setOnLoadCallback(initialize);
