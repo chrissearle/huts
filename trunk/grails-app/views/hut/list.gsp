@@ -50,6 +50,8 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
+    <g:render template="/notices"/>
+
     <div id="map" class="mainmap"></div>
 
     <div id="oldlist" style="display: none;">

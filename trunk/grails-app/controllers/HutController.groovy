@@ -78,7 +78,7 @@ class HutController extends BaseController {
                 eq('openHut', true)
             }
 
-            return ['hutList': huts]
+            return ['hutList': huts, 'notices': Notice.findByShown(true)]
         } else {
             Person p = Person.findByUserId(session.userId)
 
@@ -100,7 +100,7 @@ class HutController extends BaseController {
                 }
             }
 
-            return ['hutList': huts]
+            return ['hutList': huts, 'notices': Notice.findByShown(true)]
         }
     }
 
