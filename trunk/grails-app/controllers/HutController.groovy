@@ -73,17 +73,19 @@ class HutController extends BaseController {
     def list = {
         def criteria = Hut.createCriteria();
 
+        def notices = Notice.findByShown(true)
+
         if (!session.userId) {
             def huts = criteria.list {
                 eq('openHut', true)
             }
 
-            return ['hutList': huts, 'notices': Notice.findByShown(true)]
+            return ['hutList': huts, 'notices': notices]
         } else {
             Person p = Person.findByUserId(session.userId)
 
             if (p.admin) {
-                return ['hutList': Hut.list()]
+                return ['hutList': Hut.list(), 'notices': notices]
             }
 
             def huts = criteria.list {
@@ -100,7 +102,7 @@ class HutController extends BaseController {
                 }
             }
 
-            return ['hutList': huts, 'notices': Notice.findByShown(true)]
+            return ['hutList': huts, 'notices': notices]
         }
     }
 

@@ -1,7 +1,7 @@
 <html>
 <head>
     <title></title>
-    <meta name="layout" content="summer-days"/>
+    <meta name="layout" content="main"/>
 </head>
 <body>
 </body>

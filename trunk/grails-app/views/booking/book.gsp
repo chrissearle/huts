@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="summer-days"/>
+    <meta name="layout" content="main"/>
     <title><g:message code="booking.book.title" args="[hut.name]"/></title>
 </head>
 <body>
