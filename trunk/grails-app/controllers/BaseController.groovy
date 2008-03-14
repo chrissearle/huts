@@ -60,7 +60,7 @@ abstract class BaseController {
 
                             Hut hut = Hut.get(params.id)
 
-                            if (!(p.admin || (p == hut.owner) || hut.users.users.contains(p))) {
+                            if (!(hut.openHut || p.admin || (p == hut.owner) || hut.users.users.contains(p))) {
                                 redirect(controller: 'hut', action: 'denied')
 
                                 return false
