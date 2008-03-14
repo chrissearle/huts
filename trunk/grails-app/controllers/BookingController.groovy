@@ -30,6 +30,7 @@ class BookingController extends BaseController {
 
         if (request.method == "GET") {
             def hut = Hut.get(params.id)
+            flash['funnel'] = '/funnel/booking/step1.html'
             return ['booking': booking, 'hut': hut]
         } else {
             Person user = Person.findByUserId(params['user.id'])
@@ -41,9 +42,11 @@ class BookingController extends BaseController {
 
                 flash.message = message(code: "booking.booked.ok", args: [booking.hut])
 
+                flash['funnel'] = '/funnel/booking/step2.html'
                 redirect(controller: "hut", action: "show", id: booking.hut.id)
             } else {
                 def hut = Hut.get(params['hut.id'])
+                flash['funnel'] = '/funnel/booking/step1.html'
                 return ['booking': booking, 'hut': hut]
             }
         }

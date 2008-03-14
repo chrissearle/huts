@@ -61,6 +61,7 @@ class PersonController extends BaseController {
     def register = {
         if (request.method == "GET") {
             def user = new Person()
+            flash['funnel'] = '/funnel/register/step1.html'
         } else {
             def user = new Person()
             user.properties = params
@@ -85,8 +86,10 @@ class PersonController extends BaseController {
                         message(code: "user.new.confirmation.subject"))
 
                 flash['message'] = message(code: "user.account.created")
+                flash['funnel'] = '/funnel/register/step2.html'
                 redirect(controller: 'person', action: 'login')
             } else {
+                flash['funnel'] = '/funnel/register/step1.html'
                 render(view: 'register', model: [person: user])
             }
         }
