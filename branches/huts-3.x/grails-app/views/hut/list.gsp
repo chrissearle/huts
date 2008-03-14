@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="summer-days"/>
+    <meta name="layout" content="main"/>
     <title><g:message code="hut.list.title"/></title>
     <g:javascript library="huts"/>
     <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}"></script> <!-- add &hl=lang here -->
@@ -49,6 +49,8 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+
+    <g:render template="/notices"/>
 
     <div id="map" class="mainmap"></div>
 

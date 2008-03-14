@@ -73,17 +73,19 @@ class HutController extends BaseController {
     def list = {
         def criteria = Hut.createCriteria();
 
+        def notices = Notice.findByShown(true)
+
         if (!session.userId) {
             def huts = criteria.list {
                 eq('openHut', true)
             }
 
-            return ['hutList': huts]
+            return ['hutList': huts, 'notices': notices]
         } else {
             Person p = Person.findByUserId(session.userId)
 
             if (p.admin) {
-                return ['hutList': Hut.list()]
+                return ['hutList': Hut.list(), 'notices': notices]
             }
 
             def huts = criteria.list {
@@ -100,7 +102,15 @@ class HutController extends BaseController {
                 }
             }
 
-            return ['hutList': huts]
+            // Uniqueify
+            // TODO - find a good example of using the distinct projection for the above criteria
+            def uniqueHuts = [:];
+
+            huts.each {hut ->
+                uniqueHuts.put(hut.id, hut);
+            }
+
+            return ['hutList': uniqueHuts.values(), 'notices': notices]
         }
     }
 
