@@ -102,7 +102,15 @@ class HutController extends BaseController {
                 }
             }
 
-            return ['hutList': huts, 'notices': notices]
+            // Uniqueify
+            // TODO - find a good example of using the distinct projection for the above criteria
+            def uniqueHuts = [:];
+
+            huts.each {hut ->
+                uniqueHuts.put(hut.id, hut);
+            }
+
+            return ['hutList': uniqueHuts.values(), 'notices': notices]
         }
     }
 
