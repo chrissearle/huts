@@ -4,7 +4,13 @@
     <meta name="layout" content="main"/>
     <title><g:message code="hut.list.title"/></title>
     <g:javascript library="huts"/>
-    <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}"></script> <!-- add &hl=lang here -->
+
+    <g:if test="${session.getAttribute('org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE')}">
+        <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}&h1=${session.getAttribute("org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE")}"></script>
+    </g:if>
+    <g:else>
+        <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}"></script>
+    </g:else>
     <script type="text/javascript">
     google.load("maps", "2.x");
 
