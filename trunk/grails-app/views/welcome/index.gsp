@@ -12,7 +12,8 @@
 
 <div id="content">
     <h3><g:message code="welcome.title"/></h3>
-    <g:message code="welcome.content"/>
+
+    <g:welcome template="welcome.template.front"/>
 </div>
 </body>
 </html>

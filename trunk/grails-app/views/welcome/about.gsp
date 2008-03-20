@@ -7,7 +7,8 @@
 <body>
 <div id="content">
     <h3><g:message code="welcome.about.title"/></h3>
-    <g:message code="welcome.about.content"/>
+
+    <g:welcome template="welcome.template.about"/>
 </div>
 </body>
 </html>
