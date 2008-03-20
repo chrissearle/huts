@@ -7,7 +7,6 @@
 <body>
 
 <ul id="nav2">
-    <li><g:link controller="hut" action="list"><g:message code="welcome.index.hut.list"/></g:link></li>
     <li><g:link controller="welcome" action="about"><g:message code="welcome.index.about"/></g:link></li>
 </ul>
 

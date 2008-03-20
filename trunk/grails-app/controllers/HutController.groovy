@@ -2,6 +2,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class HutController extends BaseController {
+    HutService hutService
+
     def beforeInterceptor = [action: this.&auth, except: ['list', 'denied']]
 
     def scaffold = true
@@ -71,38 +73,20 @@ class HutController extends BaseController {
     }
 
     def list = {
-        def criteria = Hut.createCriteria();
-
         def notices = Notice.findByShown(true)
 
-        if (!session.userId) {
-            def huts = criteria.list {
-                eq('openHut', true)
-            }
+        def hutgroup = session.hutgroup
 
-            return ['hutList': huts, 'notices': notices]
+        if (!session.userId) {
+            def hutlist = hutService.visibleHuts(hutgroup)
+
+            return ['hutList': hutlist, 'notices': notices]
         } else {
             Person p = Person.findByUserId(session.userId)
 
-            if (p.admin) {
-                return ['hutList': Hut.list(), 'notices': notices]
-            }
+            def hutlist = hutService.visibleHuts(p, hutgroup)
 
-            def huts = criteria.listDistinct {
-                or {
-                    eq('openHut', true)
-                    users {
-                        users {
-                            eq('userId', session.userId)
-                        }
-                    }
-                    owner {
-                        eq('userId', session.userId)
-                    }
-                }
-            }
-
-            return ['hutList': huts, 'notices': notices]
+            return ['hutList': hutlist, 'notices': notices]
 
         }
     }

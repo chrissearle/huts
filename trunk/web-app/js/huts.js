@@ -80,6 +80,11 @@ function initializeMaps(hutlocs) {
     // And re-do the zoom
     map.setZoom(map.getBoundsZoomLevel(bounds));
     map.setCenter(bounds.getCenter());
+
+    // Force max zoom
+    if (map.getZoom() > 12) {
+        map.setZoom(12);
+    }
 }
 
 
