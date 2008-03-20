@@ -37,16 +37,17 @@ environments {
         grails.serverURL = "http://localhost:8080/huts"
         google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTwM0brOpm-All5BF6PoaKBxRWWERTQsPYlehY-o2ihzdV8xcjkHihn8g"
         mail.host.name = "mail.chrissearle.org"
-        mail.from.address = "no-reply-huts@chrissearle.net"
     }
     production {
         grails.serverURL = "http://huts.chrissearle.net/huts"
         google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTSHwLzGy9_V0V5XWMiiVFSAkWTrxTK2ih4vDZUe0HMSlF-3ftZVQ3d4w"
         google.analytics.key = "UA-2221544-6"
         mail.host.name = "localhost"
-        mail.from.address = "no-reply-huts@chrissearle.net"
     }
 }
+
+mail.from.address = "no-reply-huts@chrissearle.net"
+language.default = "nb"
 
 // log4j configuration
 log4j {

@@ -6,6 +6,6 @@ class UrlMappings {
             }
         }
         "500"(view: '/error')
-        "/"(controller: 'hut', action: 'list')
+        "/"(controller: 'welcome')
     }
 }
