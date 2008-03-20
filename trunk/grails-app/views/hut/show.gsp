@@ -75,7 +75,7 @@
                 </td>
                 <td>
                     <h4><g:message code="hut.show.title.about" args="${[hut.name]}"/></h4>
-                    <p>${hut.description}</p>
+                    <p>${hut.description.encodeAsHTML()}</p>
                 </td>
             </tr>
             <tr>
