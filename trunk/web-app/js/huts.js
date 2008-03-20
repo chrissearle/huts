@@ -85,6 +85,8 @@ function initializeMaps(hutlocs) {
     if (map.getZoom() > 12) {
         map.setZoom(12);
     }
+
+    return map;
 }
 
 

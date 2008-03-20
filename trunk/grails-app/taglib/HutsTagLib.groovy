@@ -218,4 +218,52 @@ class HutsTagLib {
 
         out << "<a href='$path'><img src='${request.contextPath}/images/flags/${lang}.png'/></a>"
     }
+
+
+    def hutLocs = {attrs ->
+        def huts = attrs.huts
+
+        out << "var hutlocs = new Array();\n\n"
+
+        huts.each {hut ->
+            out << "hutlocs['" << hut.name << "'] = new HutLocation("
+
+            out << "'" << hut.name << "', "
+
+            out << "'" << hut.latitude << "', "
+
+            out << "'" << hut.longitude << "', "
+
+            if (hut.image) {
+                out << "'" << createLink(action: 'showpic', id: hut.id) << "', "
+            } else {
+                out << "'', "
+            }
+
+            out << "'" << createLink(action: 'show', id: hut.id) << "', "
+
+            out << "'" << message(code: 'hut.list.show.link') << "', "
+
+            out << "'" << hut.description << "', "
+
+            out << "'" << hut.owner.organization << "', "
+
+            if (hut.owner.userId == session.userId) {
+                out << "'OWNER'"
+            } else {
+                if (hut.openHut) {
+                    out << "'PUBLIC'"
+                } else {
+                    out << "'PRIVATE'"
+                }
+            }
+            out << ");\n"
+        }
+    }
+
+    def centerHut = {attrs ->
+        def hut = Hut.get(attrs.hutId)
+
+        out << "map.setCenter(new GLatLng(" << hut.latitude << "," << hut.longitude << "));"
+    }
 }

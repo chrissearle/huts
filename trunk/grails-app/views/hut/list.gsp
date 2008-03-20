@@ -15,27 +15,20 @@
     google.load("maps", "2.x");
 
     function initialize() {
-    var hutlocs = new Array()
 
-    <g:each var="hut" in="${hutList}">
-        hutlocs["${hut.name}"] = new HutLocation(
-          "${hut.name}",
-          "${hut.latitude}",
-          "${hut.longitude}",
-        <g:if test="${hut.image}">"${createLink(action: 'showpic', id: hut.id)}",</g:if><g:else>"",</g:else>
-        "${createLink(action: 'show', id: hut.id)}",
-          "<g:message code='hut.list.show.link'/>",
-          "${hut.description}",
-          "${hut.owner.organization}",
-        <g:if test="${hut.owner.userId == session.userId}">"OWNER"</g:if>
-        <g:else>
-            <g:if test="${hut.openHut}">"PUBLIC"</g:if>
-            <g:else>"PRIVATE"</g:else>
-        </g:else>
-        );
-    </g:each>
+    <g:hutLocs huts="${hutList}"/>
 
-    initializeMaps(hutlocs);
+    var map = initializeMaps(hutlocs);
+
+    <g:if test="${session.zoom}">
+        map.setZoom(${session.zoom});
+    </g:if>
+    <g:if test="${session.centerHut}">
+        <g:centerHut hutId="${session.centerHut}"/>
+    </g:if>
+    <g:if test="${session.latitude && session.longitude}">
+        map.setCenter(new GLatLng(${session.latitude}, ${session.longitude}));
+    </g:if>
     }
 
     google.setOnLoadCallback(initialize);
