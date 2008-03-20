@@ -4,8 +4,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile
 class HutController extends BaseController {
     HutService hutService
 
-    def beforeInterceptor = [action: this.&auth, except: ['list', 'denied']]
-
     def scaffold = true
 
     def picture = {

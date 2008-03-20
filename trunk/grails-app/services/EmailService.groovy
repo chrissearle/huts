@@ -6,8 +6,6 @@ import org.springframework.mail.SimpleMailMessage
 
 class EmailService {
 
-    boolean transactional = true
-
     MailSender mailSender
     SimpleMailMessage mailMessage
 

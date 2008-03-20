@@ -1,8 +1,6 @@
 class BookingController extends BaseController {
     EmailService emailService
 
-    def beforeInterceptor = [action: this.&auth]
-
     def scaffold = true
 
     def delete = {

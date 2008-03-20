@@ -60,7 +60,7 @@ log4j {
     appender.'errors.File' = "stacktrace.log"
     rootLogger = "error,stdout"
     logger {
-        grails = "error"
+        grails = "info"
         StackTrace = "error,errors"
         org {
             codehaus.groovy.grails.web.servlet = "error" //  controllers
