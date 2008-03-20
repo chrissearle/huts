@@ -78,6 +78,18 @@
                     <p>${hut.description.encodeAsHTML()}</p>
                 </td>
             </tr>
+<g:manageHut hutId="${hut.id}" userId="${session.userId}">
+            <tr>
+                <td colspan="2">
+                    <h4><g:message code="hut.show.title.links"/></h4>
+                    <ul>
+                        <li><a href="${createLink(controller: 'hut', action: 'list')}?hutgroup=${hut.owner.id}"><g:message code="hut.show.link.group"/></a></li>
+                        <li><a href="${createLink(controller: 'hut', action: 'list')}?centerHut=${hut.id}"><g:message code="hut.show.link.hut"/></a></li>
+                        <li><a href="${createLink(controller: 'hut', action: 'list')}?hutgroup=${hut.owner.id}&centerHut=${hut.id}"><g:message code="hut.show.link.group.and.hut"/></a></li>
+                    </ul>
+                </td>
+            </tr>
+</g:manageHut>
             <tr>
                 <td colspan="2">
                     <g:render template="/availabilityShort" var="hut" bean="${hut}"/>
