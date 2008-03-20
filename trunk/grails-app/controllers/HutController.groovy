@@ -88,7 +88,7 @@ class HutController extends BaseController {
                 return ['hutList': Hut.list(), 'notices': notices]
             }
 
-            def huts = criteria.list {
+            def huts = criteria.listDistinct {
                 or {
                     eq('openHut', true)
                     users {
@@ -102,15 +102,8 @@ class HutController extends BaseController {
                 }
             }
 
-            // Uniqueify
-            // TODO - find a good example of using the distinct projection for the above criteria
-            def uniqueHuts = [:];
+            return ['hutList': huts, 'notices': notices]
 
-            huts.each {hut ->
-                uniqueHuts.put(hut.id, hut);
-            }
-
-            return ['hutList': uniqueHuts.values(), 'notices': notices]
         }
     }
 
