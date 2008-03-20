@@ -2,8 +2,6 @@ class PersonController extends BaseController {
     EmailService emailService
     RandomService randomService
 
-    def beforeInterceptor = [action: this.&auth, except: ['login', 'logout', 'register', 'denied', 'forgotten', 'confirm']]
-
     def scaffold = true
 
     def login = {
@@ -20,9 +18,13 @@ class PersonController extends BaseController {
                     session.userId = user.userId
                     session.userPK = user.id
 
-                    def redirectParams = session.originalRequestParams ? session.originalRequestParams : redirect(controller: 'hut', action: 'list')
+                    def redirectParams = session.originalRequestParams
 
-                    redirect(redirectParams)
+                    if (redirectParams == null) {
+                        redirect(controller: 'hut', action: 'list')
+                    } else {
+                        redirect(redirectParams)
+                    }
                 } else {
                     if (!user.approved) {
                         flash['message'] = message(code: "user.not.approved")
