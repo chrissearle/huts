@@ -17,7 +17,7 @@ class Hut {
 
     static belongsTo = Person
 
-    static hasMany = [bookings: Booking]
+    static hasMany = [bookings: Booking, pricePlans: PricePlan]
 
     static constraints = {
         name(blank: false, maxSize: 50)

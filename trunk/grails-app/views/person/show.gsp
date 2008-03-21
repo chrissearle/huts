@@ -6,16 +6,16 @@
     <title><g:message code="user.show.title" args="${[person.name]}"/></title>
 </head>
 <body>
+<g:isAdmin userId="${session.userId}">
+    <form method="post" action="${createLink(controller: 'person', action: 'delete')}" name="deletemenuform">
+        <input type="hidden" name="id" value="${person?.id}"/>
+        <ul id="nav2">
+            <li><g:link controller="person" action="edit" id="${person.id}"><g:message code="user.show.menu.edit" args="${[person.name]}"/></g:link></li>
+            <li><a href="#" onclick="return deleteCheckSubmit();"><g:message code="user.show.menu.delete" args="${[person.name]}"/></a></li>
+        </ul>
+    </form>
+</g:isAdmin>
 <div>
-    <g:isAdmin userId="${session.userId}">
-        <form method="post" action="${createLink(controller: 'person', action: 'delete')}" name="deletemenuform">
-            <input type="hidden" name="id" value="${person?.id}"/>
-            <ul id="nav2">
-                <li><g:link controller="person" action="edit" id="${person.id}"><g:message code="user.show.menu.edit" args="${[person.name]}"/></g:link></li>
-                <li><a href="#" onclick="return deleteCheckSubmit();"><g:message code="user.show.menu.delete" args="${[person.name]}"/></a></li>
-            </ul>
-        </form>
-    </g:isAdmin>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>

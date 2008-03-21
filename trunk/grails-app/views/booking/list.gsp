@@ -5,10 +5,11 @@
     <title>Bookings for ${hut.name}</title>
 </head>
 <body>
+<ul id="nav2">
+    <li><g:link controller="hut" action="show" id="${hut.id}"><g:message code="priceplan.list.menu.hut" args="[hut.name]"/></g:link></li>
+    <li><g:link controller="booking" action="create">Add booking</g:link></li>
+</ul>
 <div>
-    <ul id="nav2">
-        <li><g:link controller="booking" action="create">Add booking</g:link></li>
-    </ul>
     <h3 class="formtitle">Booking List for ${hut}</h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
