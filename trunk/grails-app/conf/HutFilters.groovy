@@ -55,8 +55,7 @@ class HutFilters {
                                             actionName == "show" ||
                                             actionName == "showpic")) ||
                             (controllerName == "person" &&
-                                    (actionName == null ||
-                                            actionName == "login" ||
+                                    (actionName == "login" ||
                                             actionName == "logout" ||
                                             actionName == "register" ||
                                             actionName == "forgotten" ||
