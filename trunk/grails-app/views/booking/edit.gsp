@@ -22,14 +22,20 @@
         <table>
             <tbody>
 
-                <tr>
-                    <td valign="top" class="name">
-                        <label for="hut"><g:message code="booking.shared.hut"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: booking, field: 'hut', 'errors')}">
-                        <g:select optionKey="id" from="${Hut.list()}" name="hut.id" value="${booking?.hut?.id}"></g:select>
-                    </td>
-                </tr>
+                <g:manageHut hutId="${booking.hut.id}" userId="${session.userId}">
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="hut"><g:message code="booking.shared.hut"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: booking, field: 'hut', 'errors')}">
+                            <g:set var="huts" value="${booking.hut.owner.owns}"/>
+                            <g:isAdmin userId="${session.userId}">
+                                <g:set var="huts" value="${Hut.list()}"/>
+                            </g:isAdmin>
+                            <g:select optionKey="id" from="${huts}" name="hut.id" value="${booking?.hut?.id}"></g:select>
+                        </td>
+                    </tr>
+                </g:manageHut>
 
                 <tr>
                     <td valign="top" class="name">

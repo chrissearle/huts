@@ -7,7 +7,7 @@
 <body>
 <ul id="nav2">
     <li><g:link controller="hut" action="show" id="${hut.id}"><g:message code="booking.list.menu.hut" args="[hut.name]"/></g:link></li>
-    <li><g:link controller="booking" action="create">Add booking</g:link></li>
+    <li><g:link controller="booking" action="create" id="${hut.id}">Add booking</g:link></li>
     <g:if test="${hut.pricePlans.size() > 0}">
         <li><g:link controller="booking" action="rental" id="${hut.id}">Rental report</g:link></li>
     </g:if>

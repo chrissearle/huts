@@ -5,6 +5,9 @@
     <title>Create Booking</title>
 </head>
 <body>
+<ul id="nav2">
+    <li><g:link controller="booking" action="list" id="${booking.hut.id}"><g:message code="booking.create.menu.back"/></g:link></li>
+</ul>
 <div>
     <h3 class="formtitle">Book ${hut}</h3>
     <g:if test="${flash.message}">
@@ -16,18 +19,9 @@
         </div>
     </g:hasErrors>
     <g:form action="save" method="post">
+        <g:hiddenField name="hut.id" value="${booking?.hut?.id}"/>
         <table>
             <tbody>
-
-                <tr>
-                    <td valign="top" class="name">
-                        <label for="hut"><g:message code="booking.shared.hut"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: booking, field: 'hut', 'errors')}">
-                        <g:select optionKey="id" from="${Hut.list()}" name="hut.id" value="${booking?.hut?.id}"></g:select>
-                    </td>
-                </tr>
-
                 <tr>
                     <td valign="top" class="name">
                         <label for="contact"><g:message code="booking.shared.contact"/></label>
@@ -64,7 +58,7 @@
                     </td>
                 </tr>
 
-                <!-- TODO - add price plan here - needs Trac #17 in place first -->
+                <!-- TODO - add price plan here - needs some kind of AJAX -->
             </tbody>
         </table>
         <div class="buttons">

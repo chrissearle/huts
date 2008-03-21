@@ -79,4 +79,31 @@ class BookingController extends BaseController {
 
         return ['bookingList': hut.bookings, 'hut': hut]
     }
+
+    def create = {
+        if (!params.id) {
+            redirect(controller: "hut", action: "list")
+        }
+
+        def booking = new Booking()
+
+        booking.hut = Hut.get(params.id)
+
+        booking.properties = params;
+
+        return ['booking': booking]
+    }
+
+    def save = {
+        def booking = new Booking(params)
+
+        if (!booking.hasErrors() && booking.save()) {
+            flash.message = message(code: "booking.created.ok", args: [booking.hut])
+
+            redirect(controller: "booking", action: "list", id: booking.hut.id)
+        } else {
+            render(view: 'create', model: ['booking': booking])
+        }
+    }
+
 }

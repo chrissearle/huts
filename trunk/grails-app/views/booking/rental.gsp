@@ -45,7 +45,9 @@
                     <td>${booking.priceplan.currency} ${booking.peopleCount * booking.priceplan.price}</td>
 
                     <g:set var="total" value="${total + (booking.peopleCount * booking.priceplan.price)}"/><br>
+
                     <!-- TODO - assumes same currency for a hut -->
+
                     <g:set var="currency" value="${booking.priceplan.currency}"/>
                 </tr>
             </g:each>

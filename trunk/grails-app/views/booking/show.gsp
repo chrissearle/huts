@@ -12,7 +12,9 @@
         <ul id="nav2">
             <li><g:link controller="booking" action="edit" id="${booking.id}">Edit</g:link></li>
             <li><a href="#" onclick="return deleteCheckSubmit();">Delete</a></li>
-            <li><g:link controller="booking" action="list" id="${booking.hut.id}">Back to list</g:link></li>
+            <g:manageHut hutId="${booking.hut.id}" userId="${session.userId}">
+                <li><g:link controller="booking" action="list" id="${booking.hut.id}">Back to list</g:link></li>
+            </g:manageHut>
         </ul>
     </form>
     <g:if test="${flash.message}">
