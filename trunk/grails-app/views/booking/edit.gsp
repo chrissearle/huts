@@ -35,16 +35,16 @@
                             <g:select optionKey="id" from="${huts}" name="hut.id" value="${booking?.hut?.id}"></g:select>
                         </td>
                     </tr>
-                </g:manageHut>
 
-                <tr>
-                    <td valign="top" class="name">
-                        <label for="contact"><g:message code="booking.shared.contact"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: booking, field: 'contact', 'errors')}">
-                        <g:select optionKey="id" from="${Person.list()}" name="contact.id" value="${booking?.contact?.id}"></g:select>
-                    </td>
-                </tr>
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="contact"><g:message code="booking.shared.contact"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: booking, field: 'contact', 'errors')}">
+                            <g:select optionKey="id" from="${Person.list()}" name="contact.id" value="${booking?.contact?.id}"></g:select>
+                        </td>
+                    </tr>
+                </g:manageHut>
 
                 <tr>
                     <td valign="top" class="name">
