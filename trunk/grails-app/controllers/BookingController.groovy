@@ -69,4 +69,14 @@ class BookingController extends BaseController {
 
         return ['bookingList': bookings, 'hut': hut]
     }
+
+    def rental = {
+        if (!params.id) {
+            redirect(controller: "hut", action: "list")
+        }
+
+        def hut = Hut.get(params.id)
+
+        return ['bookingList': hut.bookings, 'hut': hut]
+    }
 }

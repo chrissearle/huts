@@ -32,8 +32,7 @@
     }
 
     google.setOnLoadCallback(initialize);
-    </script>
-</head>
+    </script></head>
 <body onunload="GUnload()">
 
 <ul id="nav2">
