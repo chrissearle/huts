@@ -54,6 +54,14 @@
 
                 <td valign="top" class="value">${booking.peopleCount}</td>
             </tr>
+
+            <g:if test="${booking.hut.pricePlans.size() > 0}">
+                <tr>
+                    <td valign="top" class="name"><g:message code="booking.shared.price"/></td>
+
+                    <td valign="top" class="value">${booking.priceplan}</td>
+                </tr>
+            </g:if>
         </tbody>
     </table>
 </div>

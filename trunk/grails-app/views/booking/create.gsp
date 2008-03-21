@@ -64,6 +64,7 @@
                     </td>
                 </tr>
 
+                <!-- TODO - add price plan here - needs Trac #17 in place first -->
             </tbody>
         </table>
         <div class="buttons">

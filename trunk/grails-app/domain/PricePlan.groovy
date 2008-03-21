@@ -15,4 +15,6 @@ class PricePlan {
         perHead()
         hut(nullable: false)
     }
+
+    String toString() { "${name} (${currency} ${price})" }
 }

@@ -26,6 +26,10 @@
 
                 <th><g:message code="booking.shared.people"/></th>
 
+                <g:if test="${hut.pricePlans.size() > 0}">
+                    <th><g:message code="booking.shared.price"/></th>
+                </g:if>
+
                 <th></th>
 
                 <th></th>
@@ -42,6 +46,10 @@
                     <td><g:formatDate date="${booking.endDate}" format="dd/MM/yyyy"/></td>
 
                     <td>${booking.peopleCount?.encodeAsHTML()}</td>
+
+                    <g:if test="${hut.pricePlans.size() > 0}">
+                        <td valign="top" class="value">${booking.priceplan}</td>
+                    </g:if>
 
                     <td><g:link action="show" id="${booking.id}"><g:message code="booking.shared.show"/></g:link></td>
 

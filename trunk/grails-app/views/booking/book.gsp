@@ -48,6 +48,16 @@
                     </td>
                 </tr>
 
+                <g:if test="${hut.pricePlans.size() > 0}">
+                    <tr>
+                        <td valign="top" class="name">
+                            <label for="priceplan"><g:message code="booking.shared.price"/></label>
+                        </td>
+                        <td valign="top" class="value ${hasErrors(bean: booking, field: 'priceplan', 'errors')}">
+                            <g:select optionKey="id" from="${hut.pricePlans}" name="priceplan.id" value="${booking?.priceplan?.id}"></g:select>
+                        </td>
+                    </tr>
+                </g:if>
             </tbody>
         </table>
         <div class="buttons">

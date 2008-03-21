@@ -4,10 +4,12 @@ class Booking {
     Date startDate
     Date endDate
     Integer peopleCount
+    PricePlan priceplan
 
     static constraints = {
         hut(nullable: false)
         contact(nullable: false)
+        priceplan(nullable: true)
         peopleCount(nullable: false,
                 min: 1,
                 validator: {val, obj ->
