@@ -137,6 +137,7 @@ class HutFilters {
                             case "show":
                             case "edit":
                             case "update":
+                            case "save":
                                 Booking b = Booking.get(params.id)
 
                                 if (!((p == b.hut.owner) || (p == b.contact))) {
@@ -156,10 +157,19 @@ class HutFilters {
                                 }
                                 break;
 
+                            case "create":
+                                Hut hut = Hut.get(params.id)
+
+                                if (!((p == b.hut.owner) || (p == b.contact))) {
+                                    redirect(controller: 'booking', action: 'denied')
+
+                                    return false
+                                }
+                                break;
+
                             default:
                                 break;
                         }
-                        // TODO - create & save: see Trac #17 - needs this in place before an access check is meaningful - will be hut id
                     }
                 }
             }
@@ -177,6 +187,45 @@ class HutFilters {
                             redirect(controller: 'person', action: 'denied')
 
                             return false
+                        }
+                    }
+                }
+            }
+        }
+        accessCheckPricePlan(controller: 'pricePlan', action: '*') {
+            before = {
+                log.info("In accessCheckPricePlan")
+                if (session.userId) {
+                    Person p = Person.findByUserId(session.userId)
+
+                    if (!p.admin) {
+                        switch (actionName) {
+                            case "show":
+                            case "edit":
+                            case "update":
+                            case "save":
+                                PricePlan pp = PricePlan.get(params.id)
+
+                                if (p != pp.hut.owner) {
+                                    redirect(controller: 'pricePlan', action: 'denied')
+
+                                    return false
+                                }
+                                break;
+
+                            case "list":
+                            case "create":
+                                Hut hut = Hut.get(params.id)
+
+                                if (p != hut.owner) {
+                                    redirect(controller: 'pricePlan', action: 'denied')
+
+                                    return false
+                                }
+                                break;
+
+                            default:
+                                break;
                         }
                     }
                 }
