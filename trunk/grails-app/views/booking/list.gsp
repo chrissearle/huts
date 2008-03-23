@@ -2,18 +2,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <title>Bookings for ${hut.name}</title>
+    <title><g:message code="booking.list.title" args="[hut.name]"/></title>
 </head>
 <body>
 <ul id="nav2">
     <li><g:link controller="hut" action="show" id="${hut.id}"><g:message code="booking.list.menu.hut" args="[hut.name]"/></g:link></li>
     <li><g:link controller="booking" action="create" id="${hut.id}">Add booking</g:link></li>
     <g:if test="${hut.pricePlans.size() > 0}">
-        <li><g:link controller="booking" action="rental" id="${hut.id}">Rental report</g:link></li>
+        <li><g:link controller="booking" action="rental" id="${hut.id}"><g:message code="booking.list.menu.rental"/></g:link></li>
     </g:if>
 </ul>
 <div>
-    <h3 class="formtitle">Booking List for ${hut}</h3>
+    <h3 class="formtitle"><g:message code="booking.list.title" args="[hut.name]"/></h3>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
