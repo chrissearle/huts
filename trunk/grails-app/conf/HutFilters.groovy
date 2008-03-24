@@ -181,6 +181,8 @@ class HutFilters {
                     Person p = Person.findByUserId(session.userId)
 
                     switch (actionName) {
+                        case 'contact':
+                            break;
                         case 'show':
                             if (!p.admin && params.id) {
                                 Person p2 = Person.get(params.id)

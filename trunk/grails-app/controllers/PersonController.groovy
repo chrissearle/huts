@@ -155,4 +155,32 @@ class PersonController extends BaseController {
 
         redirect(controller: 'person', action: 'login')
     }
+
+    def contact = {
+        def user = Person.get(params.id)
+        def contactMessage = new ContactMessage()
+        if (params.subject) {
+            contactMessage.subject = params.subject
+        }
+        if (params.messageContent) {
+            contactMessage.messageContent = params.messageContent
+        }
+
+        if (user) {
+            if (request.method == "POST") {
+                def contacter = Person.findByUserId(session.userId)
+
+                emailService.sendMail(message(code: "user.contact.file"), [contact: contacter, contactMessage: contactMessage], [user.email], [],
+                        message(code: "user.contact.subject"))
+
+                flash['message'] = message(code: "user.contact.sent", args: [user.name])
+                redirect(controller: 'hut', action: 'list')
+            } else {
+                return [user: user, contactMessage: contactMessage]
+            }
+        } else {
+            flash['message'] = message(code: "user.not.found")
+            redirect(controller: 'hut', action: 'list')
+        }
+    }
 }
