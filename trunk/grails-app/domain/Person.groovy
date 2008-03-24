@@ -25,5 +25,5 @@ class Person {
         organization(nullable: true)
     }
 
-    String toString() {"${this.name}, ${this.phone}"}
+    String toString() {"${this.name}"}
 }
