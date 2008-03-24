@@ -50,12 +50,21 @@
 
             </tr>
 
-            <tr>
-                <td valign="top" class="name"><g:message code="user.shared.userId"/></td>
+            <g:isAdmin userId="${session.userId}">
+                <tr>
+                    <td valign="top" class="name"><g:message code="user.shared.published"/></td>
 
-                <td valign="top" class="value">${person.userId}</td>
+                    <td valign="top" class="value">${person.published}</td>
 
-            </tr>
+                </tr>
+
+                <tr>
+                    <td valign="top" class="name"><g:message code="user.shared.userId"/></td>
+
+                    <td valign="top" class="value">${person.userId}</td>
+
+                </tr>
+            </g:isAdmin>
 
             <tr>
                 <td valign="top" class="name"><g:message code="user.shared.contact"/></td>

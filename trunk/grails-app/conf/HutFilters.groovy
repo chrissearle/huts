@@ -180,14 +180,30 @@ class HutFilters {
                 if (session.userId) {
                     Person p = Person.findByUserId(session.userId)
 
-                    if (!p.admin && params.id) {
-                        Person p2 = Person.get(params.id)
+                    switch (actionName) {
+                        case 'show':
+                            if (!p.admin && params.id) {
+                                Person p2 = Person.get(params.id)
 
-                        if (p.id != p2.id) {
-                            redirect(controller: 'person', action: 'denied')
+                                if (!p2.published && (p.id != p2.id)) {
+                                    redirect(controller: 'person', action: 'denied')
 
-                            return false
-                        }
+                                    return false
+                                }
+                            }
+                            break;
+
+                        default:
+                            if (!p.admin && params.id) {
+                                Person p2 = Person.get(params.id)
+
+                                if (p.id != p2.id) {
+                                    redirect(controller: 'person', action: 'denied')
+
+                                    return false
+                                }
+                            }
+                            break;
                     }
                 }
             }

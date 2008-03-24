@@ -11,6 +11,8 @@ class Person {
     Boolean approved
     Boolean confirmed
 
+    Boolean published = false
+
     String challenge
 
     static hasMany = [owns: Hut]

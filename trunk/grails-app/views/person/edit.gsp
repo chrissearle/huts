@@ -58,6 +58,15 @@
 
                 <tr>
                     <td valign="top" class="name">
+                        <label for="approved"><g:message code="user.shared.published"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'published', 'errors')}">
+                        <g:checkBox name="published" value="${person?.published}"></g:checkBox>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top" class="name">
                         <label for="userId"><g:message code="user.shared.userId"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: person, field: 'userId', 'errors')}">
