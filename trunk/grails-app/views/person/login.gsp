@@ -12,6 +12,13 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
+    <g:if test="${flash.notconf}">
+        <div class="message">
+            <g:link controller="person" action="resend" id="${flash.notconf}"><g:message code="user.resend.confirm"/></g:link>
+
+        </div>
+    </g:if>
+
     <g:form controller="person" method="post">
         <table>
             <tbody>

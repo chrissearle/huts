@@ -30,6 +30,7 @@ class PersonController extends BaseController {
                         flash['message'] = message(code: "user.not.approved")
                     }
                     if (!user.confirmed) {
+                        flash['notconf'] = user.id
                         flash['message'] = message(code: "user.not.confirmed")
                     }
                 }
@@ -37,6 +38,21 @@ class PersonController extends BaseController {
                 flash['message'] = message(code: "user.login.invalid")
             }
         }
+    }
+
+    def resend = {
+        def user = Person.get(params.id)
+
+        if (user) {
+            user.challenge = randomService.getRandomKey(40)
+            user.save(flush: true)
+
+            emailService.sendMail(message(code: "user.new.confirmation.file"), ["user": user], [user.email], [],
+                    message(code: "user.new.confirmation.subject"))
+
+            flash['message'] = message(code: "user.confirm.resent")
+        }
+        redirect(controller: 'person', action: 'login')
     }
 
     def logout = {

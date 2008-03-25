@@ -59,6 +59,7 @@ class HutFilters {
                                             actionName == "logout" ||
                                             actionName == "register" ||
                                             actionName == "forgotten" ||
+                                            actionName == "resend" ||
                                             actionName == "confirm")))) {
 
                         log.info("In loginCheck - login required " + controllerName + " " + actionName)
