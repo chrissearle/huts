@@ -153,21 +153,16 @@ function growTopBound(map, bounds) {
 
 function getIcon(huttype) {
 
-    // Create our "tiny" marker icon
-    var tinyIcon = new GIcon();
-    var icon = "red";
+    var primaryColor = "#FF0000";
+
     if (huttype == "PRIVATE") {
-        icon = "blue";
+        primaryColor = "#0000FF";
     }
     if (huttype == "OWNER") {
-        icon = "yellow";
+        primaryColor = "#FFFF00";
     }
-    tinyIcon.image = "http://labs.google.com/ridefinder/images/mm_20_" + icon + ".png";
-    tinyIcon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
-    tinyIcon.iconSize = new GSize(12, 20);
-    tinyIcon.shadowSize = new GSize(22, 20);
-    tinyIcon.iconAnchor = new GPoint(6, 20);
-    tinyIcon.infoWindowAnchor = new GPoint(5, 1);
 
-    return tinyIcon;
+    var newIcon = IconFactory.createMarkerIcon({width: 30, height: 30, primaryColor: primaryColor});
+
+    return newIcon;
 }

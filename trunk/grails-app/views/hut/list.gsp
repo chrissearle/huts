@@ -3,6 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <title><g:message code="hut.list.title"/></title>
+    <g:javascript library="iconfactory"/>
     <g:javascript library="huts"/>
 
     <g:if test="${session.getAttribute('org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE')}">

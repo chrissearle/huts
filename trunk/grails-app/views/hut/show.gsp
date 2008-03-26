@@ -2,6 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
+    <g:javascript library="iconfactory"/>
     <g:javascript library="huts"/>
     <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}"></script> <!-- add &hl=lang here -->
     <script type="text/javascript">
