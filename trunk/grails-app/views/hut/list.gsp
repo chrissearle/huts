@@ -3,8 +3,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <title><g:message code="hut.list.title"/></title>
-    <g:javascript library="mapiconfactory"/>
-    <g:javascript library="huts"/>
 
     <g:if test="${session.getAttribute('org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE')}">
         <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}&h1=${session.getAttribute("org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE")}"></script>
@@ -52,6 +50,7 @@
     <g:render template="/notices"/>
 
     <div id="map" class="mainmap"></div>
+    <script type="text/javascript" language="javascript">showKey();</script>
 
     <div id="oldlist" style="display: none;">
         <table>

@@ -22,12 +22,15 @@ function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, org
 function toggleMapList() {
     var oldList = document.getElementById("oldlist");
     var map = document.getElementById("map");
+    var key = document.getElementById("key");
 
     if (map.style.display == "none") {
         map.style.display = "";
+        key.style.display = "";
         oldList.style.display = "none";
     } else {
         map.style.display = "none";
+        key.style.display = "none";
         oldList.style.display = "";
     }
 }
@@ -55,36 +58,23 @@ function initializeMaps(hutlocs) {
         map.setCenter(norway, 7);
 
         map.addControl(new GLargeMapControl());
-        map.addControl(new GMapTypeControl());
+        map.addControl(new GMapTypeControl(), new GControlPosition(G_ANCHOR_BOTTOM_RIGHT, 0));
     } else {
         toggleMapList();
     }
 
-    var bounds = new GLatLngBounds();
+    var markersArray=[];
 
     for (name in hutlocs) {
         var hutloc = hutlocs[name];
 
-        var marker = getMarker(hutloc, bounds);
+        var marker = getMarker(hutloc);
 
-        map.addOverlay(marker);
+        markersArray.push(marker);
     }
 
-    // Zoom to bounds
-    map.setZoom(map.getBoundsZoomLevel(bounds));
-    map.setCenter(bounds.getCenter());
-
-    // Based on that - grow top by a small amount
-    bounds = growTopBound(map, bounds);
-
-    // And re-do the zoom
-    map.setZoom(map.getBoundsZoomLevel(bounds));
-    map.setCenter(bounds.getCenter());
-
-    // Force max zoom
-    if (map.getZoom() > 12) {
-        map.setZoom(12);
-    }
+    var cluster=new ClusterMarker(map, { markers:markersArray, clusterMarkerIcon: getClusterIcon() } );
+    cluster.fitMapToMarkers();
 
     return map;
 }
@@ -113,13 +103,11 @@ function initializeSingleMap(lat, lng, huttype) {
     map.addOverlay(marker);
 }
 
-function getMarker(hutloc, bounds) {
+function getMarker(hutloc) {
     var markerOptions = { icon:getIcon(hutloc.huttype) };
 
     var latlng = new GLatLng(hutloc.lat, hutloc.lng);
     var marker = new GMarker(latlng, markerOptions);
-
-    bounds.extend(latlng);
 
     var popup = "<h4>" + hutloc.name + "</h4>";
 
@@ -141,16 +129,6 @@ function getMarker(hutloc, bounds) {
     return marker;
 }
 
-function growTopBound(map, bounds) {
-    var latlngNorthEast = bounds.getNorthEast();
-
-    var pointNorthEast = map.fromLatLngToDivPixel(latlngNorthEast);
-
-    bounds.extend(map.fromDivPixelToLatLng(new GPoint(pointNorthEast.x, pointNorthEast.y - 75)));
-
-    return bounds;
-}
-
 function getIcon(huttype) {
 
     var primaryColor = "#FF0000";
@@ -165,4 +143,34 @@ function getIcon(huttype) {
     var newIcon = MapIconFactory.createMarkerIcon({width: 30, height: 30, primaryColor: primaryColor});
 
     return newIcon;
+}
+
+function getClusterIcon() {
+    var clusterIcon = MapIconFactory.createMarkerIcon({width: 40, height: 40, primaryColor: "#ccccff"});
+
+    return clusterIcon;
+}
+
+function showKey() {
+    var icons = new Array();
+
+    icons[0] = new MapKey(getIcon("PUBLIC").image, "A public hut that anyone can book");
+    icons[1] = new MapKey(getIcon("PRIVATE").image, "A private hut that you can book");
+    icons[2] = new MapKey(getIcon("OWNER").image, "A hut you own");
+    icons[3] = new MapKey(getClusterIcon().image, "Group of huts that are too close together to show (click to zoom in)");
+
+    document.write('<table id="key" class="key">');
+    for (id in icons) {
+        document.write('<tr><td>');
+        document.write('<img src="' + icons[id].url + '"/>');
+        document.write('</td><td>');
+        document.write(icons[id].desc);
+        document.write('</td></tr>');
+    }
+    document.write('</table>');
+}
+
+function MapKey(url, desc) {
+    this.url = url;
+    this.desc = desc;
 }
