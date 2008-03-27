@@ -5,6 +5,9 @@
     <title><g:message code="user.edit.title" args="${[person.name]}"/></title>
 </head>
 <body>
+<g:if test="${session.userId == person.userId}">
+    <g:render template="/accountmenu" var="person" bean="${person}"/>
+</g:if>
 <div>
     <h3 class="formtitle"><g:message code="user.edit.title" args="${[person.name]}"/></h3>
     <g:if test="${flash.message}">

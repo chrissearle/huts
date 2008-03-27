@@ -162,7 +162,7 @@ function getIcon(huttype) {
         primaryColor = "#FFFF00";
     }
 
-    var newIcon = IconFactory.createMarkerIcon({width: 30, height: 30, primaryColor: primaryColor});
+    var newIcon = MapIconFactory.createMarkerIcon({width: 30, height: 30, primaryColor: primaryColor});
 
     return newIcon;
 }

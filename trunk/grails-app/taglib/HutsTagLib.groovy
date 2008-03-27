@@ -27,6 +27,28 @@ class HutsTagLib {
         }
     }
 
+    def hasHut = {attrs, body ->
+        if (attrs.userId) {
+            def p = Person.findByUserId(attrs.userId)
+
+            if (p.owns && p.owns.size() > 0) {
+                out << body()
+            }
+        }
+    }
+
+    def hasBooking = {attrs, body ->
+        if (attrs.userId) {
+            def p = Person.findByUserId(attrs.userId)
+
+            def bookings = Booking.findAllByContact(p)
+
+            if (bookings && bookings.size() > 0) {
+                out << body()
+            }
+        }
+    }
+
     def manageHut = {attrs, body ->
         if (attrs.userId) {
             def h = Hut.get(attrs.hutId)

@@ -20,6 +20,8 @@ class PersonController extends BaseController {
 
                     def redirectParams = session.originalRequestParams
 
+                    session.originalRequestParams = null
+
                     if (redirectParams == null) {
                         redirect(controller: 'hut', action: 'list')
                     } else {
@@ -57,6 +59,8 @@ class PersonController extends BaseController {
 
     def logout = {
         session.userId = null
+        session.originalRequestParams = null
+
         flash['message'] = message(code: "user.logout.loggedout")
         redirect(controller: 'hut', action: 'list')
     }

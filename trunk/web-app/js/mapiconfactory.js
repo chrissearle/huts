@@ -1,5 +1,5 @@
 /**
- * IconFactory v1.0
+ * MapIconFactory v1.0
  * Copyright (c) 2008 Pamela Fox
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,9 +21,9 @@
  *  colored marker icons using the Charts API marker output.
  */
 
-var IconFactory = {};
+var MapIconFactory = {};
 
-IconFactory.createMarkerIcon = function(opts) {
+MapIconFactory.createMarkerIcon = function(opts) {
   var width = opts.width || 32;
   var height = opts.height || 32;
   var primaryColor = opts.primaryColor || "#ff0000";
