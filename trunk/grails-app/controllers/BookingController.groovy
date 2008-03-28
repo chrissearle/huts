@@ -106,4 +106,15 @@ class BookingController extends BaseController {
         }
     }
 
+    def my = {
+        if (!params.id) {
+            redirect(controller: "hut", action: "list")
+        }
+
+        def person = Person.get(params.id)
+
+        def bookings = Booking.findByContact(person);
+
+        return ['bookingList': bookings, 'person': person]
+    }
 }
