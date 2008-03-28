@@ -40,6 +40,7 @@
         <li><g:link controller="hut" action="create"><g:message code="hut.list.menu.add"/></g:link></li>
     </g:if>
     <li><a href="javascript:toggleMapList();"><g:message code="hut.list.menu.toggle"/></a></li>
+    <li><a href="javascript:toggleMapKey();"><g:message code="hut.list.menu.key.toggle"/></a></li>
 </ul>
 
 <div>
@@ -49,8 +50,9 @@
 
     <g:render template="/notices"/>
 
+    <div id="mapkey" style="display: none; z-index: 10; background-color: white;"></div>
+
     <div id="map" class="mainmap"></div>
-    <script type="text/javascript" language="javascript">showKey();</script>
 
     <div id="oldlist" style="display: none;">
         <table>

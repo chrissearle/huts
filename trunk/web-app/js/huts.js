@@ -22,15 +22,12 @@ function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, org
 function toggleMapList() {
     var oldList = document.getElementById("oldlist");
     var map = document.getElementById("map");
-    var key = document.getElementById("key");
 
     if (map.style.display == "none") {
         map.style.display = "";
-        key.style.display = "";
         oldList.style.display = "none";
     } else {
         map.style.display = "none";
-        key.style.display = "none";
         oldList.style.display = "";
     }
 }
@@ -49,6 +46,8 @@ function toggleMapView() {
 }
 
 function initializeMaps(hutlocs) {
+    setupKey();
+
     //    var norway = new GLatLng(64.830253743883, 16.2158203125);
     var norway = new GLatLng(60, 10.7);
 
@@ -151,7 +150,18 @@ function getClusterIcon() {
     return clusterIcon;
 }
 
-function showKey() {
+function toggleMapKey() {
+        var key = document.getElementById("mapkey");
+
+        if (key.style.display == "none") {
+            key.style.display = "";
+        } else {
+            key.style.display = "none";
+        }
+
+}
+
+function setupKey() {
     var icons = new Array();
 
     icons[0] = new MapKey(getIcon("PUBLIC").image, "A public hut that anyone can book");
@@ -159,15 +169,22 @@ function showKey() {
     icons[2] = new MapKey(getIcon("OWNER").image, "A hut you own");
     icons[3] = new MapKey(getClusterIcon().image, "Group of huts that are too close together to show (click to zoom in)");
 
-    document.write('<table id="key" class="key">');
+    var htmlCode = '<table id="key" class="key">';
+
     for (id in icons) {
-        document.write('<tr><td>');
-        document.write('<img src="' + icons[id].url + '"/>');
-        document.write('</td><td>');
-        document.write(icons[id].desc);
-        document.write('</td></tr>');
+        htmlCode += '<tr><td>';
+        htmlCode += '<img src="' + icons[id].url + '"/>';
+        htmlCode += '</td><td>';
+        htmlCode += icons[id].desc;
+        htmlCode += '</td></tr>';
     }
-    document.write('</table>');
+    htmlCode += '</table>';
+
+    var key = document.getElementById("mapkey");
+
+    key.style.position = "absolute";
+    key.style.padding = "10px";
+    key.innerHTML = htmlCode;
 }
 
 function MapKey(url, desc) {
