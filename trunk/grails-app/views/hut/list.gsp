@@ -11,26 +11,26 @@
         <script type="text/javascript" src="http://www.google.com/jsapi?key=${grailsApplication.config.google.map.key}"></script>
     </g:else>
     <script type="text/javascript">
-    google.load("maps", "2.x");
+        google.load("maps", "2.x");
 
-    function initialize() {
+        function initialize() {
 
-    <g:hutLocs huts="${hutList}"/>
+        <g:hutLocs huts="${hutList}"/>
 
-    var map = initializeMaps(hutlocs);
+            var map = initializeMaps(hutlocs);
 
-    <g:if test="${session.zoom}">
-        map.setZoom(${session.zoom});
-    </g:if>
-    <g:if test="${session.centerHut}">
+        <g:if test="${session.zoom}">
+            map.setZoom(${session.zoom});
+        </g:if>
+        <g:if test="${session.centerHut}">
         <g:centerHut hutId="${session.centerHut}"/>
-    </g:if>
-    <g:if test="${session.latitude && session.longitude}">
-        map.setCenter(new GLatLng(${session.latitude}, ${session.longitude}));
-    </g:if>
-    }
+        </g:if>
+        <g:if test="${session.latitude && session.longitude}">
+            map.setCenter(new GLatLng(${session.latitude}, ${session.longitude}));
+        </g:if>
+        }
 
-    google.setOnLoadCallback(initialize);
+        google.setOnLoadCallback(initialize);
     </script></head>
 <body onunload="GUnload()">
 
@@ -39,7 +39,7 @@
     <g:if test="${session.userId}">
         <li><g:link controller="hut" action="create"><g:message code="hut.list.menu.add"/></g:link></li>
     </g:if>
-    <li><a href="javascript:toggleMapList();"><g:message code="hut.list.menu.toggle"/></a></li>
+    <li><a href="javascript:$('#map, #oldlist').toggle();"><g:message code="hut.list.menu.toggle"/></a></li>
     <li><a href="javascript:toggleMapKey();"><g:message code="hut.list.menu.key.toggle"/></a></li>
 </ul>
 

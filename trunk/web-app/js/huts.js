@@ -19,35 +19,7 @@ function HutLocation(name, lat, lng, imgurl, showurl, linktext, description, org
     this.huttype = huttype;
 }
 
-function toggleMapList() {
-    var oldList = document.getElementById("oldlist");
-    var map = document.getElementById("map");
-
-    if (map.style.display == "none") {
-        map.style.display = "";
-        oldList.style.display = "none";
-    } else {
-        map.style.display = "none";
-        oldList.style.display = "";
-    }
-}
-
-function toggleMapView() {
-    var img = document.getElementById("hutimg");
-    var map = document.getElementById("map");
-
-    if (map.style.display == "none") {
-        map.style.display = "";
-        img.style.display = "none";
-    } else {
-        map.style.display = "none";
-        img.style.display = "";
-    }
-}
-
 function initializeMaps(hutlocs) {
-    setupKey();
-
     //    var norway = new GLatLng(64.830253743883, 16.2158203125);
     var norway = new GLatLng(60, 10.7);
 
@@ -62,7 +34,7 @@ function initializeMaps(hutlocs) {
         toggleMapList();
     }
 
-    var markersArray=[];
+    var markersArray = [];
 
     for (name in hutlocs) {
         var hutloc = hutlocs[name];
@@ -72,7 +44,7 @@ function initializeMaps(hutlocs) {
         markersArray.push(marker);
     }
 
-    var cluster=new ClusterMarker(map, { markers:markersArray, clusterMarkerIcon: getClusterIcon() } );
+    var cluster = new ClusterMarker(map, { markers:markersArray, clusterMarkerIcon: getClusterIcon() });
     cluster.fitMapToMarkers();
 
     return map;
@@ -151,14 +123,11 @@ function getClusterIcon() {
 }
 
 function toggleMapKey() {
-        var key = document.getElementById("mapkey");
-
-        if (key.style.display == "none") {
-            key.style.display = "";
-        } else {
-            key.style.display = "none";
-        }
-
+    if ($('#mapkey').is(':hidden')) {
+        $('#mapkey').fadeIn("slow");
+    } else {
+        $('#mapkey').fadeOut("slow");
+    }
 }
 
 function setupKey() {
@@ -180,14 +149,14 @@ function setupKey() {
     }
     htmlCode += '</table>';
 
-    var key = document.getElementById("mapkey");
-
-    key.style.position = "absolute";
-    key.style.padding = "10px";
-    key.innerHTML = htmlCode;
+    $("#mapkey").css({position: "absolute", padding: "10px"}).html(htmlCode);
 }
 
 function MapKey(url, desc) {
     this.url = url;
     this.desc = desc;
 }
+
+$(function() {
+    setupKey();
+});
