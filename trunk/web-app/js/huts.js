@@ -138,7 +138,7 @@ function setupKey() {
     icons[2] = new MapKey(getIcon("OWNER").image, "A hut you own");
     icons[3] = new MapKey(getClusterIcon().image, "Group of huts that are too close together to show (click to zoom in)");
 
-    var htmlCode = '<table id="key" class="key">';
+    var htmlCode = '<div id="key"><table class="key">';
 
     for (id in icons) {
         htmlCode += '<tr><td>';
@@ -147,9 +147,9 @@ function setupKey() {
         htmlCode += icons[id].desc;
         htmlCode += '</td></tr>';
     }
-    htmlCode += '</table>';
+    htmlCode += '</table></div>';
 
-    $("#mapkey").css({position: "absolute", padding: "10px"}).html(htmlCode);
+    $("#mapkey").css({position: "absolute", padding: "10px", margin: "40px", 'margin-left': "50px"}).html(htmlCode);
 }
 
 function MapKey(url, desc) {
