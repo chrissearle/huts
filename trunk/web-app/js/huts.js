@@ -63,8 +63,8 @@ function initializeSingleMap(lat, lng, huttype) {
         map.addControl(new GMapTypeControl());
     }
 
-    if (document.getElementById("hutimg")) {
-        toggleMapView();
+    if ($('#hutimg').length) {
+        $('#hutimg, #map').toggle();
     }
 
     var markerOptions = { clickable: false, icon: getIcon(huttype) };
