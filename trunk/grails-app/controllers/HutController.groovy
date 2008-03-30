@@ -71,8 +71,6 @@ class HutController extends BaseController {
     }
 
     def list = {
-        def notices = Notice.findByShown(true)
-
         def hutgroup = session.hutgroup
 
         if (!session.userId) {
@@ -84,7 +82,7 @@ class HutController extends BaseController {
 
             def hutlist = hutService.visibleHuts(p, hutgroup)
 
-            return ['hutList': hutlist, 'notices': notices]
+            return ['hutList': hutlist]
 
         }
     }

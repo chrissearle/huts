@@ -297,4 +297,18 @@ class HutsTagLib {
 
         out << templateService.processTemplate("welcomeTemplates", message(code: template), [:])
     }
+
+    def showNotices = {
+        def notices = Notice.findAllByShown(true)
+
+        if (notices) {
+            out << '<div class="notices">'
+            notices.each { notice ->
+                out << '<h4 class="formtitle">' << notice.title  << '</h4>'
+
+                out << '<p class="formtext">' << notice.text << '</p>'
+            }
+            out << '</div>'
+        }
+    }
 }

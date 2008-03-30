@@ -48,8 +48,6 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
-    <g:render template="/notices"/>
-
     <div id="mapkey" style="display: none; z-index: 10; background-color: white;"></div>
 
     <div id="map" class="mainmap"></div>
