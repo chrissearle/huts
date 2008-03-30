@@ -36,14 +36,16 @@ class JabberService {
 
     def sendChat(String to, String msg) {
         try {
-            def chatmanager = connection.getChatManager()
+            if (connection.getRoster().getPresence(to).isAvailable()) {
+                def chatmanager = connection.getChatManager()
 
-            // we talk, but don't listen, how rude
-            Chat chat = chatmanager.createChat(to, null)
+                // we talk, but don't listen, how rude
+                Chat chat = chatmanager.createChat(to, null)
 
-            def msgObj = new Message(to, Message.Type.chat)
-            msgObj.setBody(msg)
-            chat.sendMessage(msgObj)
+                def msgObj = new Message(to, Message.Type.chat)
+                msgObj.setBody(msg)
+                chat.sendMessage(msgObj)
+            }
         } catch (Exception e) {
             log.error("Failed to send message ${e.getMessage()}")
         }
