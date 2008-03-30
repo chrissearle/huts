@@ -40,6 +40,7 @@ environments {
         js.mapiconfactory = "mapiconfactory.js"
         js.clustermarker = "clustermarker.js"
         js.jquery = "jquery-1.2.3.js"
+        chat.username = "support-development"
     }
     production {
         grails.serverURL = "http://huts.chrissearle.net/huts"
@@ -49,6 +50,7 @@ environments {
         js.mapiconfactory = "mapiconfactory_packed.js"
         js.clustermarker = "clustermarker_packed.js"
         js.jquery = "jquery-1.2.3.min.js"
+        chat.username = "support"
     }
 }
 
@@ -89,6 +91,5 @@ chat {
     serviceName = "jabber.chrissearle.org"
     host = "jabber.chrissearle.org"
     port = 5222
-    username = "support"
     password = "thahW6iu"
 }
