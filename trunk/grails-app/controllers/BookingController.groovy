@@ -1,5 +1,7 @@
 class BookingController extends BaseController {
-    EmailService emailService
+    def emailService
+    def jabberService
+    def templateService
 
     def scaffold = true
 
@@ -37,6 +39,10 @@ class BookingController extends BaseController {
             if (booking.save()) {
                 emailService.sendMail(message(code: "booking.owner.notification.file"), ["booking": booking], [booking.hut.owner.email],
                         [booking.contact.email], message(code: "booking.owner.notification.subject", args: [booking.hut.name]))
+
+                if (user.jabber) {
+                    jabberService.sendChat(user.jabber, templateService.processTemplate("mailTemplates", message(code: "booking.owner.notification.file"), ["booking": booking]))
+                }
 
                 flash.message = message(code: "booking.booked.ok", args: [booking.hut])
 

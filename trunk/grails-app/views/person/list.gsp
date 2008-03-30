@@ -23,6 +23,8 @@
 
                     <g:sortableColumn property="email" titleKey="user.shared.email"/>
 
+                    <g:sortableColumn property="jabber" titleKey="user.shared.jabber"/>
+
                     <g:sortableColumn property="phone" titleKey="user.shared.phone"/>
 
                     <th><g:message code="user.shared.contact"/></th>
@@ -36,6 +38,8 @@
                         <td><g:link action="show" id="${person.id}">${person.name?.encodeAsHTML()}</g:link></td>
 
                         <td><a href="mailto:${person.email}">${person.email}</a></td>
+
+                        <td>${person.jabber}</td>
 
                         <td>${person.phone?.encodeAsHTML()}</td>
 

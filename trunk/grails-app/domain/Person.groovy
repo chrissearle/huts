@@ -1,6 +1,7 @@
 class Person {
     String name
     String email
+    String jabber
     String phone
 
     String userId
@@ -20,6 +21,7 @@ class Person {
     static constraints = {
         name(blank: false, maxSize: 50)
         email(email: true)
+        jabber(email: true, nullable: true)
         phone(blank: true, maxSize: 15)
         userId(blank: false, unique: true, size: 3..20)
         password(blank: false, size: 6..20)

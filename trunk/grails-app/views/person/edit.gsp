@@ -52,6 +52,15 @@
 
                 <tr>
                     <td valign="top" class="name">
+                        <label for="jabber"><g:message code="user.shared.jabber"/></label>
+                    </td>
+                    <td valign="top" class="value ${hasErrors(bean: person, field: 'jaber', 'errors')}">
+                        <input type="text" id="jabber" name="jabber" value="${fieldValue(bean: person, field: 'jabber')}"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top" class="name">
                         <label for="phone"><g:message code="user.shared.phone"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: person, field: 'phone', 'errors')}">

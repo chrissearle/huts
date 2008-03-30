@@ -1,36 +1,19 @@
-import groovy.text.SimpleTemplateEngine
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.springframework.mail.MailException
 import org.springframework.mail.MailSender
 import org.springframework.mail.SimpleMailMessage
 
 class EmailService {
+    def templateService
 
     MailSender mailSender
     SimpleMailMessage mailMessage
 
     def sendMail(String templateName, Map binding, List toAddress, List ccAddress, String subject) {
-
-        def servletContext = ApplicationHolder.getApplication().getParentContext().getServletContext()
-
-        def filename = File.separator +
-                "WEB-INF" +
-                File.separator +
-                "mailTemplates" +
-                File.separator +
-                "${templateName}.gtpl"
-
-        def url = servletContext.getResource(filename)
-
-        def engine = new SimpleTemplateEngine()
-
-        def template = engine.createTemplate(url).make(binding)
-
         def email = [
                 to: toAddress,
                 cc: ccAddress,
                 subject: subject,
-                text: template.toString()
+                text: templateService.processTemplate("mailTemplates", templateName, binding)
         ]
 
 

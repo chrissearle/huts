@@ -2,6 +2,7 @@ import org.jivesoftware.smack.Chat
 import org.jivesoftware.smack.ConnectionConfiguration
 import org.jivesoftware.smack.XMPPConnection
 import org.jivesoftware.smack.packet.Message
+import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
 
 class JabberService {
 
@@ -11,16 +12,16 @@ class JabberService {
 
     def connect() {
         ConnectionConfiguration cc = new ConnectionConfiguration(
-                ConfigurationHolder.config.chat.host,
-                ConfigurationHolder.config.chat.port,
-                ConfigurationHolder.config.chat.serviceName)
+                CH.config.chat.host,
+                CH.config.chat.port,
+                CH.config.chat.serviceName)
         connection = new XMPPConnection(cc)
 
         try {
 
             connection.connect()
-            connection.login(ConfigurationHolder.config.chat.username,
-                    ConfigurationHolder.config.chat.password)
+            connection.login(CH.config.chat.username,
+                    CH.config.chat.password)
 
         } catch (Exception e) {
             log.error("Failed to connect ${e.getMessage()}")

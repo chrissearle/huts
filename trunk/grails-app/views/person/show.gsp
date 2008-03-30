@@ -44,6 +44,13 @@
             </tr>
 
             <tr>
+                <td valign="top" class="name"><g:message code="user.shared.jabber"/></td>
+
+                <td valign="top" class="value">${person.jabber}</td>
+
+            </tr>
+
+            <tr>
                 <td valign="top" class="name"><g:message code="user.shared.phone"/></td>
 
                 <td valign="top" class="value">${person.phone}</td>
