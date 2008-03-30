@@ -85,3 +85,10 @@ log4j {
 }
 
 
+chat {
+    serviceName = "jabber.chrissearle.org"
+    host = "jabber.chrissearle.org"
+    port = 5222
+    username = "support"
+    password = "thahW6iu"
+}
