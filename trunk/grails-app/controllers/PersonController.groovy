@@ -6,7 +6,7 @@ class PersonController extends BaseController {
     def scaffold = true
 
     def list = {
-        [ personList: Person.list(sort: "name", order: "asc") ]
+        [personList: Person.list(sort: "name", order: "asc")]
     }
 
 
@@ -49,7 +49,23 @@ class PersonController extends BaseController {
     }
 
     def resend = {
-        def user = Person.get(params.id)
+        def user
+
+        if (params.id) {
+            user = Person.get(params.id)
+        }
+
+        if (!user && params.userId) {
+            user = Person.findByUserId(params?.userId)
+        }
+
+        if (!user && params.email) {
+            user = Person.findByEmail(params?.email)
+        }
+
+        if (!user) {
+            return
+        }
 
         if (user) {
             user.challenge = randomService.getRandomKey(40)
