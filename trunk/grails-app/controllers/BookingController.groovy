@@ -8,8 +8,22 @@ class BookingController extends BaseController {
         def booking = Booking.get(params.id)
 
         if (booking) {
+            def user = Person.getByUserId(session.userId)
+
+            if (booking.contact == user) {
+                def messageText = templateService.processTemplate("mailTemplates",
+                        message(code: "booking.owner.cancellation.notification.file"),
+                        ["booking": booking])
+
+                emailService.sendMail(message(code: "booking.owner.cancellation.notification.subject", args: [booking.hut.name]),
+                        messageText, [booking.hut.owner], [booking.contact])
+
+            }
+
             def id = booking.hut.id
+
             booking.delete()
+
             flash.message = message(code: "booking.deleted")
             redirect(controller: 'hut', action: 'show', id: id)
         }
@@ -31,7 +45,7 @@ class BookingController extends BaseController {
             def hut = Hut.get(params.id)
 
             flash['funnel'] = '/funnel/booking/step1.html'
-            
+
             return ['booking': booking, 'hut': hut]
         } else {
             Person user = Person.findByUserId(params['user.id'])
@@ -39,7 +53,7 @@ class BookingController extends BaseController {
 
             if (booking.save()) {
                 def messageText = templateService.processTemplate("mailTemplates",
-                           message(code: "booking.owner.notification.file"),
+                        message(code: "booking.owner.notification.file"),
                         ["booking": booking])
 
                 emailService.sendMail(message(code: "booking.owner.notification.subject", args: [booking.hut.name]),
