@@ -126,7 +126,7 @@ class PersonController extends BaseController {
                         ["user": user])
 
                 emailService.sendMail(message(code: "user.new.notification.subject"),
-                        adminMessageText, [admins], [])
+                        adminMessageText, admins, [])
 
 
                 def messageText = templateService.processTemplate("mailTemplates",
