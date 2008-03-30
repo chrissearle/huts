@@ -125,7 +125,7 @@ class PersonController extends BaseController {
                         message(code: "user.new.notification.file"),
                         ["user": user])
 
-                emailService.sendMail(message(code: "user.new.notification.subject"),
+                emailService.sendMail(message(code: "user.new.notification.subject", args: [user.name]),
                         adminMessageText, admins, [])
 
 
