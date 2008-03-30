@@ -5,6 +5,11 @@ class PersonController extends BaseController {
 
     def scaffold = true
 
+    def list = {
+        [ personList: Person.list(sort: "name", order: "asc") ]
+    }
+
+
     def login = {
         if (request.method == "GET") {
             session.userId = null
