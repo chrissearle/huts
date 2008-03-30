@@ -122,10 +122,10 @@ class PersonController extends BaseController {
                 def admins = Person.findAllByAdmin(true)
 
                 def adminMessageText = templateService.processTemplate("mailTemplates",
-                        message(code: "user.new.notification.subject"),
+                        message(code: "user.new.notification.file"),
                         ["user": user])
 
-                emailService.sendMail(message(code: "user.new.confirmation.subject"),
+                emailService.sendMail(message(code: "user.new.notification.subject"),
                         adminMessageText, [admins], [])
 
 
