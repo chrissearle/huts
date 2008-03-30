@@ -3,6 +3,8 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class HutsTagLib {
+    def templateService
+    
     def showBooking = {attrs, body ->
         if (attrs.userId) {
             def b = Booking.get(attrs.bookingId)
@@ -293,19 +295,6 @@ class HutsTagLib {
     def welcome = {attrs ->
         def template = attrs.template
 
-        def templateName = message(code: template)
-
-        def filename = File.separator +
-                "WEB-INF" +
-                File.separator +
-                "welcomeTemplates" +
-                File.separator +
-                "${templateName}.gtpl"
-
-        def url = servletContext.getResource(filename)
-
-        def engine = new SimpleTemplateEngine()
-
-        out << engine.createTemplate(url).make().toString()
+        out << templateService.processTemplate("welcomeTemplates", message(code: template), [:])
     }
 }

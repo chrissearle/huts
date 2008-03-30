@@ -1,6 +1,5 @@
 class BookingController extends BaseController {
     def emailService
-    def jabberService
     def templateService
 
     def scaffold = true
@@ -30,19 +29,21 @@ class BookingController extends BaseController {
 
         if (request.method == "GET") {
             def hut = Hut.get(params.id)
+
             flash['funnel'] = '/funnel/booking/step1.html'
+            
             return ['booking': booking, 'hut': hut]
         } else {
             Person user = Person.findByUserId(params['user.id'])
             booking.contact = user
 
             if (booking.save()) {
-                emailService.sendMail(message(code: "booking.owner.notification.file"), ["booking": booking], [booking.hut.owner.email],
-                        [booking.contact.email], message(code: "booking.owner.notification.subject", args: [booking.hut.name]))
+                def messageText = templateService.processTemplate("mailTemplates",
+                           message(code: "booking.owner.notification.file"),
+                        ["booking": booking])
 
-                if (user.jabber) {
-                    jabberService.sendChat(user.jabber, templateService.processTemplate("mailTemplates", message(code: "booking.owner.notification.file"), ["booking": booking]))
-                }
+                emailService.sendMail(message(code: "booking.owner.notification.subject", args: [booking.hut.name]),
+                        messageText, [booking.hut.owner], [booking.contact])
 
                 flash.message = message(code: "booking.booked.ok", args: [booking.hut])
 

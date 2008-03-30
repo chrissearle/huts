@@ -2,7 +2,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class HutController extends BaseController {
-    HutService hutService
+    def hutService
 
     def scaffold = true
 

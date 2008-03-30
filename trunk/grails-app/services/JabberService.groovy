@@ -4,6 +4,8 @@ import org.jivesoftware.smack.Roster
 import org.jivesoftware.smack.XMPPConnection
 import org.jivesoftware.smack.packet.Message
 
+import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
+
 class JabberService {
 
     boolean transactional = false

@@ -1,6 +1,7 @@
 class PersonController extends BaseController {
-    EmailService emailService
-    RandomService randomService
+    def emailService
+    def randomService
+    def templateService
 
     def scaffold = true
 
@@ -49,8 +50,12 @@ class PersonController extends BaseController {
             user.challenge = randomService.getRandomKey(40)
             user.save(flush: true)
 
-            emailService.sendMail(message(code: "user.new.confirmation.file"), ["user": user], [user.email], [],
-                    message(code: "user.new.confirmation.subject"))
+            def messageText = templateService.processTemplate("mailTemplates",
+                    message(code: "user.new.confirmation.file"),
+                    ["user": user])
+
+            emailService.sendMail(message(code: "user.new.confirmation.subject"),
+                    messageText, [user], [])
 
             flash['message'] = message(code: "user.confirm.resent")
         }
@@ -95,17 +100,20 @@ class PersonController extends BaseController {
             if (user.save()) {
                 def admins = Person.findAllByAdmin(true)
 
-                def adminMails = []
+                def adminMessageText = templateService.processTemplate("mailTemplates",
+                        message(code: "user.new.notification.subject"),
+                        ["user": user])
 
-                admins.each {admin ->
-                    adminMails += admin.email
-                }
+                emailService.sendMail(message(code: "user.new.confirmation.subject"),
+                        adminMessageText, [admins], [])
 
-                emailService.sendMail(message(code: "user.new.notification.file"), ["user": user], adminMails, [],
-                        message(code: "user.new.notification.subject", args: [user.name]))
 
-                emailService.sendMail(message(code: "user.new.confirmation.file"), ["user": user], [user.email], [],
-                        message(code: "user.new.confirmation.subject"))
+                def messageText = templateService.processTemplate("mailTemplates",
+                        message(code: "user.new.confirmation.file"),
+                        ["user": user])
+
+                emailService.sendMail(message(code: "user.new.confirmation.subject"),
+                        messageText, [user], [])
 
                 flash['message'] = message(code: "user.account.created")
                 flash['funnel'] = '/funnel/register/step2.html'
@@ -145,8 +153,10 @@ class PersonController extends BaseController {
             }
 
             if (user) {
-                emailService.sendMail(message(code: "user.forgotten.password.file"), ["user": user], [user.email], [],
-                        message(code: "user.forgotten.password.subject"))
+                def messageText = templateService.processTemplate("mailTemplates",
+                        message(code: "user.forgotten.password.file"), ["user": user])
+
+                emailService.sendMail(message(code: "user.forgotten.password.subject"), messageText, [user], [])
 
                 flash['message'] = message(code: "user.password.sent")
 
@@ -190,8 +200,10 @@ class PersonController extends BaseController {
             if (request.method == "POST") {
                 def contacter = Person.findByUserId(session.userId)
 
-                emailService.sendMail(message(code: "user.contact.file"), [contact: contacter, contactMessage: contactMessage], [user.email], [],
-                        message(code: "user.contact.subject"))
+                def messageText = templateService.processTemplate("mailTemplates", message(code: "user.contact.file"),
+                        [contact: contacter, contactMessage: contactMessage])
+
+                emailService.sendMail(message(code: "user.contact.subject"), messageText, [user], [])
 
                 flash['message'] = message(code: "user.contact.sent", args: [user.name])
                 redirect(controller: 'hut', action: 'list')

@@ -3,19 +3,35 @@ import org.springframework.mail.MailSender
 import org.springframework.mail.SimpleMailMessage
 
 class EmailService {
-    def templateService
+    def jabberService
 
     MailSender mailSender
     SimpleMailMessage mailMessage
 
-    def sendMail(String templateName, Map binding, List toAddress, List ccAddress, String subject) {
-        def email = [
-                to: toAddress,
-                cc: ccAddress,
-                subject: subject,
-                text: templateService.processTemplate("mailTemplates", templateName, binding)
-        ]
+    def sendMail(String subject, String message, List toPeople, List ccPeople) {
+        def toAddresses = []
+        def ccAddresses = []
 
+        toPeople.each {person ->
+            toAddresses.add(person.email)
+            if (person.jabber) {
+                jabberService.sendChat(person.jabber, message)
+            }
+        }
+
+        ccPeople.each {person ->
+            ccAddresses.add(person.email)
+            if (person.jabber) {
+                jabberService.sendChat(person.jabber, message)
+            }
+        }
+
+        def email = [
+                to: toAddresses,
+                cc: ccAddresses,
+                subject: subject,
+                text: message
+        ]
 
         sendEmails([email])
     }

@@ -10,7 +10,13 @@
     <li>Bestillingsoversikt</li>
     <li>Brukere kan legge til eget hytter</li>
     <li>Vis kun egne hytter</li>
+    <li>Både jabber og e-post varsling</li>
 </ul>
+
+<h4>Jabber</h4>
+
+<p>Hvis du velge å legge til jabber adressen til kontoen din så sender systemmet en chat melding hver gang den sender deg
+et e-post. Du må legge til support@jabber.chrissearle.org til rosteren din for dette.</p>
 
 <h4>Kommersielt bruk</h4>
 
