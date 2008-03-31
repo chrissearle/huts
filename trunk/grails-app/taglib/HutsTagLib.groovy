@@ -1,4 +1,4 @@
-import groovy.text.SimpleTemplateEngine
+import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -295,7 +295,7 @@ class HutsTagLib {
     def welcome = {attrs ->
         def template = attrs.template
 
-        out << templateService.processTemplate("welcomeTemplates", message(code: template), [:])
+        out << templateService.processTemplate("welcomeTemplates", message(code: template), [botname: CH.config.chat.username, bothost: CH.config.chat.host])
     }
 
     def showNotices = {

@@ -16,7 +16,7 @@
 <h4>Jabber</h4>
 
 <p>Hvis du velge å legge til jabber adressen til kontoen din så sender systemmet en chat melding hver gang den sender deg
-et e-post. Du må legge til support@jabber.chrissearle.org til rosteren din for dette.</p><p>Siden google talk/GTalk går
+et e-post. Du må legge til ${botname}@${bothost} til rosteren din for dette.</p><p>Siden google talk/GTalk går
 via jabber kan du også registrere gtalk adressen din.</p>
 
 <h4>Kommersielt bruk</h4>
