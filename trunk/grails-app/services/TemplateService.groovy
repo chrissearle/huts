@@ -18,9 +18,11 @@ class TemplateService {
 
         def url = servletContext.getResource(filename)
 
+        Reader templateReader = new InputStreamReader(url.getContent(), "UTF-8")
+
         def engine = new SimpleTemplateEngine()
 
-        def template = engine.createTemplate(url).make(binding)
+        def template = engine.createTemplate(templateReader).make(binding)
 
         return template.toString()
     }
