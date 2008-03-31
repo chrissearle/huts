@@ -2,7 +2,7 @@ class OwnerWeeklyRentalReportJob {
     def templateService
     def emailService
 
-    def cronExpression = "0 20 3 * * MON"
+    def cronExpression = "0 20 3 ? * MON"
 
     def execute() {
         def people = Person.list()
