@@ -26,7 +26,9 @@
       <sourceFolder url="file://$MODULE_DIR$/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/views" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/plugins/quartz-0.2/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/plugins/quartz-0.3-SNAPSHOT/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/plugins/quartz-0.3-SNAPSHOT/test/integration" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/plugins/quartz-0.3-SNAPSHOT/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
@@ -49,11 +51,11 @@
     <orderEntry type="module-library">
       <library name="Grails User Library">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/plugins/quartz-0.2/lib" />
+          <root url="file://$MODULE_DIR$/plugins/quartz-0.3-SNAPSHOT/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/plugins/quartz-0.2/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/plugins/quartz-0.3-SNAPSHOT/lib" recursive="false" />
       </library>
     </orderEntry>
     <orderEntryProperties />
