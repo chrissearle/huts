@@ -1,0 +1,38 @@
+   =================================================================
+   ==  NOTICE file for use with the Apache License, Version 2.0,  ==
+   =================================================================
+
+   Hut Reservation System
+   ----------------------
+   Copyright 2008 Chris Searle
+
+   This project includes software developed at
+   https://www.chrissearle.org.
+
+   Frameworks/Libraries used
+   -------------------------
+
+   spring - http://www.springframework.org
+   hibernate - http://www.hibernate.org
+   groovy - http://groovy.codehaus.org
+   grails - http://grails.org
+   quartz - http://www.opensymphony.com/quartz/
+   smack - http://www.igniterealtime.org/projects/smack/
+
+   Contact
+   -------
+
+   If you do use this software I'd love to know - just drop me a line
+   at huts-software@chrissearle.org
+
+   Non-marked files
+   ----------------
+
+   The license boilerplate has not been added to template files - since
+   this would cause extra bandwidth requirements for web page downloads
+   and add the boilerplate to outgoing mail etc. However - these files
+   are covered by the same license.
+
+   Binaries (images etc) are also not marked but considered covered.
+
+   Third party libraries are of course covered by their own license.
