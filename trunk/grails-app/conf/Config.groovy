@@ -40,7 +40,7 @@ environments {
         js.mapiconfactory = "mapiconfactory.js"
         js.clustermarker = "clustermarker.js"
         js.jquery = "jquery-1.2.3.js"
-        chat.username = "support-development"
+        chat.username = "hut-bot-dev"
     }
     production {
         grails.serverURL = "http://huts.chrissearle.net/huts"
@@ -50,7 +50,7 @@ environments {
         js.mapiconfactory = "mapiconfactory_packed.js"
         js.clustermarker = "clustermarker_packed.js"
         js.jquery = "jquery-1.2.3.min.js"
-        chat.username = "support"
+        chat.username = "hut-bot"
     }
 }
 
