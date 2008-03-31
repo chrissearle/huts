@@ -76,7 +76,7 @@ class HutController extends BaseController {
         if (!session.userId) {
             def hutlist = hutService.visibleHuts(hutgroup)
 
-            return ['hutList': hutlist, 'notices': notices]
+            return ['hutList': hutlist]
         } else {
             Person p = Person.findByUserId(session.userId)
 
