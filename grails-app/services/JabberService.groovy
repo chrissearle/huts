@@ -58,30 +58,37 @@ class JabberService {
                         if (message.type == Message.Type.chat && message.from && message.body) {
                             Person person = Person.findByJabber(StringUtils.parseBareAddress(message.from))
 
-                            log.error("${message.body}")
+                            log.debug("${message.body}")
 
                             if (person) {
-                                log.error("${person}: ${message.body}")
+                                log.debug("${person}: ${message.body}")
 
                                 if (message.body == "huts") {
-                                    log.error("huts")
+                                    log.debug("huts")
+
+                                    def msg = new StringBuffer();
 
                                     hutService.visibleHuts(person, "").each {hut ->
-                                        this.sendChat(person.jabber, "${hut.id}: ${hut.name}")
+                                        msg.append("${hut.id}: ${hut.name}").append("\n")
                                     }
+                                    this.sendChat(person.jabber, msg.toString())
                                 }
                                 if (message.body == "contacts") {
-                                    log.error("contacts")
+                                    log.debug("contacts")
+
+                                    def msg = new StringBuffer();
 
                                     if (person.admin) {
                                         Person.list().each {contact ->
-                                            this.sendChat(person.jabber, "${contact.id}: ${contact.name}")
+                                            msg.append("${contact.id}: ${contact.name}").append("\n")
                                         }
-                                    }
+                                        this.sendChat(person.jabber, msg.toString())
+                                     }
                                 }
                                 if (message.body.startsWith("hut:")) {
                                     def id = message.body.substring(message.body.indexOf(":") + 1)
-                                    log.error("hut ${id}")
+
+                                    log.debug("hut ${id}")
 
                                     Hut hut = Hut.get(id)
 
@@ -97,7 +104,8 @@ Contact: ${hut.owner.id}: ${hut.owner}
                                 }
                                 if (message.body.startsWith("contact:")) {
                                     def id = message.body.substring(message.body.indexOf(":") + 1)
-                                    log.error("contact ${id}")
+
+                                    log.debug("contact ${id}")
 
                                     Person contact = Person.get(id)
 
