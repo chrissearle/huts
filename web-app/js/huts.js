@@ -48,9 +48,13 @@ function initializeMaps(hutlocs) {
         toggleMapList();
     }
 
+    var seenHut = false;
+
     var markersArray = [];
 
     for (name in hutlocs) {
+        seenHut = true;
+
         var hutloc = hutlocs[name];
 
         var marker = getMarker(hutloc);
@@ -58,8 +62,12 @@ function initializeMaps(hutlocs) {
         markersArray.push(marker);
     }
 
-    var cluster = new ClusterMarker(map, { markers:markersArray, clusterMarkerIcon: getClusterIcon() });
-    cluster.fitMapToMarkers();
+    if (seenHut) {
+        var cluster = new ClusterMarker(map, { markers:markersArray, clusterMarkerIcon: getClusterIcon() });
+        cluster.fitMapToMarkers();
+    } else {
+        $('#nomapwarning').toggle();
+    }
 
     return map;
 }

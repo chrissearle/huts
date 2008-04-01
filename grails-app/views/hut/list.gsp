@@ -48,6 +48,8 @@
         <div class="message">${flash.message}</div>
     </g:if>
 
+    <div id="nomapwarning" class="message" style="display: none"><g:message code="no.map.warning"/></div>
+
     <div id="mapkey" style="display: none; z-index: 10; background-color: white;"></div>
 
     <div id="map" class="mainmap"></div>
