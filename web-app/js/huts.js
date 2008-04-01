@@ -136,14 +136,6 @@ function getClusterIcon() {
     return clusterIcon;
 }
 
-function toggleMapKey() {
-    if ($('#mapkey').is(':hidden')) {
-        $('#mapkey').fadeIn("slow");
-    } else {
-        $('#mapkey').fadeOut("slow");
-    }
-}
-
 function setupKey() {
     var icons = new Array();
 
