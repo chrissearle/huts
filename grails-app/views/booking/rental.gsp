@@ -42,9 +42,9 @@
 
                     <td><g:formatDate date="${booking.endDate}" format="dd/MM/yyyy"/></td>
 
-                    <td>${booking.priceplan.currency} ${booking.peopleCount * booking.priceplan.price}</td>
+                    <td>${booking.priceplan.currency} <g:bookingPrice bookingId="${booking.id}"/></td>
 
-                    <g:set var="total" value="${total + (booking.peopleCount * booking.priceplan.price)}"/><br>
+                    <g:set var="total" value="${total + Double.valueOf(bookingPrice(bookingId: booking.id))}"/><br>
 
                     <!-- TODO - assumes same currency for a hut -->
 

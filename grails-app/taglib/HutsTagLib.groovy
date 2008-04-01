@@ -17,6 +17,9 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
+import org.joda.time.Days
+import org.joda.time.DateMidnight
+
 class HutsTagLib {
     def templateService
     
@@ -324,6 +327,38 @@ class HutsTagLib {
                 out << '<p class="formtext">' << notice.text << '</p>'
             }
             out << '</div>'
+        }
+    }
+
+    def bookingPrice = { attrs ->
+        def booking = Booking.get(attrs.bookingId)
+
+        if (booking && booking.priceplan) {
+            Days days = Days.daysBetween(new DateMidnight(booking.startDate.time), new DateMidnight(booking.endDate.time))
+
+            def price = booking.priceplan.price * days.days
+
+            if (booking.priceplan.perHead) {
+                price *= booking.peopleCount
+            }
+
+            out << price
+        }
+    }
+
+    def bookingPriceValue = { attrs ->
+        def booking = Booking.get(attrs.bookingId)
+
+        if (booking && booking.priceplan) {
+            Days days = Days.daysBetween(new DateMidnight(booking.startDate.time), new DateMidnight(booking.endDate.time))
+
+            def price = booking.priceplan.price * days.days
+
+            if (booking.priceplan.perHead) {
+                price *= booking.peopleCount
+            }
+
+            return price
         }
     }
 }
