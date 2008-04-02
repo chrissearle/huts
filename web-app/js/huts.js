@@ -41,6 +41,7 @@ function initializeMaps(hutlocs) {
         var map = new google.maps.Map2(document.getElementById("map"));
 
         map.setCenter(norway, 7);
+        map.addMapType(G_PHYSICAL_MAP);
 
         map.addControl(new GLargeMapControl());
         map.addControl(new GMapTypeControl(), new GControlPosition(G_ANCHOR_BOTTOM_RIGHT, 0));
