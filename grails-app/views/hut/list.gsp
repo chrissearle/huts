@@ -31,6 +31,17 @@
         }
 
         google.setOnLoadCallback(initialize);
+
+        $(function() {
+            var icons = new Array();
+
+            icons[0] = new MapKey(getIcon("PUBLIC").image, "<g:message code="map.key.public"/>");
+            icons[1] = new MapKey(getIcon("PRIVATE").image, "<g:message code="map.key.private"/>");
+            icons[2] = new MapKey(getIcon("OWNER").image, "<g:message code="map.key.owner"/>");
+            icons[3] = new MapKey(getClusterIcon().image, "<g:message code="map.key.cluster"/>");
+
+            setupKey(icons);
+        });
     </script></head>
 <body onunload="GUnload()">
 

@@ -146,14 +146,7 @@ function getClusterIcon() {
     return clusterIcon;
 }
 
-function setupKey() {
-    var icons = new Array();
-
-    icons[0] = new MapKey(getIcon("PUBLIC").image, "A public hut that anyone can book");
-    icons[1] = new MapKey(getIcon("PRIVATE").image, "A private hut that you can book");
-    icons[2] = new MapKey(getIcon("OWNER").image, "A hut you own");
-    icons[3] = new MapKey(getClusterIcon().image, "Group of huts that are too close together to show (click to zoom in)");
-
+function setupKey(icons) {
     var tablediv = $('<div>').attr('id', 'key');
 
     var table = $('<table>').addClass('key');
@@ -175,7 +168,3 @@ function MapKey(url, desc) {
     this.url = url;
     this.desc = desc;
 }
-
-$(function() {
-    setupKey();
-});
