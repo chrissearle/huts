@@ -57,6 +57,13 @@
 
             </tr>
 
+            <tr>
+                <td valign="top" class="name"><g:message code="user.shared.language"/></td>
+
+                <td valign="top" class="value"><img src='${request.contextPath}/images/flags/${person.language}.png'/></td>
+
+            </tr>
+
             <g:isAdmin userId="${session.userId}">
                 <tr>
                     <td valign="top" class="name"><g:message code="user.shared.published"/></td>

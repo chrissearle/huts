@@ -18,6 +18,7 @@ class Person {
     String email
     String jabber
     String phone
+    String language = "nb"
 
     String userId
     String password
@@ -42,6 +43,7 @@ class Person {
         password(blank: false, size: 6..20)
         challenge(nullable: true)
         organization(nullable: true)
+        language(inList: ["en", "nb"])
     }
 
     String toString() {"${this.name}"}

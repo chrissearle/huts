@@ -15,6 +15,14 @@
 */
 class HutFilters {
     def filters = {
+        logSession(controller: '*', action: '*') {
+            before = {
+                log.debug("In log session")
+                session.attributeNames.each {attr ->
+                    log.info("${attr} ${session.getAttribute(attr)}")
+                }
+            }
+        }
         // First we store off any sticky params
         hutgroup(controller: '*', action: '*') {
             before = {

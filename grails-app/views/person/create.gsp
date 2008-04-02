@@ -75,6 +75,17 @@
 
                 <tr>
                     <td valign="top" class="name">
+                        <label for="language"><g:message code="user.shared.language"/></label>
+                    </td>
+                    <td valign="top" class="value">
+                        <g:radioGroup name="language" labels="${person.constraints.language.inList}" values="${person.constraints.language.inList}" value="${person?.language}">
+                            <img src='${request.contextPath}/images/flags/${it.label}.png'/> ${it.radio}
+                        </g:radioGroup>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top" class="name">
                         <label for="userId"><g:message code="user.shared.userId"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: person, field: 'userId', 'errors')}">

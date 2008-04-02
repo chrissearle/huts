@@ -13,6 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
+import org.springframework.web.servlet.i18n.SessionLocaleResolver
+
 class PersonController extends BaseController {
     def emailService
     def randomService
@@ -42,6 +45,8 @@ class PersonController extends BaseController {
                     def redirectParams = session.originalRequestParams
 
                     session.originalRequestParams = null
+
+                    session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, new Locale(user.language))
 
                     if (redirectParams == null) {
                         redirect(controller: 'hut', action: 'list')
