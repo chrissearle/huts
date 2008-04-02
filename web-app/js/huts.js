@@ -102,21 +102,23 @@ function getMarker(hutloc) {
     var latlng = new GLatLng(hutloc.lat, hutloc.lng);
     var marker = new GMarker(latlng, markerOptions);
 
-    var popup = "<h4>" + hutloc.name + "</h4>";
+    var popup = $('<h4>').html(hutloc.name);
 
     if (hutloc.organization) {
-        popup += "<h5>" + hutloc.organization + "</h5>";
+        popup.append($('<h5>').html(hutloc.organization));
     }
 
     if (hutloc.imgurl) {
-        popup += "<img width='150px' src='" + hutloc.imgurl + "'/>";
+        popup.append($('<img>').attr('width', '150px').attr('src', hutloc.imgurl));
     }
 
-    popup += "<p class='maptext'>" + hutloc.description + "</p>";
-    popup += "<p class='maptext'><a href='" + hutloc.showurl + "'>" + hutloc.linktext + "</a></p>";
+    popup.append($('<p>').addClass('maptext').html(hutloc.description));
+
+    popup.append($('<p>').addClass('maptext').append($('<a>').attr('href', hutloc.showurl).html(hutloc.linktext)));
 
     GEvent.addListener(marker, "click", function() {
-        marker.openInfoWindowHtml(popup);
+        // Uses a div to contain the popup - since we need to call html() which gets the _contents_ of a container
+        marker.openInfoWindowHtml($('<div>').append(popup).html());
     });
 
     return marker;
@@ -152,18 +154,21 @@ function setupKey() {
     icons[2] = new MapKey(getIcon("OWNER").image, "A hut you own");
     icons[3] = new MapKey(getClusterIcon().image, "Group of huts that are too close together to show (click to zoom in)");
 
-    var htmlCode = '<div id="key"><table class="key">';
+    var tablediv = $('<div>').attr('id', 'key');
+
+    var table = $('<table>').addClass('key');
+
+    tablediv.append(table);
 
     for (id in icons) {
-        htmlCode += '<tr><td>';
-        htmlCode += '<img src="' + icons[id].url + '"/>';
-        htmlCode += '</td><td>';
-        htmlCode += icons[id].desc;
-        htmlCode += '</td></tr>';
-    }
-    htmlCode += '</table></div>';
+        var col1 = $('<td>').append($('<img>').attr('src', icons[id].url));
+        var col2 = $('<td>').html(icons[id].desc);
 
-    $("#mapkey").css({position: "absolute", padding: "10px", margin: "40px", 'margin-left': "50px"}).html(htmlCode);
+        table.append($('<tr>').append(col1).append(col2));
+    }
+
+    // Uses a div to contain the popup - since we need to call html() which gets the _contents_ of a container
+    $("#mapkey").css({position: "absolute", padding: "10px", margin: "40px", 'margin-left': "50px"}).html($('<div>').append(tablediv).html());
 }
 
 function MapKey(url, desc) {
