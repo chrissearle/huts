@@ -83,8 +83,14 @@ log4j {
     appender.'errors.File' = "stacktrace.log"
     rootLogger = "debug,stdout"
     logger {
-        grails = "info"
+        grails {
+            app {
+                service = "debug"
+            }
+        }
+
         StackTrace = "error,errors"
+
         org {
             codehaus.groovy.grails.web.servlet = "error" //  controllers
             codehaus.groovy.grails.web.pages = "error" //  GSP

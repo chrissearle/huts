@@ -17,15 +17,16 @@
 import org.jivesoftware.smack.Chat
 import org.jivesoftware.smack.ConnectionConfiguration
 import org.jivesoftware.smack.Roster
-import org.jivesoftware.smack.PacketListener
 import org.jivesoftware.smack.XMPPConnection
 import org.jivesoftware.smack.filter.PacketFilter
 import org.jivesoftware.smack.filter.PacketTypeFilter
 import org.jivesoftware.smack.packet.Message
-import org.jivesoftware.smack.packet.Packet
-import org.jivesoftware.smack.util.StringUtils
 
 import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
+import org.jivesoftware.smack.packet.Packet
+import org.jivesoftware.smack.PacketListener
+import org.jivesoftware.smack.util.StringUtils
+
 
 class JabberService {
 
@@ -36,6 +37,10 @@ class JabberService {
     XMPPConnection connection
 
     def connect() {
+        def commands = [hut: new HutCommand(hutService),
+                contact: new ContactCommand(),
+        booking: new BookingCommand()]
+
         ConnectionConfiguration cc = new ConnectionConfiguration(
                 CH.config.chat.host,
                 CH.config.chat.port,
@@ -43,14 +48,15 @@ class JabberService {
         connection = new XMPPConnection(cc)
 
         try {
-
             connection.connect()
             connection.login(CH.config.chat.username,
                     CH.config.chat.password)
 
             connection.getRoster().setSubscriptionMode(Roster.SubscriptionMode.accept_all)
 
-            PacketListener pl = {Packet packet ->
+            PacketFilter pf = new PacketTypeFilter(Message.class)
+
+            connection.addPacketListener({Packet packet ->
                 try {
                     if (packet instanceof Message) {
                         Message message = (Message) packet
@@ -58,82 +64,45 @@ class JabberService {
                         if (message.type == Message.Type.chat && message.from && message.body) {
                             Person person = Person.findByJabber(StringUtils.parseBareAddress(message.from))
 
-                            log.debug("${message.body}")
+                            log.info("${message.body}")
 
                             if (person) {
-                                log.debug("${person}: ${message.body}")
+                                log.info("${person}: ${message.body}")
 
-                                if (message.body == "huts") {
-                                    log.debug("huts")
+                                String command = message.body
 
-                                    def msg = new StringBuffer();
-
-                                    hutService.visibleHuts(person, "").each {hut ->
-                                        msg.append("${hut.id}: ${hut.name}").append("\n")
-                                    }
-                                    this.sendChat(person.jabber, msg.toString())
+                                if (command.indexOf(":") > 0) {
+                                    command = command.substring(0, command.indexOf(":"))
                                 }
-                                if (message.body == "contacts") {
-                                    log.debug("contacts")
 
-                                    def msg = new StringBuffer();
+                                JabberCommand jabberCommand = commands.get(command)
 
-                                    if (person.admin) {
-                                        Person.list().each {contact ->
-                                            msg.append("${contact.id}: ${contact.name}").append("\n")
-                                        }
-                                        this.sendChat(person.jabber, msg.toString())
-                                     }
-                                }
-                                if (message.body.startsWith("hut:")) {
+                                String messageText
+
+                                if (message.body.indexOf(":") > 0) {
                                     def id = message.body.substring(message.body.indexOf(":") + 1)
 
-                                    log.debug("hut ${id}")
-
-                                    Hut hut = Hut.get(id)
-
-                                    if (person.admin || hut.owner == person) {
-                                        this.sendChat(person.jabber, """Name: ${hut.name}
-Location: ${hut.location}
-Description: ${hut.description}
-Beds: ${hut.beds}
-Org: ${hut.owner.organization}
-Contact: ${hut.owner.id}: ${hut.owner}
-""")
-                                    }
+                                    messageText = jabberCommand.get(person, Long.valueOf(id))
+                                } else {
+                                    messageText = jabberCommand.list(person)
                                 }
-                                if (message.body.startsWith("contact:")) {
-                                    def id = message.body.substring(message.body.indexOf(":") + 1)
 
-                                    log.debug("contact ${id}")
-
-                                    Person contact = Person.get(id)
-
-                                    if (person.admin || contact == person) {
-                                        this.sendChat(person.jabber, """Name: ${contact.name}
-Tlf/Mob: ${contact.phone}
-Email: ${contact.email}
-Jabber: ${contact.jabber}
-Admin: ${contact.admin}
-Approved: ${contact.approved}
-Confirmed: ${contact.confirmed}
-""")
-                                    }
+                                log.debug("Response ${person.jabber} ${messageText}")
+                                if (messageText != null && !(messageText == "")) {
+                                    this.sendChat(person.jabber, messageText)
                                 }
                             }
                         }
                     }
-                } catch (Exception e) {
-                    log.error("Failed to send response ${e.getMessage()} ")
                 }
-            } as PacketListener
 
-            PacketFilter pf = new PacketTypeFilter(Message.class)
-
-            connection.addPacketListener(pl, pf)
+                catch (Exception e) {
+                    log.error("Failed to send response ${e}", e)
+                }
+            } as PacketListener, pf)
 
         } catch (Exception e) {
-            log.error("Failed to connect ${e.getMessage()}")
+            log.error("Failed to connect ${e}", e)
         }
     }
 
@@ -142,10 +111,10 @@ Confirmed: ${contact.confirmed}
     }
 
     def sendChat(String to, String msg) {
-        log.error("Chat to ${to} ${msg}")
+        log.info("Chat to ${to} ${msg}")
         try {
             if (connection.getRoster().getPresence(to).isAvailable()) {
-                log.error("Available")
+                log.debug("Available")
 
                 def chatmanager = connection.getChatManager()
 

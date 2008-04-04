@@ -9,7 +9,7 @@
   <component name="CheckStyle-IDEA">
     <option name="configuration">
       <map>
-        <entry key="config-file" value="/Users/chris/src/chrissearle.net/chrissearle.net/trunk/doc/checkstyle.xml" />
+        <entry key="check-test-classes" value="false" />
       </map>
     </option>
   </component>
