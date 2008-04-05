@@ -22,6 +22,7 @@ class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
 
         def owner = new Person(name: "Hut owner", email: "test1@example.com", phone: "12345678", userId: "user1",
                 password: "passw1", admin: false, approved: true, confirmed: true)
+
         assertNotNull "Owner null", owner
 
         if (!owner.save()) {
@@ -29,16 +30,29 @@ class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
         }
 
         def renter1 = new Person(name: "Hut renter 1", email: "test2@example.com", phone: "11223344", userId: "user2",
-                password: "passw2", admin: false, approved: true, confirmed: true).save()
-        def renter2 = new Person(name: "Hut renter 2", email: "test3@example.com", phone: "87654321", userId: "user3",
-                password: "passw3", admin: false, approved: true, confirmed: true).save()
+                password: "passw2", admin: false, approved: true, confirmed: true)
+
         assertNotNull "Renter 1 null", renter1
+
+        if (!renter1.save()) {
+            fail renter1.errors;
+        }
+
+        def renter2 = new Person(name: "Hut renter 2", email: "test3@example.com", phone: "87654321", userId: "user3",
+                password: "passw3", admin: false, approved: true, confirmed: true)
+
         assertNotNull "Renter 2 null", renter2
+
+        if (!renter2.save()) {
+            fail renter2.errors;
+        }
 
         def hut = new Hut(name: "Test Hut", location: "Test Location", owner: owner, description: "Test description",
                 beds: 5, latitude: "10", longitude: "10", openHut: true)
+
         hut.users = new PersonList()
         hut.users.hut = hut
+
         assertNotNull "Hut null", hut
 
         if (!hut.save()) {
@@ -50,10 +64,11 @@ class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
         new Booking(hut: hut, contact: renter1, startDate: new Date() - 2, endDate: new Date() + 2, peopleCount: 4, priceplan: null).save()
     }
 
-    void tearDown() {
-        Person.list()*.delete()
-        Hut.list()*.delete()
-        Booking.list()*.delete()
+    void testData() {
+        
+        assertLength 3, Person.list()
+
+        assertLength 1, Hut.list()
     }
 
     void testGetMessage() {
