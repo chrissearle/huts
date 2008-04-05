@@ -21,7 +21,7 @@
     <artifactId>huts</artifactId>
     <packaging>grails-app</packaging>
     <name>huts</name>
-    <version>9-SNAPSHOT</version>
+    <version>9</version>
     <build>
         <plugins>
             <plugin>
