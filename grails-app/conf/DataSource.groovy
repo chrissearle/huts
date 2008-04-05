@@ -34,7 +34,7 @@ environments {
     }
     test {
         dataSource {
-            driverClassName = "org.hsqldb.Driver"
+            driverClassName = "org.hsqldb.jdbcDriver"
             username = "sa"
             password = ""
             dbCreate = "create-drop"
