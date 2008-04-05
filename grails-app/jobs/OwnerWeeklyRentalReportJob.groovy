@@ -36,39 +36,37 @@ class OwnerWeeklyRentalReportJob {
 
         people.each {person ->
             log.debug("${person} ${person.owns}")
-            if (person.owns) {
-                def rentals = []
 
-                person.owns.each {hut ->
-                    def now = new Date()
-                    def lastWeek = now - 7
-                    def bookings = Booking.findAllByHutAndStartDateBetween(hut, lastWeek, now)
+            def rentals = []
 
-                    if (bookings) {
-                        bookings.each {booking ->
-                            def rental = [hut: hut,
-                                    contact: booking.contact,
-                                    start: booking.startDate,
-                                    end: booking.endDate,
-                                    people: booking.peopleCount
-                            ];
+            person.owns.each {hut ->
+                def now = new Date()
+                def lastWeek = now - 7
+                def bookings = Booking.findAllByHutAndStartDateBetween(hut, lastWeek, now)
 
-                            if (booking.priceplan) {
-                                def price = (booking.endDate - booking.startDate) * booking.priceplan.price
+                if (bookings) {
+                    bookings.each {booking ->
+                        def rental = [hut: hut,
+                                contact: booking.contact,
+                                start: booking.startDate,
+                                end: booking.endDate,
+                                people: booking.peopleCount
+                        ];
 
-                                if (booking.priceplan.perHead) {
-                                    price *= booking.peopleCount
-                                }
+                        if (booking.priceplan) {
+                            def price = (booking.endDate - booking.startDate) * booking.priceplan.price
 
-                                rental.put(currency: booking.priceplan.currency,
-                                        price: price)
+                            if (booking.priceplan.perHead) {
+                                price *= booking.peopleCount
                             }
 
-                            rentals.add(rental)
+                            rental.put(currency: booking.priceplan.currency,
+                                    price: price)
                         }
+
+                        rentals.add(rental)
                     }
                 }
-
 
                 if (rentals.count) {
                     messageText = templateService.processTemplate("cronTemplates", "ownerWeeklyRentalReport.gtpl", [person: person, rentals: rentals])

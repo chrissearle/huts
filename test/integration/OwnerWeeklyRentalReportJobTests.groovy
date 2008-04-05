@@ -16,64 +16,50 @@
 class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
 
     void setUp() {
-        Person.list()*.delete()
-        Hut.list()*.delete()
         Booking.list()*.delete()
+        Hut.list()*.delete()
+        Person.list()*.delete()
 
         def owner = new Person(name: "Hut owner", email: "test1@example.com", phone: "12345678", userId: "user1",
-                password: "passw1", admin: false, approved: true, confirmed: true)
-
-        assertNotNull "Owner null", owner
-
-        if (!owner.save()) {
-            fail owner.errors;
-        }
-
+                password: "passw1", admin: false, approved: true, confirmed: true).save(flush: true)
         def renter1 = new Person(name: "Hut renter 1", email: "test2@example.com", phone: "11223344", userId: "user2",
-                password: "passw2", admin: false, approved: true, confirmed: true)
-
-        assertNotNull "Renter 1 null", renter1
-
-        if (!renter1.save()) {
-            fail renter1.errors;
-        }
-
+                password: "passw2", admin: false, approved: true, confirmed: true).save(flush: true)
         def renter2 = new Person(name: "Hut renter 2", email: "test3@example.com", phone: "87654321", userId: "user3",
-                password: "passw3", admin: false, approved: true, confirmed: true)
-
-        assertNotNull "Renter 2 null", renter2
-
-        if (!renter2.save()) {
-            fail renter2.errors;
-        }
+                password: "passw3", admin: false, approved: true, confirmed: true).save(flush: true)
 
         def hut = new Hut(name: "Test Hut", location: "Test Location", owner: owner, description: "Test description",
                 beds: 5, latitude: "10", longitude: "10", openHut: true)
-
         hut.users = new PersonList()
         hut.users.hut = hut
+        hut.save(flush: true)
 
-        assertNotNull "Hut null", hut
-
-        if (!hut.save()) {
-            fail hut.errors;
-        }
-
-        assertEquals "Owner not owner", owner, hut.owner;
-
-        new Booking(hut: hut, contact: renter1, startDate: new Date() - 2, endDate: new Date() + 2, peopleCount: 4, priceplan: null).save()
+        
+        new Booking(hut: hut, contact: renter1, startDate: new Date() - 5, endDate: new Date() -3, peopleCount: 4, priceplan: null).save(flush: true)
+        new Booking(hut: hut, contact: renter2, startDate: new Date() - 2, endDate: new Date() + 2, peopleCount: 4, priceplan: null).save(flush: true)
     }
 
     void testData() {
-        
-        assertLength 3, Person.list()
+        assertEquals 3, Person.list().size()
 
-        assertLength 1, Hut.list()
+        assertEquals 1, Hut.list().size()
+
+        Hut.list().each { hut ->
+            assertNotNull hut.owner
+            assertNotNull hut.owner.owns
+        }
+
+        assertEquals 2, Booking.list().size()
     }
 
     void testGetMessage() {
         def messageText = new OwnerWeeklyRentalReportJob().getMessage()
 
         assertToString(messageText, "Woot")
+    }
+
+    void tearDown() {
+        Booking.list()*.delete()
+        Hut.list()*.delete()
+        Person.list()*.delete()
     }
 }
