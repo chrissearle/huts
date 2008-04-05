@@ -15,7 +15,27 @@
 */
 class PersonTests extends GroovyTestCase {
 
-    void testSomething() {
+    void setUp() {
+        Person.list()*.delete()
 
+        def owner = new Person(name: "Owner", email: "test1@example.com", phone: "12345678", userId: "user1",
+                password: "passw1", admin: false, approved: true, confirmed: true)
+
+        assertNotNull "Owner null", owner
+
+        if (!owner.save()) {
+            fail owner.errors;
+        }
+    }
+
+
+    void testPerson() {
+        def list = Person.list()
+
+        assertLength 1, list
+    }
+
+    void tearDown() {
+        Person.list()*.delete()
     }
 }
