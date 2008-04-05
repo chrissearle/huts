@@ -57,6 +57,15 @@ environments {
         js.jquery = "jquery-1.2.3.js"
         chat.username = "hut-bot-dev"
     }
+    test {
+        grails.serverURL = "http://localhost:8080/huts"
+        google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTwM0brOpm-All5BF6PoaKBxRWWERTQsPYlehY-o2ihzdV8xcjkHihn8g"
+        mail.host.name = "mail.chrissearle.org"
+        js.mapiconfactory = "mapiconfactory.js"
+        js.clustermarker = "clustermarker.js"
+        js.jquery = "jquery-1.2.3.js"
+        chat.username = "hut-bot-test"
+    }
     production {
         grails.serverURL = "http://huts.chrissearle.net/huts"
         google.map.key = "ABQIAAAAXg65O3cup7wNZGjVeZYpsBTSHwLzGy9_V0V5XWMiiVFSAkWTrxTK2ih4vDZUe0HMSlF-3ftZVQ3d4w"
@@ -85,7 +94,10 @@ log4j {
     logger {
         grails {
             app {
-                service = "debug"
+                domain = "info"
+                services = "info"
+                controllers = "info"
+                jobs = "debug"
             }
         }
 

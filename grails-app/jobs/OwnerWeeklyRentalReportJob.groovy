@@ -20,15 +20,26 @@ class OwnerWeeklyRentalReportJob {
     def cronExpression = "0 20 3 ? * MON"
 
     def execute() {
+        String messageText = this.getMessage()
+
+        if (messageText != "") {
+            emailService.sendMail("Weekly Rental Report", messageText, [person], [])
+        }
+    }
+
+    def getMessage = {
+        def messageText = ""
+
+        log.debug("In getMessage")
+
         def people = Person.list()
 
         people.each {person ->
+            log.debug("${person} ${person.owns}")
             if (person.owns) {
-                def huts = person.owns
-
                 def rentals = []
 
-                huts.each {hut ->
+                person.owns.each {hut ->
                     def now = new Date()
                     def lastWeek = now - 7
                     def bookings = Booking.findAllByHutAndStartDateBetween(hut, lastWeek, now)
@@ -58,12 +69,13 @@ class OwnerWeeklyRentalReportJob {
                     }
                 }
 
-                if (rentals.count) {
-                    def messageText = templateService.processTemplate("cronTemplates", "ownerWeeklyRentalReport.gtpl", [person: person, rentals: rentals])
 
-                    emailService.sendMail("Weekly Rental Report", messageText, [person], [])
+                if (rentals.count) {
+                    messageText = templateService.processTemplate("cronTemplates", "ownerWeeklyRentalReport.gtpl", [person: person, rentals: rentals])
                 }
             }
         }
+
+        return messageText
     }
 }
