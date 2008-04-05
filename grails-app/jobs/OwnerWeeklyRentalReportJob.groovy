@@ -59,7 +59,7 @@ class OwnerWeeklyRentalReportJob {
                 }
 
                 if (rentals.count) {
-                    def messageText = templateService.processTemplate("cronTemplates", "ownerWeeklyRentalReport.gtpl")
+                    def messageText = templateService.processTemplate("cronTemplates", "ownerWeeklyRentalReport.gtpl", [person: person, rentals: rentals])
 
                     emailService.sendMail("Weekly Rental Report", messageText, [person], [])
                 }
