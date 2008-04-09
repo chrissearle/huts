@@ -130,6 +130,7 @@ class PersonController extends BaseController {
         if (request.method == "GET") {
             def user = new Person()
             flash['funnel'] = '/funnel/register/step1.html'
+            return [person: user]
         } else {
             def user = new Person()
             user.properties = params
