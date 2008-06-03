@@ -1,3 +1,6 @@
+lib/xercesImpl*
+lib/xml-apis*
+lib/junit*
 out
 stacktrace.log
 huts.iws
