@@ -15,7 +15,51 @@
 */
 class HutTests extends GroovyTestCase {
 
-    void testSomething() {
+    void setUp() {
+        Hut.list()*.delete()
+        Person.list()*.delete()
 
+        def owner = new Person(name: "Owner", email: "test1@example.com", phone: "12345678", userId: "user1",
+                password: "passw1", admin: false, approved: true, confirmed: true)
+
+        assertNotNull "Owner null", owner
+
+        if (!owner.save()) {
+            fail owner.errors;
+        }
+
+        def hut = new Hut(name: "Test Hut",
+                location: "Rhubarb Island",
+                owner: owner,
+                description: "blabla",
+                beds: 20,
+                latitude: "10",
+                longitude: "10",
+        )
+
+        assertNotNull "Hut null", hut
+
+        hut.users = [];
+
+        if (!hut.save()) {
+            fail hut.errors;
+        }
+    }
+
+    void testHutCount() {
+        def list = Hut.list()
+
+        assertLength 1, list
+    }
+
+    void testHutToString() {
+        def list = Hut.list()
+
+        assertEquals "toString incorrect", "Test Hut, Rhubarb Island", list[0].toString()
+    }
+
+    void tearDown() {
+        Hut.list()*.delete()
+        Person.list()*.delete()
     }
 }
