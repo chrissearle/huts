@@ -98,7 +98,7 @@
                         <label for="password"><g:message code="user.shared.password"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: person, field: 'password', 'errors')}">
-                        <input type="text" maxlength="20" id="password" name="password" value="${fieldValue(bean: person, field: 'password')}"/>
+                        <input type="password" maxlength="20" id="password" name="password" value="${fieldValue(bean: person, field: 'password')}"/>
                     </td>
                 </tr>
 
