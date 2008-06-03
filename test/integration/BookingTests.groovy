@@ -15,6 +15,30 @@
 */
 class BookingTests extends GroovyTestCase {
 
+    void setUp() {
+        def person = new Person(name: "Test Person",
+                email: "test@example.com",
+                userId: "testuser",
+                password: "testpass"
+        )
+
+        def hut = new Hut(name: "Test Hut",
+                location: "Rhubarb Land",
+                owner: person,
+                description: "Blah blah blah",
+                beds: 3,
+                latitude: "10",
+                longitude: "10"
+        )
+
+        new Booking(hut: hut,
+                contact: person,
+                startDate: "2007-01-01",
+                endDate: "2007-01-10",
+                peopleCount: 3
+        )
+    }
+
     void testSomething() {
 
     }
