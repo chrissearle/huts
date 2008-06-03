@@ -2,7 +2,7 @@
 
 <dl>
     <dt>Support - Net</dt>
-    <dd>https://svn.chrissearle.net/trac/chrissearle.net/ - for those who need the source code, are running their own
+    <dd>https://dev.chrissearle.net/jira/browse/HUTS/ - for those who need the source code, are running their own
     instance or who have a bug</dd>
 
     <dt>Support - E-mail</dt>

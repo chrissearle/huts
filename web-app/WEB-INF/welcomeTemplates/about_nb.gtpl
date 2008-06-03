@@ -2,7 +2,7 @@
 
 <dl>
     <dt>Support - internett</dt>
-    <dd>https://svn.chrissearle.net/trac/chrissearle.net/ - for de som trenger kildekoden, som kjører eget instans eller
+    <dd>https://dev.chrissearle.net/jira/browse/HUTS/ - for de som trenger kildekoden, som kjører eget instans eller
     som har funnet en feil</dd>
 
     <dt>Support - E-post</dt>
