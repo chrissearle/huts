@@ -15,7 +15,9 @@
 */
 class BaseControllerTests extends GroovyTestCase {
 
-    void testSomething() {
+    // This is a class that provides inheritance only - nothing we can test directly.
 
+    void testDefault() {
+        assertTrue true;
     }
 }
