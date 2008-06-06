@@ -16,26 +16,27 @@
 class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
 
     void setUp() {
-        Booking.list()*.delete()
-        Hut.list()*.delete()
         Person.list()*.delete()
 
         def owner = new Person(name: "Hut owner", email: "test1@example.com", phone: "12345678", userId: "user1",
                 password: "passw1", admin: false, approved: true, confirmed: true).save(flush: true)
+
         def renter1 = new Person(name: "Hut renter 1", email: "test2@example.com", phone: "11223344", userId: "user2",
                 password: "passw2", admin: false, approved: true, confirmed: true).save(flush: true)
+
         def renter2 = new Person(name: "Hut renter 2", email: "test3@example.com", phone: "87654321", userId: "user3",
                 password: "passw3", admin: false, approved: true, confirmed: true).save(flush: true)
 
-        def hut = new Hut(name: "Test Hut", location: "Test Location", owner: owner, description: "Test description",
-                beds: 5, latitude: "10", longitude: "10", openHut: true)
-        hut.users = new PersonList()
-        hut.users.hut = hut
-        hut.save(flush: true)
+        def hut = new Hut(name: "Test Hut", location: "Test Location", description: "Test description",
+                beds: 5, latitude: "10", longitude: "10", openHut: true, users: new PersonList())
 
-        
-        new Booking(hut: hut, contact: renter1, startDate: new Date() - 5, endDate: new Date() -3, peopleCount: 4, priceplan: null).save(flush: true)
-        new Booking(hut: hut, contact: renter2, startDate: new Date() - 2, endDate: new Date() + 2, peopleCount: 4, priceplan: null).save(flush: true)
+        owner.addToOwns(hut);
+
+        def booking1 = new Booking(contact: renter1, startDate: new Date() - 5, endDate: new Date() -3, peopleCount: 4, priceplan: null)
+        def booking2 = new Booking(contact: renter2, startDate: new Date() - 2, endDate: new Date() + 2, peopleCount: 4, priceplan: null)
+
+        hut.addToBookings(booking1)
+        hut.addToBookings(booking2)
     }
 
     void testData() {
@@ -44,8 +45,9 @@ class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
         assertEquals 1, Hut.list().size()
 
         Hut.list().each { hut ->
-            assertNotNull hut.owner
-            assertNotNull hut.owner.owns
+            assertNotNull "Hut owner null", hut.owner
+            assertNotNull "Hut owner ows null", hut.owner.owns
+            assertTrue "Hut owner doesn't own hut", hut.owner.owns.contains(hut)
         }
 
         assertEquals 2, Booking.list().size()
@@ -58,8 +60,6 @@ class OwnerWeeklyRentalReportJobTests extends GroovyTestCase {
     }
 
     void tearDown() {
-        Booking.list()*.delete()
-        Hut.list()*.delete()
         Person.list()*.delete()
     }
 }

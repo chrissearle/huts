@@ -16,6 +16,8 @@
 class BookingTests extends GroovyTestCase {
 
     void setUp() {
+        Person.list()*.delete()
+        
         def person = new Person(name: "Test Person",
                 email: "test@example.com",
                 userId: "testuser",
@@ -24,22 +26,30 @@ class BookingTests extends GroovyTestCase {
 
         def hut = new Hut(name: "Test Hut",
                 location: "Rhubarb Land",
-                owner: person,
                 description: "Blah blah blah",
                 beds: 3,
                 latitude: "10",
-                longitude: "10"
+                longitude: "10",
+                users: []
+
         )
 
-        new Booking(hut: hut,
-                contact: person,
+        person.addToOwns(hut);
+
+        def booking = new Booking(contact: person,
                 startDate: "2007-01-01",
                 endDate: "2007-01-10",
                 peopleCount: 3
         )
+
+        hut.addToBookings(booking)
     }
 
     void testSomething() {
 
+    }
+
+    void tearDown() {
+        Person.list()*.delete()
     }
 }

@@ -14,7 +14,6 @@
    limitations under the License.
 */
 class Booking {
-    Hut hut
     Person contact
     Date startDate
     Date endDate
@@ -22,8 +21,6 @@ class Booking {
     PricePlan priceplan
 
     static constraints = {
-        hut(nullable: false)
-        contact(nullable: false)
         priceplan(nullable: true)
         peopleCount(nullable: false,
                 min: 1,
@@ -73,7 +70,7 @@ class Booking {
         })
     }
 
-    static belongsTo = Hut
+    static belongsTo = [hut: Hut]
 
     String toString() {"${this.hut}, ${this.contact}"}
 }

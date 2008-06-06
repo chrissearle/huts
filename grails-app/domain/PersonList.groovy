@@ -14,9 +14,7 @@
    limitations under the License.
 */
 class PersonList {
-    Hut hut
-
     static hasMany = ['users': Person]
 
-    static belongsTo = Hut
+    static belongsTo = [hut: Hut]
 }

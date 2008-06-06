@@ -16,40 +16,44 @@
 class HutTests extends GroovyTestCase {
 
     void setUp() {
-        Hut.list()*.delete()
         Person.list()*.delete()
 
         def owner = new Person(name: "Owner", email: "test1@example.com", phone: "12345678", userId: "user1",
                 password: "passw1", admin: false, approved: true, confirmed: true)
 
-        assertNotNull "Owner null", owner
-
-        if (!owner.save()) {
-            fail owner.errors;
-        }
 
         def hut = new Hut(name: "Test Hut",
                 location: "Rhubarb Island",
-                owner: owner,
                 description: "blabla",
                 beds: 20,
                 latitude: "10",
                 longitude: "10",
+                users: []
         )
 
+        assertNotNull "Owner null", owner
         assertNotNull "Hut null", hut
 
-        hut.users = [];
+        owner.addToOwns(hut)
 
-        if (!hut.save()) {
-            fail hut.errors;
+        if (!owner.save()) {
+            fail owner.errors;
         }
     }
+
 
     void testHutCount() {
         def list = Hut.list()
 
         assertLength 1, list
+    }
+
+    void testRelationships() {
+        Hut hut = Hut.findByName("Test Hut")
+
+        assertNotNull "Hut owner null", hut.owner
+        assertNotNull "Hut owner's huts null", hut.owner.owns
+        assertTrue "Hut owner doesn't own hut", hut.owner.owns.contains(hut)
     }
 
     void testHutToString() {
@@ -59,7 +63,6 @@ class HutTests extends GroovyTestCase {
     }
 
     void tearDown() {
-        Hut.list()*.delete()
         Person.list()*.delete()
     }
 }

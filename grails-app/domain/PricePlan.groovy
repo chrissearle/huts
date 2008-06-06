@@ -19,16 +19,13 @@ class PricePlan {
     String currency
     Boolean perHead = true
 
-    Hut hut
-
-    static belongsTo = Hut
+    static belongsTo = [hut: Hut]
 
     static constraints = {
         name(blank: false)
         currency(blank: false, inList   :["NOK", "GBP", "EUR", "USD"])
         price(nullable: false)
         perHead()
-        hut(nullable: false)
     }
 
     String toString() { "${name} (${currency} ${price})" }

@@ -38,7 +38,6 @@ class Hut {
         location(blank: false, maxSize: 50)
         latitude(blank: false)
         longitude(blank: false)
-        owner(nullable: false)
         description(blank: false, maxSize: 255)
         beds(nullable: false, range: 1..250)
         image(nullable: true, maxSize: 250000)
