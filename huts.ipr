@@ -262,6 +262,9 @@
     </option>
     <option name="crucibleConfiguration">
       <CrucibleProjectConfiguration>
+        <option name="crucibleFilters">
+          <CrucibleFiltersBean />
+        </option>
         <option name="tableConfiguration">
           <ProjectToolWindowTableConfiguration />
         </option>
@@ -269,6 +272,31 @@
     </option>
     <option name="jiraConfiguration">
       <JiraProjectConfiguration>
+        <option name="query">
+          <map>
+            <entry key="1212350951563">
+              <value>
+                <JiraFiltersBean>
+                  <option name="savedFilter">
+                    <JiraFilterEntryBean>
+                      <option name="filterEntry">
+                        <map>
+                          <entry key="author" value="null" />
+                          <entry key="filterTypeClass" value="com.atlassian.theplugin.jira.api.JIRASavedFilterBean" />
+                          <entry key="id" value="10001" />
+                          <entry key="name" value="Huts v10" />
+                          <entry key="project" value="null" />
+                        </map>
+                      </option>
+                    </JiraFilterEntryBean>
+                  </option>
+                  <option name="savedFilterUsed" value="true" />
+                </JiraFiltersBean>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="selectedServerId" value="1212350951563" />
         <option name="tableConfiguration">
           <ProjectToolWindowTableConfiguration />
         </option>

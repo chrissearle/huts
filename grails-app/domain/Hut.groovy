@@ -16,7 +16,6 @@
 class Hut {
     String name
     String location
-    Person owner
 
     String description
     Integer beds
@@ -30,7 +29,7 @@ class Hut {
 
     byte[] image
 
-    static belongsTo = Person
+    static belongsTo = [owner: Person]
 
     static hasMany = [bookings: Booking, pricePlans: PricePlan]
 
