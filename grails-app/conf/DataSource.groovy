@@ -27,9 +27,16 @@ hibernate {
 // environment specific settings
 environments {
     development {
+//        dataSource {
+//            dbCreate = "update" // one of 'create', 'create-drop','update'
+//            url = "jdbc:mysql://localhost/huts_dev"
+//        }
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/huts_dev"
+            driverClassName = "org.hsqldb.jdbcDriver"
+            username = "sa"
+            password = ""
+            dbCreate = "create-drop"
+            url = "jdbc:hsqldb:mem:devDb"
         }
     }
     test {
