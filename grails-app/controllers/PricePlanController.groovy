@@ -15,98 +15,103 @@
 */
 class PricePlanController {
 
-    def scaffold = true
+  // the delete, save and update actions only accept POST requests
+  def allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
-    def list = {
-        if (!params.id) {
-            redirect(controller: "hut", action: "list")
-        }
-
-        def hut = Hut.get(params.id)
-
-        return ['pricePlanList': hut.pricePlans, 'hut': hut]
+  def list = {
+    if (!params.id) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def create = {
-        if (!params.id) {
-            redirect(controller: "hut", action: "list")
-        }
+    def hut = Hut.get(params.id)
 
-        def pricePlan = new PricePlan()
+    return ['pricePlanList': hut.pricePlans, 'hut': hut]
+  }
 
-        pricePlan.hut = Hut.get(params.id)
-
-        pricePlan.properties = params;
-
-        return ['priceplan': pricePlan]
+  def create = {
+    if (!params.id) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def save = {
-        def pricePlan = new PricePlan(params)
+    def pricePlan = new PricePlan()
 
-        if (!pricePlan.hasErrors() && pricePlan.save()) {
-            flash.message = message(code: "priceplan.created.ok", args: [pricePlan.hut])
+    pricePlan.hut = Hut.get(params.id)
 
-            redirect(controller: "pricePlan", action: "list", id: pricePlan.hut.id)
-        } else {
-            render(view: 'create', model: ['priceplan': pricePlan])
-        }
+    pricePlan.properties = params;
+
+    return ['priceplan': pricePlan]
+  }
+
+  def save = {
+    def pricePlan = new PricePlan(params)
+
+    if (!pricePlan.hasErrors() && pricePlan.save()) {
+      flash.message = message(code: "priceplan.created.ok", args: [pricePlan.hut])
+
+      redirect(controller: "pricePlan", action: "list", id: pricePlan.hut.id)
+    } else {
+      render(view: 'create', model: ['priceplan': pricePlan])
     }
+  }
 
-    def edit = {
-        def pricePlan = PricePlan.get(params.id)
+  def edit = {
+    def pricePlan = PricePlan.get(params.id)
 
-        if (!pricePlan) {
-            flash.message = message(code: "priceplan.shared.notfound")
+    if (!pricePlan) {
+      flash.message = message(code: "priceplan.shared.notfound")
 
-            redirect(controller: "hut", action: "list")
-        }
-        else {
-            return [priceplan: pricePlan]
-        }
+      redirect(controller: "hut", action: "list")
     }
-
-    def update = {
-        def pricePlan = PricePlan.get(params.id)
-        if (pricePlan) {
-            pricePlan.properties = params
-            if (!pricePlan.hasErrors() && pricePlan.save()) {
-                flash.message = message(code: "priceplan.updated.ok")
-                redirect(action: list, id: pricePlan.hut.id)
-            }
-            else {
-                render(view: 'edit', model: [priceplan: pricePlan])
-            }
-        }
-        else {
-            flash.message = message(code: "priceplan.shared.notfound")
-
-            redirect(action: edit, id: params.id)
-        }
+    else {
+      return [priceplan: pricePlan]
     }
+  }
 
-    def show = {
-        def pricePlan = PricePlan.get(params.id)
-
-        if (!pricePlan) {
-            flash.message = message(code: "priceplan.shared.notfound")
-            redirect(controller: "hut", action: "list")
-        }
-        else {return [priceplan: pricePlan]}
+  def update = {
+    def pricePlan = PricePlan.get(params.id)
+    if (pricePlan) {
+      pricePlan.properties = params
+      if (!pricePlan.hasErrors() && pricePlan.save()) {
+        flash.message = message(code: "priceplan.updated.ok")
+        redirect(action: list, id: pricePlan.hut.id)
+      }
+      else {
+        render(view: 'edit', model: [priceplan: pricePlan])
+      }
     }
+    else {
+      flash.message = message(code: "priceplan.shared.notfound")
 
-    def delete = {
-        def pricePlan = PricePlan.get(params.id)
-
-        if (pricePlan) {
-            def hut = pricePlan.hut
-            pricePlan.delete()
-            flash.message = message(code: "priceplan.deleted.ok")
-            redirect(action: list, id: hut.id)
-        }
-        else {
-            flash.message = message(code: "priceplan.shared.notfound")
-            redirect(controller: "hut", action: "list")
-        }
+      redirect(action: edit, id: params.id)
     }
+  }
+
+  def show = {
+    def pricePlan = PricePlan.get(params.id)
+
+    if (!pricePlan) {
+      flash.message = message(code: "priceplan.shared.notfound")
+      redirect(controller: "hut", action: "list")
+    }
+    else {return [priceplan: pricePlan]}
+  }
+
+  def delete = {
+    def pricePlan = PricePlan.get(params.id)
+
+    if (pricePlan) {
+      def hut = pricePlan.hut
+      pricePlan.delete()
+      flash.message = message(code: "priceplan.deleted.ok")
+      redirect(action: list, id: hut.id)
+    }
+    else {
+      flash.message = message(code: "priceplan.shared.notfound")
+      redirect(controller: "hut", action: "list")
+    }
+  }
+
+
+  def index = { redirect(action: list, params: params) }
+
 }

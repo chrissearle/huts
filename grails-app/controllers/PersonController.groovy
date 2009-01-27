@@ -21,7 +21,8 @@ class PersonController extends BaseController {
     def randomService
     def templateService
 
-    def scaffold = true
+    // the delete, save and update actions only accept POST requests
+    def allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     def list = {
         [personList: Person.list(sort: "name", order: "asc")]
@@ -257,4 +258,63 @@ class PersonController extends BaseController {
             redirect(controller: 'hut', action: 'list')
         }
     }
+
+  def index = { redirect(action:list,params:params) }
+
+  def show = {
+      def person = Person.get( params.id )
+
+      if(!person) {
+          flash.message = "Person not found with id ${params.id}"
+          redirect(action:list)
+      }
+      else { return [ person : person ] }
+  }
+
+  def edit = {
+      def person = Person.get( params.id )
+
+      if(!person) {
+          flash.message = "Person not found with id ${params.id}"
+          redirect(action:list)
+      }
+      else {
+          return [ person : person ]
+      }
+  }
+
+  def update = {
+      def person = Person.get( params.id )
+      if(person) {
+          person.properties = params
+          if(!person.hasErrors() && person.save()) {
+              flash.message = "Person ${params.id} updated"
+              redirect(action:show,id:person.id)
+          }
+          else {
+              render(view:'edit',model:[person:person])
+          }
+      }
+      else {
+          flash.message = "Person not found with id ${params.id}"
+          redirect(action:edit,id:params.id)
+      }
+  }
+
+  def create = {
+      def person = new Person()
+      person.properties = params
+      return ['person':person]
+  }
+
+  def save = {
+      def person = new Person(params)
+      if(!person.hasErrors() && person.save()) {
+          flash.message = "Person ${person.id} created"
+          redirect(action:show,id:person.id)
+      }
+      else {
+          render(view:'create',model:[person:person])
+      }
+  }
 }

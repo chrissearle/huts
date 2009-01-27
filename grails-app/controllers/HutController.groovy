@@ -13,171 +13,205 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 class HutController extends BaseController {
-    def hutService
+  def hutService
 
-    def scaffold = true
+  // the delete, save and update actions only accept POST requests
+  def allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
-    def picture = {
-        if (!params.id) {
-            redirect(controller: "hut", action: "list")
-        }
 
-        def hut = Hut.get(params.id)
-
-        if (!hut) {
-            redirect(controller: "hut", action: "list")
-        }
-
-        if (request.method == "GET") {
-            return ['hut': hut]
-        } else {
-            if (!(request instanceof MultipartHttpServletRequest)) {
-                println("no multipart")
-            }
-
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-            CommonsMultipartFile file = (CommonsMultipartFile) multiRequest.getFile("file");
-
-            hut.image = file.getBytes()
-        }
-
-        flash['message'] = message(code: "hut.picture.uploaded", args: [hut.name])
-
-        redirect(controller: 'hut', action: 'list')
+  def picture = {
+    if (!params.id) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def showpic = {
-        if (!params.id) {
-            redirect(controller: "hut", action: "list")
-        }
+    def hut = Hut.get(params.id)
 
-        def hut = Hut.get(params.id)
-
-        if (!hut) {
-            redirect(controller: "hut", action: "list")
-        }
-
-        if (!hut.image) {
-            redirect(controller: "hut", action: "list")
-        }
-
-        response.contentType = "image/jpeg"
-        response.outputStream << hut.image
+    if (!hut) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def delete = {
-        def hut = Hut.get(params.id)
+    if (request.method == "GET") {
+      return ['hut': hut]
+    } else {
+      if (!(request instanceof MultipartHttpServletRequest)) {
+        println("no multipart")
+      }
 
-        if (hut) {
-            flash.message = message(code: "hut.deleted", args: [hut.name])
+      MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+      CommonsMultipartFile file = (CommonsMultipartFile) multiRequest.getFile("file");
 
-            hut.delete()
-
-            redirect(controller: 'hut', action: 'list')
-        }
-        else {
-            flash.message = message(code: "hut.not.found")
-            redirect(controller: 'hut', action: 'list')
-        }
+      hut.image = file.getBytes()
     }
 
-    def list = {
-        def hutgroup = session.hutgroup
+    flash['message'] = message(code: "hut.picture.uploaded", args: [hut.name])
 
-        if (!session.userId) {
-            def hutlist = hutService.visibleHuts(hutgroup)
+    redirect(controller: 'hut', action: 'list')
+  }
 
-            return ['hutList': hutlist]
-        } else {
-            Person p = Person.findByUserId(session.userId)
-
-            def hutlist = hutService.visibleHuts(p, hutgroup)
-
-            return ['hutList': hutlist]
-
-        }
+  def showpic = {
+    if (!params.id) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def userlist = {
-        def hut = Hut.get(params.id)
+    def hut = Hut.get(params.id)
 
-        if (hut) {
-            def criteria = Person.createCriteria();
-
-            def people = criteria.list {
-                eq('approved', true)
-                eq('confirmed', true)
-                ne('userId', hut.owner.userId)
-            }
-
-            return ['hut': hut, 'users': people]
-        }
+    if (!hut) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def adduser = {
-        def hut = Hut.get(params.id)
-
-        def person = Person.get(params.user)
-
-        if (hut && person) {
-            hut.users.addToUsers(person).save()
-        }
-
-        redirect(controller: 'hut', action: 'userlist', id: hut.id);
+    if (!hut.image) {
+      redirect(controller: "hut", action: "list")
     }
 
-    def save = {
-        def hut = new Hut(params)
+    response.contentType = "image/jpeg"
+    response.outputStream << hut.image
+  }
 
+  def delete = {
+    def hut = Hut.get(params.id)
+
+    if (hut) {
+      flash.message = message(code: "hut.deleted", args: [hut.name])
+
+      hut.delete()
+
+      redirect(controller: 'hut', action: 'list')
+    }
+    else {
+      flash.message = message(code: "hut.not.found")
+      redirect(controller: 'hut', action: 'list')
+    }
+  }
+
+  def list = {
+    def hutgroup = session.hutgroup
+
+    if (!session.userId) {
+      def hutlist = hutService.visibleHuts(hutgroup)
+
+      return ['hutList': hutlist]
+    } else {
+      Person p = Person.findByUserId(session.userId)
+
+      def hutlist = hutService.visibleHuts(p, hutgroup)
+
+      return ['hutList': hutlist]
+
+    }
+  }
+
+  def userlist = {
+    def hut = Hut.get(params.id)
+
+    if (hut) {
+      def criteria = Person.createCriteria();
+
+      def people = criteria.list {
+        eq('approved', true)
+        eq('confirmed', true)
+        ne('userId', hut.owner.userId)
+      }
+
+      return ['hut': hut, 'users': people]
+    }
+  }
+
+  def adduser = {
+    def hut = Hut.get(params.id)
+
+    def person = Person.get(params.user)
+
+    if (hut && person) {
+      hut.users.addToUsers(person).save()
+    }
+
+    redirect(controller: 'hut', action: 'userlist', id: hut.id);
+  }
+
+  def save = {
+    def hut = new Hut(params)
+
+    hut.users = new PersonList()
+    hut.users.hut = hut
+
+    def p = Person.findByUserId(session.userId);
+
+    if (!p.admin) {
+      hut.owner = p
+    }
+
+    if (!hut.hasErrors() && hut.save()) {
+      flash.message = message(code: 'hut.save.saved', args: [hut.name])
+      redirect(action: show, id: hut.id)
+    } else {
+      render(view: 'create', model: [hut: hut])
+    }
+  }
+
+  def update = {
+    def hut = Hut.get(params.id)
+
+    if (hut) {
+
+      hut.properties = params
+
+      def p = Person.findByUserId(session.userId);
+
+      if (!p.admin) {
+        hut.owner = p
+      }
+
+      if (!hut.users) {
         hut.users = new PersonList()
         hut.users.hut = hut
+      }
 
-        def p = Person.findByUserId(session.userId);
-
-        if (!p.admin) {
-            hut.owner = p
-        }
-
-        if (!hut.hasErrors() && hut.save()) {
-            flash.message = message(code: 'hut.save.saved', args: [hut.name])
-            redirect(action: show, id: hut.id)
-        } else {
-            render(view: 'create', model: [hut: hut])
-        }
+      if (!hut.hasErrors() && hut.save()) {
+        flash.message = message(code: 'hut.update.saved', args: [hut.name])
+        redirect(action: show, id: hut.id)
+      } else {
+        render(view: 'edit', model: [hut: hut])
+      }
     }
-
-    def update = {
-        def hut = Hut.get(params.id)
-
-        if (hut) {
-
-            hut.properties = params
-
-            def p = Person.findByUserId(session.userId);
-
-            if (!p.admin) {
-                hut.owner = p
-            }
-
-            if (!hut.users) {
-                hut.users = new PersonList()
-                hut.users.hut = hut
-            }
-
-            if (!hut.hasErrors() && hut.save()) {
-                flash.message = message(code: 'hut.update.saved', args: [hut.name])
-                redirect(action: show, id: hut.id)
-            } else {
-                render(view: 'edit', model: [hut: hut])
-            }
-        }
-        else {
-            flash.message = message(code: 'hut.update.not.found')
-            redirect(action: edit, id: params.id)
-        }
+    else {
+      flash.message = message(code: 'hut.update.not.found')
+      redirect(action: edit, id: params.id)
     }
+  }
+
+  def index = { redirect(action: list, params: params) }
+
+  def show = {
+    def hut = Hut.get(params.id)
+
+    if (!hut) {
+      flash.message = "Hut not found with id ${params.id}"
+      redirect(action: list)
+    }
+    else { return [hut: hut] }
+  }
+
+  def edit = {
+    def hut = Hut.get(params.id)
+
+    if (!hut) {
+      flash.message = "Hut not found with id ${params.id}"
+      redirect(action: list)
+    }
+    else {
+      return [hut: hut]
+    }
+  }
+
+  def create = {
+    def hut = new Hut()
+    hut.properties = params
+    return ['hut': hut]
+  }
+
 }
