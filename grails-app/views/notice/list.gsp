@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <g:each in="${noticeList}" status="i" var="notice">
+                <g:each in="${noticeInstanceList}" status="i" var="notice">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 
                         <td><g:link action="show" id="${notice.id}">${notice.id?.encodeAsHTML()}</g:link></td>
