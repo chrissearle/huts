@@ -50,8 +50,8 @@
     <g:if test="${session.userId}">
         <li><g:link controller="hut" action="create"><g:message code="hut.list.menu.add"/></g:link></li>
     </g:if>
-    <li><a href="javascript:$('#map, #oldlist').toggle();"><g:message code="hut.list.menu.toggle"/></a></li>
-    <li><a href="javascript:$('#mapkey').toggle();"><g:message code="hut.list.menu.key.toggle"/></a></li>
+    <li><a onclick="$('#map, #oldlist').toggle();"><g:message code="hut.list.menu.toggle"/></a></li>
+    <li><a onclick="$('#mapkey').toggle();"><g:message code="hut.list.menu.key.toggle"/></a></li>
 </ul>
 
 <div>

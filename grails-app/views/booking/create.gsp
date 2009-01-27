@@ -62,7 +62,7 @@
             </tbody>
         </table>
         <div class="buttons">
-            <span class="button"><g:actionSubmit action="create" value="${message(code:'booking.create.create.button')}"/></span>
+            <span class="button"><input class="save" type="submit" value="${message(code:'booking.create.create.button')}"/></span>
         </div>
     </g:form>
 
