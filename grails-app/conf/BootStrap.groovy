@@ -14,19 +14,30 @@
    limitations under the License.
 */
 class BootStrap {
-    def jabberService
+  def jabberService
 
-    def init = {servletContext ->
-        Locale.setDefault(new Locale("nb"))
+  def init = {servletContext ->
+    Locale.setDefault(new Locale("nb"))
 
-        if (!Person.get(1)) {
-            new Person(name: "Default Admin - Change these details to your own!", userId: "admin", password: "admin",
-                    phone: "xxxxxxxx", email: "root@localhost", admin: true, approved: true).save()
+    if (!Person.get(1)) {
+      def admin = new Person(name: "Default Admin - Change these details to your own!", userId: "admin", password: "password",
+              phone: "xxxxxxxx", email: "root@localhost.localdomain", admin: true, approved: true, confirmed: true, language: "en")
+
+
+      if (!admin.validate()) {
+        admin.errors.each {
+          println it
         }
+      }
 
-        jabberService.connect()
+      if (!admin.save()) {
+        println("Unable to save admin user")
+      }
     }
-    def destroy = {
-        jabberService.disconnect()
-    }
+
+    jabberService.connect()
+  }
+  def destroy = {
+    jabberService.disconnect()
+  }
 } 
