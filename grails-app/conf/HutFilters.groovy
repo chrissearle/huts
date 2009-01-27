@@ -184,7 +184,7 @@ class HutFilters {
                             case "create":
                                 Hut hut = Hut.get(params.id)
 
-                                if (!((p == b.hut.owner) || (p == b.contact))) {
+                                if (!(p == hut.owner)) {
                                     redirect(controller: 'booking', action: 'denied')
 
                                     return false
