@@ -1,10 +1,11 @@
-package org.chrissearle.huts
+package net.chrissearle.huts
 
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.server.testing.*
 import kotlin.test.*
 import io.ktor.http.*
+import net.chrissearle.huts.plugins.configureRouting
 import org.chrissearle.huts.plugins.*
 
 class ApplicationTest {
