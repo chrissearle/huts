@@ -5,11 +5,13 @@ import arrow.core.left
 import arrow.core.right
 import com.password4j.Hash
 import com.password4j.Password
+import mu.KotlinLogging
 import net.chrissearle.huts.ApiError
 import net.chrissearle.huts.CannotUpdateWithoutId
 import net.chrissearle.huts.InvalidPassword
 import net.chrissearle.huts.UserNotFound
 import net.chrissearle.huts.domain.model.LocalUser
+import net.chrissearle.huts.plugins.role.Role
 import net.chrissearle.huts.repository.UserRepository
 import org.passay.CharacterRule
 import org.passay.EnglishCharacterData
@@ -19,6 +21,8 @@ import org.passay.LengthRule
 import org.passay.PasswordData
 import org.passay.PasswordValidator
 import org.passay.WhitespaceRule
+
+private val logger = KotlinLogging.logger {}
 
 class UserService(private val repository: UserRepository) {
 
@@ -66,6 +70,20 @@ class UserService(private val repository: UserRepository) {
                 InvalidPassword(validator.getMessages(result)).left()
             }
         }
+    }
+
+    fun createDefaultUserIfNeeded(username: String, password: String) {
+        if (all().isNotEmpty()) {
+            return
+        }
+
+        logger.info { "Creating default user" }
+
+        repository.createUser(username, "Default User", listOf(Role.USER, Role.ADMIN), "system")
+
+        val hash = Password.hash(password).withBcrypt()
+
+        repository.storeHash(username, hash.result)
     }
 
     companion object {

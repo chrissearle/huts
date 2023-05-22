@@ -26,6 +26,21 @@ class UserRepository(private val session: Session) : QueryLoader() {
         )
     }
 
+    fun createUser(username: String, name: String, roles: List<Role>, by: String) =
+        loadQuery("user/create.sql")?.let { query ->
+            session.run(
+                queryOf(
+                    statement = query,
+                    paramMap = mapOf(
+                        "username" to username,
+                        "name" to name,
+                        "roles" to roles.joinToString(",") { it.toString() },
+                        "createdBy" to by
+                    )
+                ).asUpdate
+            )
+        }
+
     fun deleteUser(id: Long) = loadQuery("user/delete.sql")?.let { query ->
         session.run(
             queryOf(
@@ -91,21 +106,38 @@ class UserRepository(private val session: Session) : QueryLoader() {
             ).map { it.toLocalUser() }.asSingle
         )
     }
+
+    fun updateUser(
+        userId: Long,
+        username: String,
+        name: String,
+        by: String
+    ) = loadQuery("user/update.sql")?.let { query ->
+        session.run(
+            queryOf(
+                statement = query,
+                paramMap = mapOf(
+                    "username" to username,
+                    "name" to name,
+                    "id" to userId,
+                    "updatedBy" to by
+                )
+            ).asUpdate
+        )
+    }
 }
 
 fun Row.toLocalUser() = LocalUser(
     id = this.long("lu_id"),
     username = this.string("username"),
     name = this.string("lu_name"),
-    number = this.stringOrNull("lu_number"),
     roles = this.string("roles").roles(),
 )
 
 fun Row.toUserClaims() = UserClaims(
     username = this.string("username"),
     roles = this.string("roles").roles(),
-    name = this.string("name"),
-    number = this.stringOrNull("number")
+    name = this.string("name")
 )
 
 private fun String.roles() = this.split(",").map { Role.valueOf(it) }

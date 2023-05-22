@@ -1,7 +1,8 @@
 CREATE TABLE local_user (
-    id SERIAL PRIMARY KEY,0
-    username VARCHAR(100) not null,
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
     password VARCHAR(100),
+    name VARCHAR(100),
     roles VARCHAR(100) NOT NULL DEFAULT 'USER',
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
