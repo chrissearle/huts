@@ -1,0 +1,6 @@
+[*.{kt,kts}]
+ktlint_code_style=official
+ij_kotlin_allow_trailing_comma_on_call_site=false
+ktlint_standard_trailing-comma-on-call-site=disabled
+ij_kotlin_allow_trailing_comma=false
+ktlint_standard_trailing-comma-on-declaration-site=disabled

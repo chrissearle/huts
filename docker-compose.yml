@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5454:5432"
+    environment:
+      POSTGRES_DB: huts
+      POSTGRES_USER: huts
+      POSTGRES_PASSWORD: huts
+
