@@ -4,9 +4,6 @@ import kotliquery.Row
 import kotliquery.Session
 import kotliquery.queryOf
 import net.chrissearle.huts.domain.model.Hut
-import net.chrissearle.huts.domain.model.LocalUser
-import net.chrissearle.huts.domain.model.UserClaims
-import net.chrissearle.huts.plugins.role.Role
 
 class HutRepository(private val session: Session) : QueryLoader() {
 
