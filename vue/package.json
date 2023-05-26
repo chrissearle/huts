@@ -12,7 +12,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.5",
+    "jwt-decode": "^3.1.2",
+    "luxon": "^3.3.0",
     "pinia": "^2.0.36",
+    "pinia-plugin-persistedstate": "^3.1.0",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0"
   },
@@ -20,6 +26,7 @@
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/node18": "^2.0.1",
     "@types/node": "^18.16.8",
+    "@types/luxon": "^3.3.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
