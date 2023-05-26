@@ -1,12 +1,12 @@
 package net.chrissearle.huts
 
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.server.testing.*
-import kotlin.test.*
-import io.ktor.http.*
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.testing.testApplication
 import net.chrissearle.huts.plugins.configureRouting
-import org.chrissearle.huts.plugins.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class ApplicationTest {
     @Test
