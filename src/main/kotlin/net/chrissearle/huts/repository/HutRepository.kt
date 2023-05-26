@@ -20,6 +20,6 @@ class HutRepository(private val session: Session) : QueryLoader() {
 }
 
 fun Row.toHut() = Hut(
-    id = this.long("h_id"),
-    name = this.string("h_name"),
+    id = this.long("hut_id"),
+    name = this.string("hut_name"),
 )

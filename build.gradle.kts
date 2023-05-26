@@ -15,6 +15,10 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(19))
+}
+
 repositories {
     mavenCentral()
 }
@@ -67,6 +71,8 @@ tasks {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xcontext-receivers")
             jvmTarget = "19"
+            apiVersion = "1.9"
+            languageVersion = "1.9"
         }
     }
 }

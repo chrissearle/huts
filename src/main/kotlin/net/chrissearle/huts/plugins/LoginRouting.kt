@@ -24,7 +24,6 @@ fun buildToken(config: ApplicationConfig, claims: UserClaims): String = JWT.crea
     .withIssuer(config["jwt.issuer"])
     .withClaim("username", claims.username)
     .withClaim("name", claims.name)
-    .withClaim("number", claims.number ?: "")
     .withArrayClaim("roles", claims.roles.map { it.toString() }.toTypedArray())
     .withExpiresAt(Date(System.currentTimeMillis() + 1000 * 60 * 20))
     .sign(Algorithm.HMAC256(config["jwt.secret"]))
