@@ -4,8 +4,10 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.ServerReady
 import kotliquery.HikariCP
 import kotliquery.sessionOf
+import net.chrissearle.huts.repository.BookingRepository
 import net.chrissearle.huts.repository.HutRepository
 import net.chrissearle.huts.repository.UserRepository
+import net.chrissearle.huts.service.BookingService
 import net.chrissearle.huts.service.HutService
 import net.chrissearle.huts.service.UserService
 import org.flywaydb.core.Flyway
@@ -41,4 +43,8 @@ fun Application.configureServices(dataSource: DataSource) {
     val hutRepository = HutRepository(dbSession)
     val hutService = HutService(hutRepository)
     configureHutRouting(hutService)
+
+    val bookingRepository = BookingRepository(dbSession)
+    val bookingService = BookingService(bookingRepository)
+    configureBookingRouting(bookingService)
 }
