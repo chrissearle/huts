@@ -19,4 +19,5 @@ class HutRepository(private val session: Session) : QueryLoader() {
 fun Row.toHut() = Hut(
     id = this.long("hut_id"),
     name = this.string("hut_name"),
+    shortName = this.string("hut_short_name")
 )

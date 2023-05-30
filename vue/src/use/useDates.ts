@@ -8,6 +8,10 @@ export const useDates = () => {
     return date.startOf('day')
   }
 
+  const dateAtEndOfWeek = (date: DateTime): DateTime => {
+    return dateAtStartOfWeek(date).plus({ days: 7 })
+  }
+
   const dateAtStartOfWeek = (date: DateTime): DateTime => {
     return dateAtStartOfDay(date).startOf('week')
   }
@@ -100,7 +104,7 @@ export const useDates = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function dateTimeReviver(key: any, value: any) {
-    if (typeof value === 'string' && key === 'date') {
+    if (typeof value === 'string' && (key === 'date' || key.endsWith('Date'))) {
       return dateAtStartOfDay(DateTime.fromISO(value))
     }
 
@@ -128,6 +132,7 @@ export const useDates = () => {
     isToday,
     dateTimeReviver,
     dateInPastWeek,
-    fromSeconds
+    fromSeconds,
+    dateAtEndOfWeek
   }
 }
