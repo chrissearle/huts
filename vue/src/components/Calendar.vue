@@ -2,6 +2,7 @@
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import nbLocale from '@fullcalendar/core/locales/nb'
+import { type CalendarOptions } from '@fullcalendar/core'
 
 import { useDates } from '@/use/useDates'
 
@@ -26,7 +27,7 @@ const startDate = computed<DateTime>(() => {
   }).fromDate
 })
 
-const calendarOptions = computed(() => {
+const calendarOptions = computed<CalendarOptions>(() => {
   return {
     locale: nbLocale,
     weekNumbers: true,
@@ -45,7 +46,7 @@ const calendarOptions = computed(() => {
         textColor: 'black'
       }
     })
-  }
+  } as CalendarOptions
 })
 
 const calendarApi = ref<InstanceType<typeof FullCalendar> | null>(null)
