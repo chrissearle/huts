@@ -1,5 +1,31 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+
+import { useAuth } from '@/stores/useAuth'
+import { useRouter } from 'vue-router'
+import { watch } from 'vue'
+
+const router = useRouter()
+const authStore = useAuth()
+
+const logout = () => {
+  authStore.reset()
+
+  router.push({
+    name: 'future'
+  })
+}
+
+watch(
+  () => authStore.roles,
+  async (newRoles, oldRoles) => {
+    if (newRoles.length === 0 && oldRoles.length > 0) {
+      router.push({
+        name: 'future'
+      })
+    }
+  }
+)
 </script>
 
 <template>
@@ -27,7 +53,32 @@ import { RouterLink, RouterView } from 'vue-router'
           </li>
         </ul>
 
-        <ul class="navbar-nav mb-2 mb-lg-0">
+        <ul v-if="authStore.isUser" class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="adminDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person px-2"></i>
+              {{ authStore.name }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <!-- li>
+                <router-link to="/password" class="dropdown-item" active-class="active">
+                  Bytt passord
+                </router-link>
+              </li -->
+              <li>
+                <button type="button" class="dropdown-item" @click="logout">Logg ut</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul v-else class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link to="/login" class="nav-link" active-class="active">Logg på</router-link>
           </li>
