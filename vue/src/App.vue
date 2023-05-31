@@ -5,6 +5,8 @@ import { useAuth } from '@/stores/useAuth'
 import { useRouter } from 'vue-router'
 import { watch } from 'vue'
 
+import StoreAlerts from '@/components/StoreAlerts.vue'
+
 const router = useRouter()
 const authStore = useAuth()
 
@@ -67,11 +69,11 @@ watch(
               {{ authStore.name }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <!-- li>
+              <li>
                 <router-link to="/password" class="dropdown-item" active-class="active">
                   Bytt passord
                 </router-link>
-              </li -->
+              </li>
               <li>
                 <button type="button" class="dropdown-item" @click="logout">Logg ut</button>
               </li>
@@ -86,6 +88,8 @@ watch(
       </div>
     </div>
   </nav>
+
+  <store-alerts />
 
   <router-view />
 </template>
