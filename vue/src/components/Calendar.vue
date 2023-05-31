@@ -40,7 +40,7 @@ const calendarOptions = computed(() => {
         title: booking.name,
         allDay: true,
         start: booking.fromDate.toJSDate(),
-        end: booking.toDate.toJSDate(),
+        end: booking.toDate.plus({ days: 1 }).toJSDate(),
         classNames: `hut hut${booking.hut.id}`,
         textColor: 'black'
       }
