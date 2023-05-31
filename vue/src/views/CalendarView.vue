@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Calendar from '@/components/Calendar.vue'
+import BookingCalendar from '@/components/BookingCalendar.vue'
 </script>
 
 <template>
   <main>
-    <Calendar />
+    <BookingCalendar />
   </main>
 </template>
