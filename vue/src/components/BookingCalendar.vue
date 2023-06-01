@@ -9,7 +9,7 @@ import { DateTime } from 'luxon'
 
 import CalendarDisplay, { type DisplayEvent } from '@/components/CalendarDisplay.vue'
 
-const { dateAtStartOfDay } = useDates()
+const { dateAtStartOfDay, shortDate } = useDates()
 
 const hutStore = useHuts()
 const bookingStore = useBookings()
@@ -55,7 +55,11 @@ onMounted(() => {
       </div>
     </div>
 
-    <CalendarDisplay :bookings="displayBookings" :start-date="startDate" :key="startDate" />
+    <CalendarDisplay
+      :bookings="displayBookings"
+      :start-date="startDate"
+      :key="shortDate(startDate)"
+    />
   </div>
 </template>
 
