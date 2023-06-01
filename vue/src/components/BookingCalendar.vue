@@ -30,7 +30,7 @@ const displayBookings = computed<DisplayEvent[]>(() => {
       id: booking.id,
       name: booking.name,
       start: booking.fromDate,
-      end: booking.toDate,
+      end: booking.toDate.plus({ days: 1 }),
       classNames: `hut hut${booking.hut.id}`
     } as DisplayEvent
   })

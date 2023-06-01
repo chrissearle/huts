@@ -31,7 +31,7 @@ const calendarOptions = {
       title: booking.name,
       allDay: true,
       start: booking.start.toJSDate(),
-      end: booking.end.plus({ days: 1 }).toJSDate(),
+      end: booking.end.toJSDate(),
       classNames: booking.classNames,
       textColor: 'black'
     }
