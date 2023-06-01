@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import FullCalendar from '@fullcalendar/vue3'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import nbLocale from '@fullcalendar/core/locales/nb'
-import { type CalendarOptions } from '@fullcalendar/core'
-
 import { useDates } from '@/use/useDates'
 
 import { useHuts } from '@/stores/useHuts'
 import { useBookings } from '@/stores/useBookings'
 
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted } from 'vue'
 import { DateTime } from 'luxon'
+
+import CalendarDisplay, { type DisplayEvent } from '@/components/CalendarDisplay.vue'
 
 const { dateAtStartOfDay } = useDates()
 
@@ -27,40 +24,17 @@ const startDate = computed<DateTime>(() => {
   }).fromDate
 })
 
-const calendarOptions = computed<CalendarOptions>(() => {
-  return {
-    locale: nbLocale,
-    weekNumbers: true,
-    plugins: [dayGridPlugin],
-    initialView: 'dayGridMonth',
-    initialDate: startDate.value.toJSDate(),
-    aspectRatio: 1.6,
-    events: bookingStore.bookings.map((booking) => {
-      return {
-        id: booking.id,
-        title: booking.name,
-        allDay: true,
-        start: booking.fromDate.toJSDate(),
-        end: booking.toDate.plus({ days: 1 }).toJSDate(),
-        classNames: `hut hut${booking.hut.id}`,
-        textColor: 'black'
-      }
-    })
-  } as CalendarOptions
+const displayBookings = computed<DisplayEvent[]>(() => {
+  return bookingStore.bookings.map((booking) => {
+    return {
+      id: booking.id,
+      name: booking.name,
+      start: booking.fromDate,
+      end: booking.toDate,
+      classNames: `hut hut${booking.hut.id}`
+    } as DisplayEvent
+  })
 })
-
-const calendarApi = ref<InstanceType<typeof FullCalendar> | null>(null)
-
-watch(
-  () => bookingStore.bookings,
-  async () => {
-    const api = calendarApi.value
-
-    if (api) {
-      api.getApi().gotoDate(startDate.value.toJSDate())
-    }
-  }
-)
 
 onMounted(() => {
   hutStore.retrieve()
@@ -81,11 +55,11 @@ onMounted(() => {
       </div>
     </div>
 
-    <FullCalendar ref="calendarApi" :options="calendarOptions" />
+    <CalendarDisplay :bookings="displayBookings" :start-date="startDate" :key="startDate" />
   </div>
 </template>
 
-<style scope lang="scss">
+<style lang="scss">
 $bgcolor1: #fcc;
 $bgcolor2: #cfc;
 $bgcolor3: #ccf;
