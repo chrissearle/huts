@@ -14,7 +14,7 @@ const logout = () => {
   authStore.reset()
 
   router.push({
-    name: 'future'
+    name: 'cal'
   })
 }
 
@@ -23,7 +23,7 @@ watch(
   async (newRoles, oldRoles) => {
     if (newRoles.length === 0 && oldRoles.length > 0) {
       router.push({
-        name: 'future'
+        name: 'cal'
       })
     }
   }
@@ -56,6 +56,23 @@ watch(
         </ul>
 
         <ul v-if="authStore.isUser" class="navbar-nav mb-2 mb-lg-0">
+          <li v-if="authStore.isAdmin" class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="adminDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Admin
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+              <li>
+                <router-link to="/admin/users" class="dropdown-item">User admin</router-link>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
