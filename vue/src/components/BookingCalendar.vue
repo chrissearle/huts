@@ -7,7 +7,14 @@ import { useBookings } from '@/stores/useBookings'
 import { computed, onMounted } from 'vue'
 import { DateTime } from 'luxon'
 
-import CalendarDisplay, { type DisplayEvent } from '@/components/CalendarDisplay.vue'
+import CalendarDisplay from '@/components/CalendarDisplay.vue'
+import OrderCalendar from '@/components/OrderCalendar.vue'
+import OrderForm from '@/components/OrderForm.vue'
+import type { DisplayEvent } from '@/types/DisplayEvent'
+
+const props = defineProps<{
+  full: boolean
+}>()
 
 const { dateAtStartOfDay, shortDate } = useDates()
 
@@ -29,6 +36,7 @@ const displayBookings = computed<DisplayEvent[]>(() => {
     return {
       id: booking.id,
       name: booking.name,
+      hut: booking.hut.name,
       start: booking.fromDate,
       end: booking.toDate.plus({ days: 1 }),
       classNames: `hut hut${booking.hut.id}`
@@ -56,10 +64,16 @@ onMounted(() => {
     </div>
 
     <CalendarDisplay
+      v-if="props.full"
       :bookings="displayBookings"
       :start-date="startDate"
-      :key="shortDate(startDate)"
+      :key="`Full_${shortDate(startDate)}`"
     />
+    <div v-else>
+      <OrderForm />
+      <hr />
+      <OrderCalendar :bookings="displayBookings" :key="`Order_${shortDate(startDate)}`" />
+    </div>
   </div>
 </template>
 

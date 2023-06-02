@@ -4,6 +4,6 @@ import BookingCalendar from '@/components/BookingCalendar.vue'
 
 <template>
   <main>
-    <BookingCalendar :full="true" />
+    <BookingCalendar :full="false" />
   </main>
 </template>

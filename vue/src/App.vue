@@ -51,7 +51,7 @@ watch(
             <router-link to="/" class="nav-link" active-class="active">Kalender</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" active-class="active">Bestill</router-link>
+            <router-link to="/order" class="nav-link" active-class="active">Bestill</router-link>
           </li>
         </ul>
 

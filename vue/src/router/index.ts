@@ -6,6 +6,7 @@ import AdminUsers from '@/views/admin/AdminUsers.vue'
 import CalendarView from '@/views/CalendarView.vue'
 import ChangePassword from '@/views/ChangePassword.vue'
 import LoginForm from '@/views/LoginForm.vue'
+import OrderView from '@/views/OrderView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/',
       name: 'cal',
       component: CalendarView
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: OrderView
     },
     {
       path: '/password',
