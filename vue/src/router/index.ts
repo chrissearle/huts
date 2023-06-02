@@ -53,7 +53,7 @@ const router = createRouter({
       component: AdminEditUser
     }
   ],
-  scrollBehavior(_to, _from, _savedPosition) {
+  scrollBehavior() {
     return { top: 0 }
   }
 })

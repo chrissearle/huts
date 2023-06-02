@@ -1,12 +1,9 @@
 import type Booking from '@/types/Booking'
-import type { DateTime } from 'luxon'
 import axios from 'axios'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useDates } from '@/use/useDates'
 import { useStoreUtils } from '@/stores/useStoreUtils'
 
-const { datesEqual } = useDates()
 const storeUtils = useStoreUtils()
 
 export const useBookings = defineStore(
