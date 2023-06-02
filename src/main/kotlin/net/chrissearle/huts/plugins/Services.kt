@@ -5,6 +5,7 @@ import io.ktor.server.application.ServerReady
 import kotliquery.HikariCP
 import kotliquery.sessionOf
 import net.chrissearle.huts.repository.BookingRepository
+import net.chrissearle.huts.repository.BookingRequestRepository
 import net.chrissearle.huts.repository.HutRepository
 import net.chrissearle.huts.repository.UserRepository
 import net.chrissearle.huts.service.BookingService
@@ -45,6 +46,7 @@ fun Application.configureServices(dataSource: DataSource) {
     configureHutRouting(hutService)
 
     val bookingRepository = BookingRepository(dbSession)
-    val bookingService = BookingService(bookingRepository)
+    val bookingRequestRepository = BookingRequestRepository(dbSession)
+    val bookingService = BookingService(bookingRepository, bookingRequestRepository)
     configureBookingRouting(bookingService)
 }

@@ -4,7 +4,6 @@ import kotliquery.Row
 import kotliquery.Session
 import kotliquery.queryOf
 import net.chrissearle.huts.domain.model.Booking
-import java.time.LocalDate
 
 class BookingRepository(private val session: Session) : QueryLoader() {
 
@@ -18,7 +17,7 @@ class BookingRepository(private val session: Session) : QueryLoader() {
 }
 
 fun Row.toBooking(): Booking {
-    val dates = this.string("booking_dates").dateRangeToDates()
+    val dates = this.string("booking_dates").dateRange()
 
     return Booking(
         id = this.long("booking_id"),
@@ -28,7 +27,3 @@ fun Row.toBooking(): Booking {
         toDate = dates.second
     )
 }
-
-// Format is [yyyy-mm-dd,yyyy-mm-dd)
-private fun String.dateRangeToDates() =
-    this.drop(1).dropLast(1).split(",").map { LocalDate.parse(it) }.zipWithNext().first()

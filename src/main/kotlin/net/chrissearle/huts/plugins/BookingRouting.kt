@@ -21,6 +21,11 @@ fun Application.configureBookingRouting(service: BookingService) {
                         call.respond(HttpStatusCode.OK, service.all())
                     }
                 }
+                route("/booking_request") {
+                    get {
+                        call.respond(HttpStatusCode.OK, service.allRequests())
+                    }
+                }
             }
             route("/hut") {
                 authenticate("auth-jwt") {
