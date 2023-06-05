@@ -42,3 +42,13 @@ object NotImplementedYet : ApiError(
     HttpStatusCode.BadRequest,
     "Not implemented yet"
 )
+
+object CouldNotCreateBookingRequest : ApiError(
+    HttpStatusCode.InternalServerError,
+    "Could not create booking request"
+)
+
+object BookingRequestNotFound : ApiError(
+    HttpStatusCode.NotFound,
+    "Booking request not found"
+)
